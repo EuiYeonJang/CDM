@@ -1,48 +1,25 @@
-# create a vocab_b for subset
+# create vocab and counters for subset
+vocab = set()
+counters = list()
 
-vocab_b = set()
+for prime, target in subset:
+    for w in prime.split():
+        vocab.add(w)
 
-for _, b in subset:
-    for w in b:
-        vocab_b.add(w)
+    for w in target.split():
+        vocab.add(w)
 
-count = {w: {"true":0, "false":0} for w in vocab_b}
-a_counters = dict()
-i = 0
+    prime_counter = Counter(prime)
+    target_counter = Counter(target)
+    
+    counter.append(prime_counter, target_counter)
+    
 
-for a, b in subset:
-    for w in vocab_b:
-        if w in b:
-            count[w]["true"] += 1
-        else:
-            count[w]["false"] += 1
-
-    counter = dict()
-    for w in a:
-        if w in counter:
-            counter[w] += 1
-        else:
-            counter[w] = 0
-
-    a_counters[i] = counter
-    i += 1
-
-      
-logit = dict()
-
-for w in count:
-    nom = count[w]["true"] / len(Set)
-    denom = count[w]["false"] / len(Set)
-
-    logit[w] = log(nom/denom)
+c_count = {w: list() for w in vocab}
+y = {w: list() for w in vocab}
 
 
-total_lin_comb = {token: list() for token in logit}
-
-for token in logit:
-    for i in len(subset):
-        c_count = a_counters[i][token] # should be log transformed but doesn't mention how to deal with when count is 0
-        total_lin_comb[token].append(c_count)
-
-
-        
+for w in vocab:
+    for prime, target in counters:
+        c_count[w].append(prime[w])
+        y[w].append(target[w])
