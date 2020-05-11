@@ -1,0 +1,48 @@
+# create a vocab_b for subset
+
+vocab_b = set()
+
+for _, b in subset:
+    for w in b:
+        vocab_b.add(w)
+
+count = {w: {"true":0, "false":0} for w in vocab_b}
+a_counters = dict()
+i = 0
+
+for a, b in subset:
+    for w in vocab_b:
+        if w in b:
+            count[w]["true"] += 1
+        else:
+            count[w]["false"] += 1
+
+    counter = dict()
+    for w in a:
+        if w in counter:
+            counter[w] += 1
+        else:
+            counter[w] = 0
+
+    a_counters[i] = counter
+    i += 1
+
+      
+logit = dict()
+
+for w in count:
+    nom = count[w]["true"] / len(Set)
+    denom = count[w]["false"] / len(Set)
+
+    logit[w] = log(nom/denom)
+
+
+total_lin_comb = {token: list() for token in logit}
+
+for token in logit:
+    for i in len(subset):
+        c_count = a_counters[i][token] # should be log transformed but doesn't mention how to deal with when count is 0
+        total_lin_comb[token].append(c_count)
+
+
+        
