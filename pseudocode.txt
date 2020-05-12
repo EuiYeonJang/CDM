@@ -22,4 +22,4 @@ y = {w: list() for w in vocab}
 for w in vocab:
     for prime, target in counters:
         c_count[w].append(prime[w])
-        y[w].append(target[w])
+        y[w].append(1 if target[w] > 0 else 0)
