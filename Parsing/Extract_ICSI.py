@@ -189,6 +189,7 @@ def main():
     parsed_adjacency_path = ICSI_path + 'adjacency_dict_1.pkl'
     adjacency_pair_list_pickle = ICSI_path + 'adjacency_list.pkl'
     parsed_speakers_path = ICSI_path + 'parsed_speakers.pkl'
+    parsed_gender_split = ICSI_path + 'parsed_gender_split.pkl'
     words_directory = ICSI_path + 'Words/'
     acts_directory = ICSI_path + 'DialogueActs/'
     speakerspath = ICSI_path + 'speakers.xml'
@@ -273,157 +274,157 @@ def main():
     print(list(speakers.values())[0])
     print(len(speakers))
 
-    if not os.path.isfile(parsed_adjacency_path):
-        print("Extracting dialogue acts..")
-        # TODO: Implement looping over all dialogue act files
-        # filepath = ICSI_path + 'DialogueActs/Bdb001.A.dialogue-acts.xml'
-        dialogue_acts = {}
-        adjacency_dict = {}
+    # if not os.path.isfile(parsed_adjacency_path):
+    #     print("Extracting dialogue acts..")
+    #     # TODO: Implement looping over all dialogue act files
+    #     # filepath = ICSI_path + 'DialogueActs/Bdb001.A.dialogue-acts.xml'
+    #     dialogue_acts = {}
+    #     adjacency_dict = {}
         
-        for subdir, dirs, files in tqdm(os.walk(acts_directory)):
-            for file in tqdm(files):
-                filepath = subdir + os.sep + file
+    #     for subdir, dirs, files in tqdm(os.walk(acts_directory)):
+    #         for file in tqdm(files):
+    #             filepath = subdir + os.sep + file
 
-                if filepath.endswith('.xml'):
+    #             if filepath.endswith('.xml'):
 
-                    tree = ET.parse(filepath)
-                    root = tree.getroot()
-                    for child in tqdm(root):
-                        # print(child.tag, child.attrib, child.text)
+    #                 tree = ET.parse(filepath)
+    #                 root = tree.getroot()
+    #                 for child in tqdm(root):
+    #                     # print(child.tag, child.attrib, child.text)
 
-                        id = child.attrib['{http://nite.sourceforge.net/}id']
-                        start_time = child.attrib.get('starttime', None)
-                        end_time = child.attrib.get('endtime', None)
-                        type_ = child.attrib.get('type', None)
-                        adjacency = child.attrib.get('adjacency', None)
-                        original_type = child.attrib.get('original_type', None)
-                        channel = child.attrib.get('channel', None)
-                        comment = child.attrib.get('comment', None)
-                        participant_id = child.attrib.get('participant', None)
-                        # print("Participant id: ", participant_id)
+    #                     id = child.attrib['{http://nite.sourceforge.net/}id']
+    #                     start_time = child.attrib.get('starttime', None)
+    #                     end_time = child.attrib.get('endtime', None)
+    #                     type_ = child.attrib.get('type', None)
+    #                     adjacency = child.attrib.get('adjacency', None)
+    #                     original_type = child.attrib.get('original_type', None)
+    #                     channel = child.attrib.get('channel', None)
+    #                     comment = child.attrib.get('comment', None)
+    #                     participant_id = child.attrib.get('participant', None)
+    #                     # print("Participant id: ", participant_id)
 
-                        for grandchild in child:
-                            href = grandchild.attrib.get('href', None)
-                            opening_bracket_index = href.find('(')
-                            word_ids = href[opening_bracket_index+1:]
-                            first_closing_bracket_index = word_ids.find(')')
+    #                     for grandchild in child:
+    #                         href = grandchild.attrib.get('href', None)
+    #                         opening_bracket_index = href.find('(')
+    #                         word_ids = href[opening_bracket_index+1:]
+    #                         first_closing_bracket_index = word_ids.find(')')
 
-                            start_word_id = word_ids[:first_closing_bracket_index]
-                            end_word_id = word_ids[first_closing_bracket_index:]
-                            end_opening_bracket = end_word_id.find('(')
-                            if end_opening_bracket != -1:
-                                end_word_id = end_word_id[end_opening_bracket+1:-1]
-                            else:
-                                end_word_id = None
+    #                         start_word_id = word_ids[:first_closing_bracket_index]
+    #                         end_word_id = word_ids[first_closing_bracket_index:]
+    #                         end_opening_bracket = end_word_id.find('(')
+    #                         if end_opening_bracket != -1:
+    #                             end_word_id = end_word_id[end_opening_bracket+1:-1]
+    #                         else:
+    #                             end_word_id = None
                                 
 
 
-                        # dialogue_acts[id] = DialogueAct(id, start_time, end_time, participant_id, type_, \
-                            # original_type, channel, comment, adjacency, start_word_id, end_word_id, words=words, speakers=speakers)
+    #                     # dialogue_acts[id] = DialogueAct(id, start_time, end_time, participant_id, type_, \
+    #                         # original_type, channel, comment, adjacency, start_word_id, end_word_id, words=words, speakers=speakers)
 
 
-                        if adjacency is not None:
-                            adjacencies = adjacency.split('.')
-                            # print(adjacencies)
-                            # There is also a dash - 
+    #                     if adjacency is not None:
+    #                         adjacencies = adjacency.split('.')
+    #                         # print(adjacencies)
+    #                         # There is also a dash - 
                             
-                            # text = words[start_word_id:end_word_id] # To retrieve words, convert the keys to indices in with list(words.keys), and then select the Words between those indices
-                            # text_start_index = list(words.keys()).index(start_word_id)
-                            # text_end_index = list(words.keys()).index(end_word_id)
+    #                         # text = words[start_word_id:end_word_id] # To retrieve words, convert the keys to indices in with list(words.keys), and then select the Words between those indices
+    #                         # text_start_index = list(words.keys()).index(start_word_id)
+    #                         # text_end_index = list(words.keys()).index(end_word_id)
 
-                            # text = 
+    #                         # text = 
 
-                            # retrieve index in words_dict of start_word_id
-                            # TODO: COnvert this to function
-                            start_word_index = list(words.keys()).index(start_word_id)
-                            if end_word_id is not None:
-                                end_word_index = list(words.keys()).index(end_word_id)+1
-                            else:
-                                end_word_index = start_word_index+1
+    #                         # retrieve index in words_dict of start_word_id
+    #                         # TODO: COnvert this to function
+    #                         start_word_index = list(words.keys()).index(start_word_id)
+    #                         if end_word_id is not None:
+    #                             end_word_index = list(words.keys()).index(end_word_id)+1
+    #                         else:
+    #                             end_word_index = start_word_index+1
 
-                            act_words = list(words.values())[start_word_index:end_word_index]
-                            string = ' '.join([word.text for word in act_words if word.text])
-                            # self.text = string
-                            # print(string)
-                            # return string
+    #                         act_words = list(words.values())[start_word_index:end_word_index]
+    #                         string = ' '.join([word.text for word in act_words if word.text])
+    #                         # self.text = string
+    #                         # print(string)
+    #                         # return string
 
-                            for tag in adjacencies:
-                                # print("Tag: ", tag)
-                                # if tag == '5a':
-                                #     print("Tag is 5a!")
-                                if (tag.count('a') + tag.count('b')) != 1:
-                                    continue # This filters out faulty tags (sadly these exist in the dataset)
-                                # Select the first a or b letter, this ends the adjacency pair tag
-                                letter_index = max(tag.find('a'), tag.find('b')) # Removes -1 from unfound letter
-                                final_tag = file[:6] + tag[:letter_index] # Tags are reused in different meetings, this splits them up
-                                letter = tag[letter_index]
-                                number = 1
-                                # print("final tag: ", final_tag, letter_index)
-                                if '-' in tag:
-                                    number = tag[letter_index+2]
+    #                         for tag in adjacencies:
+    #                             # print("Tag: ", tag)
+    #                             # if tag == '5a':
+    #                             #     print("Tag is 5a!")
+    #                             if (tag.count('a') + tag.count('b')) != 1:
+    #                                 continue # This filters out faulty tags (sadly these exist in the dataset)
+    #                             # Select the first a or b letter, this ends the adjacency pair tag
+    #                             letter_index = max(tag.find('a'), tag.find('b')) # Removes -1 from unfound letter
+    #                             final_tag = file[:6] + tag[:letter_index] # Tags are reused in different meetings, this splits them up
+    #                             letter = tag[letter_index]
+    #                             number = 1
+    #                             # print("final tag: ", final_tag, letter_index)
+    #                             if '-' in tag:
+    #                                 number = tag[letter_index+2]
                                 
-                                no_of_plusses = tag.count('+')
-                                # insert_dict = {letter: {number: [string_list, participant_id]}} 
-                                # Check if there is already an entry. If not, add string_list with length of current number of plusses
-                                # If there is one, add it on the index of the list that corresponds to the number of plusses
+    #                             no_of_plusses = tag.count('+')
+    #                             # insert_dict = {letter: {number: [string_list, participant_id]}} 
+    #                             # Check if there is already an entry. If not, add string_list with length of current number of plusses
+    #                             # If there is one, add it on the index of the list that corresponds to the number of plusses
                                 
-                                # tupl = (letter, number, no_of_plusses, string, participant_id)
-                                # insert_dict = {letter: (number, no_of_plusses, string_list, participant_id)}
-                                # adjacency_dict[letter][number]
-                                if final_tag in adjacency_dict.keys() and letter in adjacency_dict[final_tag].keys():
-                                    # if letter in adjacency_dict[final_tag].keys():
-                                    for item_index, item in enumerate(adjacency_dict[final_tag][letter]): # loop through all existing acts for the current tag
-                                        if number == item[0] and participant_id == item[3]:
-                                            # if no_of_plusses == item[2] + 1:
-                                                # text = item[3] + ' ' + string
-                                            text = item[2]
-                                            if len(text) < no_of_plusses + 1:
-                                                text += ['']*(no_of_plusses + 1 - len(text))
-                                            text[no_of_plusses] = string
-                                            insert_tupl = (number, no_of_plusses, text, participant_id)
-                                            adjacency_dict[final_tag][letter][item_index] = insert_tupl
-                                            # print(text)
-                                            break
-                                        # elif no_of_plusses < item[2]:
-                                            # print("\n Less plusses than seen before \n")
-                                        # else:
-                                            # print("Skipped a plus..", tag)
+    #                             # tupl = (letter, number, no_of_plusses, string, participant_id)
+    #                             # insert_dict = {letter: (number, no_of_plusses, string_list, participant_id)}
+    #                             # adjacency_dict[letter][number]
+    #                             if final_tag in adjacency_dict.keys() and letter in adjacency_dict[final_tag].keys():
+    #                                 # if letter in adjacency_dict[final_tag].keys():
+    #                                 for item_index, item in enumerate(adjacency_dict[final_tag][letter]): # loop through all existing acts for the current tag
+    #                                     if number == item[0] and participant_id == item[3]:
+    #                                         # if no_of_plusses == item[2] + 1:
+    #                                             # text = item[3] + ' ' + string
+    #                                         text = item[2]
+    #                                         if len(text) < no_of_plusses + 1:
+    #                                             text += ['']*(no_of_plusses + 1 - len(text))
+    #                                         text[no_of_plusses] = string
+    #                                         insert_tupl = (number, no_of_plusses, text, participant_id)
+    #                                         adjacency_dict[final_tag][letter][item_index] = insert_tupl
+    #                                         # print(text)
+    #                                         break
+    #                                     # elif no_of_plusses < item[2]:
+    #                                         # print("\n Less plusses than seen before \n")
+    #                                     # else:
+    #                                         # print("Skipped a plus..", tag)
 
-                                # adjacency_dict[final_tag]
-                                    else:
-                                        string_list = ['']*(no_of_plusses+1)
-                                        string_list[no_of_plusses] = string
-                                        # tupl = (letter, number, no_of_plusses, string_list, participant_id)
-                                        insert_tupl = (number, no_of_plusses, string_list, participant_id)
-                                        adjacency_dict[final_tag][letter].append(insert_tupl)
-                                        # print(string_list)
-                                elif final_tag in adjacency_dict.keys(): # Only the letter is not in there yet. We need to insert it
+    #                             # adjacency_dict[final_tag]
+    #                                 else:
+    #                                     string_list = ['']*(no_of_plusses+1)
+    #                                     string_list[no_of_plusses] = string
+    #                                     # tupl = (letter, number, no_of_plusses, string_list, participant_id)
+    #                                     insert_tupl = (number, no_of_plusses, string_list, participant_id)
+    #                                     adjacency_dict[final_tag][letter].append(insert_tupl)
+    #                                     # print(string_list)
+    #                             elif final_tag in adjacency_dict.keys(): # Only the letter is not in there yet. We need to insert it
 
-                                    string_list = ['']*(no_of_plusses+1)
-                                    string_list[no_of_plusses] = string
-                                    # tupl = (letter, number, no_of_plusses, string_list, participant_id)
-                                    insert_tupl = (number, no_of_plusses, string_list, participant_id)
-                                    adjacency_dict[final_tag][letter] = [insert_tupl]
-                                else: # So final_tag is not in there yet. We need to insert it
-                                    string_list = ['']*(no_of_plusses+1)
-                                    string_list[no_of_plusses] = string
-                                    # tupl = (letter, number, no_of_plusses, string_list, participant_id)
-                                    insert_dict = {letter: [(number, no_of_plusses, string_list, participant_id)]}
-                                    adjacency_dict[final_tag] = insert_dict
-                                    # print(string_list)
-                        # dialogue_acts[id].retrieve_text(words)
-                        # dialogue_acts[id].retrieve_participant(speakers)
-                # break
+    #                                 string_list = ['']*(no_of_plusses+1)
+    #                                 string_list[no_of_plusses] = string
+    #                                 # tupl = (letter, number, no_of_plusses, string_list, participant_id)
+    #                                 insert_tupl = (number, no_of_plusses, string_list, participant_id)
+    #                                 adjacency_dict[final_tag][letter] = [insert_tupl]
+    #                             else: # So final_tag is not in there yet. We need to insert it
+    #                                 string_list = ['']*(no_of_plusses+1)
+    #                                 string_list[no_of_plusses] = string
+    #                                 # tupl = (letter, number, no_of_plusses, string_list, participant_id)
+    #                                 insert_dict = {letter: [(number, no_of_plusses, string_list, participant_id)]}
+    #                                 adjacency_dict[final_tag] = insert_dict
+    #                                 # print(string_list)
+    #                     # dialogue_acts[id].retrieve_text(words)
+    #                     # dialogue_acts[id].retrieve_participant(speakers)
+    #             # break
 
 
-        with open(parsed_adjacency_path, 'wb') as parsed_acts_file:
-            pickle.dump(adjacency_dict, parsed_acts_file)
-    else:
-        with open(parsed_adjacency_path, 'rb') as parsed_acts_file:
-            adjacency_dict = pickle.load(parsed_acts_file)
+    #     with open(parsed_adjacency_path, 'wb') as parsed_acts_file:
+    #         pickle.dump(adjacency_dict, parsed_acts_file)
+    # else:
+    #     with open(parsed_adjacency_path, 'rb') as parsed_acts_file:
+    #         adjacency_dict = pickle.load(parsed_acts_file)
 
-    # print(list(adjacency_dict.values()))
-    print(len(adjacency_dict))
+    # # print(list(adjacency_dict.values()))
+    # print(len(adjacency_dict))
     
     # del speakers
     # del words
@@ -468,7 +469,31 @@ def main():
         with open(adjacency_pair_list_pickle, 'rb') as adjacency_list_file:
             adjacency_pairs = pickle.load(adjacency_list_file)
 
-    print(adjacency_pairs[0:2])
+
+    # Now, split the dataset into m-f, m-m, f-m and f-f. The first letter is the replier (so b), who responds to another gender (a)
+    if not os.path.isfile(parsed_gender_split):
+        f_m = []
+        m_m = []
+        m_f = []
+        f_f = []
+
+        for adjacency_pair in adjacency_pairs:
+            new_pair = [adjacency_pair['a']['counter'], adjacency_pair['b']['counter']]
+            if adjacency_pair['a']['gender'] == 'm' and adjacency_pair['b']['gender'] == 'm':
+                m_m.append(new_pair)
+            elif adjacency_pair['a']['gender'] == 'm' and adjacency_pair['b']['gender'] == 'f':
+                f_m.append(new_pair)
+            elif adjacency_pair['a']['gender'] == 'f' and adjacency_pair['b']['gender'] == 'm':
+                m_f.append(new_pair)
+            elif adjacency_pair['a']['gender'] == 'f' and adjacency_pair['b']['gender'] == 'f':
+                f_f.append(new_pair)
+        with open(parsed_gender_split, 'wb') as adjacency_split_file:
+            pickle.dump((f_m, m_m, m_f, f_f), adjacency_split_file)
+    else:
+        with open(parsed_gender_split, 'rb') as adjacency_split_file:
+            (f_m, m_m, m_f, f_f) = pickle.load(adjacency_split_file)
+    print(f_m)
+    # print(adjacency_pairs[0:2])
     # The adjacency_list has a dict of each single adjacency pair at each list entry
     # This dict contains the first turn at key 'a', and the second at turn 'b'.
 
