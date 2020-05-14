@@ -3,38 +3,6 @@ import numpy as np
 from sklearn.linear_model import LogisticRegression
 import statsmodels.api as sm
   
-# create subsets
-def create_subsets(filename="subset_dict.pkl"):
-
-    # load parsed file
-    with open("Corpora/ICSI/adjacency_list.pkl", "rb") as f:
-        adj_list = pkl.load(f)
-    
-    subset_dict = dict(mm=list(),
-                    mf=list(),
-                    fm=list(),
-                    ff=list())
-
-    for item in adj_list:
-        gender_a = item["a"]["gender"] 
-        gender_b = item["b"]["gender"] 
-        if gender_a == "m" and gender_b == "m":
-            subset_name = "mm"
-        elif gender_a == "m" and gender_b == "f":
-            subset_name = "mf"
-        elif gender_a == "f" and gender_b == "m":
-            subset_name = "fm"
-        else: # gneder_a == "f" and gender_b == "f"
-            subset_name = "ff"
-
-        subset_dict[subset_name].append((item["a"]["counter"], item["b"]["counter"]))
-
-    with open(f"{filename}", "wb") as f:
-        pkl.dump(subset_dict, f)
-
-    return subset_dict
-
-
 # create vocab for subset
 def create_vocab(subset, subset_name):
     vocab = set()
@@ -48,20 +16,64 @@ def create_vocab(subset, subset_name):
     return vocab
 
 
+def create_bi_vocab(subset, subset_name):
+    vocab = set()
+    for _, p, t in subset:
+        vocab |= set(p.keys())
+        vocab |= set(t.keys())
+
+    with open(f"{subset_name}_vocab.pkl", "wb") as f:
+        pkl.dump(vocab, f)
+
+    return vocab
+
 # create the features and labels
 def create_X_y(subset, subset_name, vocab):
     c_count = {w: list() for w in vocab}
     y = {w: list() for w in vocab}
-    p_len = {w: list() for w in vocab}
+    # p_len = {w: list() for w in vocab}
 
     for w in vocab:
         for p, t in subset:
-            c_count[w].append(p[w])
+            # c_count[w].append(p[w])
+            c_count[w].append(p[w]/sum(p.values()))
             y[w].append(1 if t[w] > 0 else 0)
-            p_len[w].append(sum(p.values()))
+            # p_len[w].append(sum(p.values()))
 
-    d = dict(c_count=c_count, y=y, p_len=p_len)
-    with open(f"{subset_name}_c_count_y.pkl", "wb") as f:
+    if subset_name == "mf" or subset_name == "mm":
+        c_power = {w: [1]*len(c_count[w]) for w in c_count}
+    else:
+        c_power = {w: [0]*len(c_count[w]) for w in c_count}
+
+
+    # d = dict(c_count=c_count, y=y, p_len=p_len, c_power=c_power)
+    d = dict(c_count=c_count, y=y, c_power=c_power)
+    with open(f"{subset_name}_X_y.pkl", "wb") as f:
+        pkl.dump(d, f)
+
+    return d
+
+
+# create the features and labels
+def create_bi_X_y(subset, subset_name, vocab):
+    c_count = {w: list() for w in vocab}
+    y = {w: list() for w in vocab}
+    # p_len = {w: list() for w in vocab}
+    c_power = {w: list() for w in vocab}
+
+    for w in vocab:
+        for pg, p, t in subset:
+            # c_count[w].append(p[w])
+            c_count[w].append(p[w]/sum(p.values()))
+            y[w].append(1 if t[w] > 0 else 0)
+            # p_len[w].append(sum(p.values()))
+            c_power[w].append(1 if pg =="m" else 0)
+            
+
+    # d = dict(c_count=c_count, y=y, p_len=p_len, c_power=c_power)
+    d = dict(c_count=c_count, y=y, c_power=c_power)
+
+    with open(f"{subset_name}_X_y.pkl", "wb") as f:
         pkl.dump(d, f)
 
     return d
@@ -71,74 +83,124 @@ def create_X_y(subset, subset_name, vocab):
 def calculate_beta(X_dict, vocab, subset_name):
     c_count = X_dict["c_count"]
     y = X_dict["y"]
-    p_len = X_dict["p_len"]
+    # p_len = X_dict["p_len"]
+    c_power = X_dict["c_power"]
 
-    beta_dict = {w: {i: "undefined" for i in range(7)} for w in vocab}
+    # beta_dict = {w: {i: "undefined" for i in range(7)} for w in vocab}
+    pvalue_dict = {w: {i: "undefined" for i in range(4)} for w in vocab}
+    zscores_dict = {w: {i: "undefined" for i in range(4)} for w in vocab}
 
     for w in vocab:
-        c_w = c_count[w]
+        cc_w = c_count[w]
         y_w = y[w]
-        p_len_w = p_len[w]
+        # p_len_w = p_len[w]
+        cp_w = c_power[w]
 
         if sum(y_w) > 0:
-            c_w = np.array(c_w)
-            p_len_w = np.array(p_len_w)
-            X = np.array([c_w, np.ones(len(c_w)), p_len_w, c_w, c_w*p_len_w, p_len_w, c_w*p_len_w]).T
+            cc_w = np.array(cc_w)
+            # p_len_w = np.array(p_len_w)
+            cp_w = np.array(cp_w)
+            # X = np.array([np.ones(len(cc_w)), cc_w, cp_w, p_len_w, cc_w*cp_w, cc_w*p_len_w, cp_w*p_len_w, cc_w*cp_w*p_len_w]).T
+            X = np.array([np.ones(len(cc_w)), cc_w, cp_w, cc_w*cp_w]).T
+
             y_w = np.array(y_w)
 
-            clf = LogisticRegression(random_state=0).fit(X, y_w)
-            beta_dict[w][0] = clf.intercept_[0]
-            coef = clf.coef_.squeeze()
-            for i, c in enumerate(coef):
-                beta_dict[w][i+1] = c
+            glm_binom = sm.GLM(y_w, X, family=sm.families.Binomial())
+            res = glm_binom.fit()
+            p_values = res.pvalues
+            for i, p in enumerate(p_values):
+                pvalue_dict[w][i] = p
+
+            z_scores = res.tvalues
+            for i, z in enumerate(z_scores):
+                zscores_dict[w][i] = z
                 
 
-    with open(f"{subset_name}_betas.pkl", "wb") as f:
-        pkl.dump(beta_dict, f)
+    with open(f"{subset_name}_pvalues.pkl", "wb") as f:
+        pkl.dump(pvalue_dict, f)
+
+    with open(f"{subset_name}_zscores.pkl", "wb") as f:
+        pkl.dump(zscores_dict, f)
+    
 
 
 if __name__ == "__main__":
+    N_GROUP = 2
     print("load subsets\n")
-    with open("subset_dict.pkl", "rb") as f:
-        subsets = pkl.load(f)
+    
+    if N_GROUP == 2:
+        # with open("parsed_target_split.pkl", 'rb') as f:
+        with open("parsed_prime_split.pkl", 'rb') as f:
+            subsets = pkl.load(f)
 
-    # names = ["fm", "ff"]
-    names = ["ff"]
-    for subset_name in names:
-        print(subset_name)
-        subset = subsets[subset_name]
+        # names = ["m", "f"]
+        names = ["m"]
 
-        # print("\tcreating vocab")
-        # vocab = create_vocab(subset, subset_name)
-        # print("load vocab")
-        # with open(f"{subset_name}_vocab.pkl", "rb") as f:
-        #     vocab = pkl.load(f)
+        for subset_name in names:
+            print(subset_name)
+            subset = subsets[subset_name]
 
-        # print("\tcreating c_count and y")
-        # X_dict = create_X_y(subset, subset_name, vocab)
-        print("load c_count, y")
-        with open(f"{subset_name}_c_count_y.pkl", "rb") as f:
-            d = pkl.load(f)
-        #     c_count = d["c_count"]
-        #     y = d["y"]
-        c = np.array(d["c_count"]["meetings"])
-        y = np.array(d["y"]["meetings"])
-        p = np.array(d["p_len"]["meetings"])
+            print("\tcreating vocab")
+            vocab = create_bi_vocab(subset, subset_name)
+            # print("\tload vocab")
+            # with open(f"{subset_name}_vocab.pkl", "rb") as f:
+            #     vocab = pkl.load(f)
 
-        X = np.array([np.ones(len(c)), c, np.ones(len(c)), p, c, c*p, p, c*p]).T
-        glm_binom = sm.GLM(y, X, family=sm.families.Binomial())
-        res = glm_binom.fit(maxiter=100)
-        print(res.summary())
-        # print("\tcalculating beta")
-        # calculate_beta(X_dict, vocab, subset_name)
-        # print("load betas")
-        # with open(f"{subset_name}_betas.pkl", "rb") as f:
-        #     betas = pkl.load(f)
-        
-        # counter = 0
+            print("\tcreating features and target")
+            X_dict = create_bi_X_y(subset, subset_name, vocab)
+            # print("\tload features and target")
+            # with open(f"{subset_name}_X_y.pkl", "rb") as f:
+                # X_dict = pkl.load(f)
+           
+            # print("\tcalculating beta")
+            # calculate_beta(X_dict, vocab, subset_name)
+            # print("load betas")
+            # with open(f"{subset_name}_betas.pkl", "rb") as f:
+            #     betas = pkl.load(f)
 
-        # for w in betas:
-        #     if betas[w][0] == "undefined":
-        #         counter += 1
+            
+    else:
+        with open("parsed_target_prime_split.pkl", 'rb') as f:
+            subsets = pkl.load(f)
 
-        # print(f"counter {counter} / {len(betas)}")
+        names = ["mm", "mf", "fm", "ff"]
+    
+
+        for subset_name in names:
+            print(subset_name)
+            subset = subsets[subset_name]
+
+            print("\tcreating vocab")
+            vocab = create_vocab(subset, subset_name)
+            # print("load vocab")
+            # with open(f"{subset_name}_vocab.pkl", "rb") as f:
+            #     vocab = pkl.load(f)
+
+            print("\tcreating features and target")
+            X_dict = create_X_y(subset, subset_name, vocab)
+            # print("load c_count, y")
+            # with open(f"{subset_name}_c_count_y.pkl", "rb") as f:
+            #     d = pkl.load(f)
+            #     c_count = d["c_count"]
+            #     y = d["y"]
+            # c = np.array(d["c_count"]["meetings"])
+            # y = np.array(d["y"]["meetings"])
+            # p = np.array(d["p_len"]["meetings"])
+
+            # X = np.array([np.ones(len(c)), c, np.ones(len(c)), p, c, c*p, p, c*p]).T
+            # glm_binom = sm.GLM(y, X, family=sm.families.Binomial())
+            # res = glm_binom.fit(maxiter=100)
+            # print(res.summary())
+            # print("\tcalculating beta")
+            # calculate_beta(X_dict, vocab, subset_name)
+            # print("load betas")
+            # with open(f"{subset_name}_betas.pkl", "rb") as f:
+            #     betas = pkl.load(f)
+            
+            # counter = 0
+
+            # for w in betas:
+            #     if betas[w][0] == "undefined":
+            #         counter += 1
+
+            # print(f"counter {counter} / {len(betas)}")
