@@ -1,6 +1,9 @@
 import os
 import argparse
-from alignment_utils import *
+import pickle as pkl
+import numpy as np
+import statsmodels.api as sm
+from collections import Counter
 
 CATEGORIES = ['articles', 'pronoun', 'prepositions', 'negations', 'tentative', 'certainty', 'discrepancy', 'exclusive', 'inclusive']
 
@@ -14,7 +17,7 @@ def prime_lists(target_gender):
         tuple of original splits (split with female prime, split with male prime)
     """
     
-    with open("Corpora/ICSI/in_between_split.pkl", "rb") as f:
+    with open("../Corpora/ICSI/in_between_split.pkl", "rb") as f:
         mf, mm, fm, ff = pkl.load(f)
 
     if target_gender == "m":
