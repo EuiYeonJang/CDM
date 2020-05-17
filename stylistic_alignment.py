@@ -265,7 +265,7 @@ def calculate_beta_three(apl):
     return zscores_dict, pvalue_dict
 
 
-def calculate_alignment(apl, eq, normalise=False):
+def calculate_alignment(apl, eq, prime="f", normalise=False):
     if eq == 1:
         z, p = calculate_beta_one(apl, normalise)
     elif eq == 2:
@@ -277,7 +277,9 @@ def calculate_alignment(apl, eq, normalise=False):
         f.write("\n==================================\n")
         f.write(f"TARGET GENDER: {args.target_gender}\nEQUATION: {args.analysis}\n")
         
-        if eq == 1 : f.write(f"NORMALISE: {args.normalise}\n\n")
+        if eq == 1 : f.write(f"NORMALISE: {args.normalise}\n")
+
+        if eq == 2: f.write(f"PRIME GENDER: {prime}\n")
 
         f.write("==================================\n")
         betas = [3] if eq == 1 else [1] if eq == 2 else [4, 5, 6, 7]
@@ -289,6 +291,7 @@ def calculate_alignment(apl, eq, normalise=False):
             f.write("----------------------------------\n")
 
             for w in z:
+                if p[w][b] < 0.05: f.write(">> ")
                 f.write(f"{w}:\t{z[w][b]:.3f}\t{p[w][b]:.3f}\n")
 
 
@@ -312,7 +315,11 @@ def main():
         
         if os.path.exists(filename):
             with open(filename, "rb") as f:
-                adj_pair_list = pkl.load(f)
+                female_prime_apl = pkl.load(f)
+
+            with open(f"./stylistic/p_m_t_{args.target_gender}_prepped_apl.pkl", "rb") as f:
+                male_prime_apl = pkl.load(f)
+            
         else:
             female_prime_apl, male_prime_apl = prep_in_between_apl_two(args.target_gender)
 
