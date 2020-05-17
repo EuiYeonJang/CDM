@@ -111,7 +111,7 @@ def prep_in_between_apl(target_gender):
 
     liwc = create_liwc(vocab)
 
-    stylistic_apl = create_stylistic_in_between_apl(liwc, apl)
+    stylistic_apl = create_in_between_apl(liwc, apl)
 
     with open(f"./stylistic/t_{target_gender}_prepped_apl.pkl", "wb") as f:
         pkl.dump(stylistic_apl, f)
