@@ -59,7 +59,7 @@ certainty:	0.929	0.353
 ==================================
 TARGET GENDER: m
 EQUATION: 2
-PRIME GENDER: f
+PRIME GENDER: m
 ==================================
 
 BETA: 1
@@ -76,44 +76,6 @@ discrepancy:	-1.816	0.069
 inclusive:	-0.991	0.322
 
 ==================================
-TARGET GENDER: 'f'
-EQUATION: 2
-PRIME GENDER: f
-==================================
-
-BETA: 1
-CATEGORIES:	Z-SCORES	P-VALUES
-----------------------------------
->> articles:	-3.580	0.000
-pronoun:	-1.562	0.118
-prepositions:	-1.239	0.215
-negations:	-0.566	0.571
->> tentative:	-2.294	0.022
-certainty:	-0.012	0.990
-discrepancy:	-0.630	0.528
-exclusive:	-0.371	0.711
-inclusive:	-1.906	0.057
-
-==================================
-TARGET GENDER: 'f'
-EQUATION: 2
-PRIME GENDER: f
-==================================
-
-BETA: 1
-CATEGORIES:	Z-SCORES	P-VALUES
-----------------------------------
-articles:	-0.809	0.419
-pronoun:	-0.195	0.845
->> prepositions:	2.190	0.028
-negations:	-0.113	0.910
-tentative:	0.245	0.806
-certainty:	1.119	0.263
-discrepancy:	-0.327	0.743
-exclusive:	1.848	0.065
-inclusive:	-0.929	0.353
-
-==================================
 TARGET GENDER: f
 EQUATION: 2
 PRIME GENDER: f
@@ -135,7 +97,7 @@ inclusive:	-1.906	0.057
 ==================================
 TARGET GENDER: f
 EQUATION: 2
-PRIME GENDER: f
+PRIME GENDER: m
 ==================================
 
 BETA: 1

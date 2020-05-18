@@ -327,7 +327,7 @@ def main():
             female_prime_apl, male_prime_apl = prep_in_between_apl_two(args.target_gender)
 
         calculate_alignment(female_prime_apl, args.analysis)
-        calculate_alignment(male_prime_apl, args.analysis)
+        calculate_alignment(male_prime_apl, args.analysis, prime="m")
 
 
 args = None
