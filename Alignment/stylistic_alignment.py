@@ -4,26 +4,9 @@ import pickle as pkl
 import numpy as np
 import statsmodels.api as sm
 from collections import Counter
+import alignment_utils as au
 
 CATEGORIES = ['articles', 'pronoun', 'prepositions', 'negations', 'tentative', 'certainty', 'discrepancy', 'exclusive', 'inclusive']
-
-
-def prime_lists(target_gender):
-    """
-    Parameters
-        target_gender (str): "m" or "f"
-
-    Returns
-        tuple of original splits (split with female prime, split with male prime)
-    """
-    
-    with open("../Corpora/ICSI/in_between_split.pkl", "rb") as f:
-        mf, mm, fm, ff = pkl.load(f)
-
-    if target_gender == "m":
-        return fm, mm
-    else:
-        return ff, mf
 
 
 def create_liwc(vocab):
@@ -75,25 +58,8 @@ def create_in_between_apl(liwc, orig_apl):
     return new_apl
 
 
-def create_vocab(adj_pair_list):
-    """
-    Parameters: 
-        adj_pair_list -list of tuples (gender of prime, prime counter, target counter)
-    
-    Returns:
-        set of vocab
-    """
-    vocab = set()
-
-    for _, prime, target in adj_pair_list:
-        vocab |= set(prime.keys())
-        vocab |= set(target.keys())
-
-    return vocab
-
-
 def prep_in_between_apl(target_gender):
-    female_prime_list, male_prime_list = prime_lists(target_gender)
+    female_prime_list, male_prime_list = au.prime_lists(target_gender)
     apl = list()
 
     for pair in female_prime_list:
@@ -107,7 +73,7 @@ def prep_in_between_apl(target_gender):
         if sum(combined.values()) > 0 and sum(pair["b"].values()) > 0:
             apl.append(("m",  combined, pair["b"]))
 
-    vocab = create_vocab(apl)
+    vocab = au.create_vocab(apl)
 
     liwc = create_liwc(vocab)
 
@@ -120,7 +86,7 @@ def prep_in_between_apl(target_gender):
 
 
 def prep_in_between_apl_two(target_gender):
-    female_prime_list, male_prime_list = prime_lists(target_gender)
+    female_prime_list, male_prime_list = au.prime_lists(target_gender)
     female_prime_apl = list()
 
     for pair in female_prime_list:
@@ -134,8 +100,8 @@ def prep_in_between_apl_two(target_gender):
         if sum(combined.values()) > 0 and sum(pair["b"].values()) > 0:
             male_prime_apl.append(("m",  combined, pair["b"]))
 
-    female_prime_vocab = create_vocab(female_prime_apl)
-    male_prime_vocab = create_vocab(male_prime_apl)
+    female_prime_vocab = au.create_vocab(female_prime_apl)
+    male_prime_vocab = au.create_vocab(male_prime_apl)
 
     female_prime_liwc = create_liwc(female_prime_vocab)
     male_prime_liwc = create_liwc(male_prime_vocab)
@@ -311,7 +277,7 @@ def main():
         else:
             adj_pair_list = prep_in_between_apl(args.target_gender)
 
-        calculate_alignment(adj_pair_list, args.analysis, args.normalise)
+        calculate_alignment(adj_pair_list, args.analysis, normalise=args.normalise)
 
     elif args.analysis == 2:
         filename = f"./stylistic/p_f_t_{args.target_gender}_prepped_apl.pkl"
@@ -342,5 +308,7 @@ if __name__ == "__main__":
                         help="to normalise c_count for equation 1")
 
     args = parser.parse_args()
+    
+    print("Attention: Make sure you're in the 'Alignment' directory before running code!")
 
     main()
