@@ -260,7 +260,7 @@ def calculate_alignment(apl, eq, prime="f", normalise=False):
     else:
         z, p = calculate_beta_three(apl)
 
-    results_filename = f"{SAVEDIR}/results_between.txt" if args.between else f"{SAVEDIR}/results_orig.txt"
+    results_filename = f"./stylistic_{args.dataset}/results_between.txt" if args.between else f"./stylistic_{args.dataset}/results_orig.txt"
 
     with open(results_filename, "a") as f:
         f.write("\n==================================\n")
@@ -286,8 +286,6 @@ def calculate_alignment(apl, eq, prime="f", normalise=False):
 
 
 def main():
-    SAVEDIR = f"./stylistic_{args.dataset}/between" if args.between else f"./stylistic_{args.dataset}/orig"
-
     os.makedirs(SAVEDIR, exist_ok=True)
 
     if args.analysis == 1 or args.analysis == 3:
@@ -337,5 +335,7 @@ if __name__ == "__main__":
     
     print("Attention: Make sure you're in the 'Alignment' directory before running code!")
     print(args)
+
+    SAVEDIR = f"./stylistic_{args.dataset}/between" if args.between else f"./stylistic_{args.dataset}/orig"
 
     main()
