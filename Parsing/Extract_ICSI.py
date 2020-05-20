@@ -550,19 +550,28 @@ def main():
     (f_m, m_m, m_f, f_f) = unpickle_or_generate(split_genders, parsed_gender_split, adjacency_pairs)
     (f_m_b, m_m_b, m_f_b, f_f_b) = unpickle_or_generate(split_genders_between, split_in_between_path, in_between_pairs)
 
-    print('\n \n')
-    print(len(f_m_b[2]['fb']))
-    number_of_not_in_between =  sum( [1 for pair in f_m_b if len(pair['mb']) == 0] ) + \
-                                sum( [1 for pair in m_m_b if len(pair['mb']) == 0] ) + \
-                                sum( [1 for pair in m_f_b if len(pair['fb']) == 0] ) + \
-                                sum( [1 for pair in f_f_b if len(pair['fb']) == 0] ) 
-    total_number_of_pairs = len(f_m_b)+len(m_m_b) + len(m_f_b) + len(f_f_b)
-    print('Pairs with turns in between: ', total_number_of_pairs - number_of_not_in_between,'out of', total_number_of_pairs)
-    # Each of these is a list of dicts, with four keys: a, b, and mb (male between) and fb (female between)
+    # print('\n \n')
+    # print(len(f_m_b[2]['fb']))
+    # number_of_not_in_between =  sum( [1 for pair in f_m_b if len(pair['mb']) == 0] ) + \
+    #                             sum( [1 for pair in m_m_b if len(pair['mb']) == 0] ) + \
+    #                             sum( [1 for pair in m_f_b if len(pair['fb']) == 0] ) + \
+    #                             sum( [1 for pair in f_f_b if len(pair['fb']) == 0] ) 
+    # total_number_of_pairs = len(f_m_b)+len(m_m_b) + len(m_f_b) + len(f_f_b)
+    # print('Pairs with turns in between: ', total_number_of_pairs - number_of_not_in_between,'out of', total_number_of_pairs)
+    # # Each of these is a list of dicts, with four keys: a, b, and mb (male between) and fb (female between)
     
 
-
-
+    # number_of_empty_counters =  sum( [1 for pair in f_m_b if (len(pair['a']) == 0 or len(pair['b'])==0) ] )   + \
+    #                             sum( [1 for pair in m_m_b if (len(pair['a']) == 0 or len(pair['b'])==0) ] )   + \
+    #                             sum( [1 for pair in m_f_b if (len(pair['a']) == 0 or len(pair['b'])==0) ] )  + \
+    #                             sum( [1 for pair in f_f_b if (len(pair['a']) == 0 or len(pair['b'])==0) ] )  
+    # # total_number_of_pairs = len(f_m_b)+len(m_m_b) + len(m_f_b) + len(f_f_b)
+    # print("Number of empty counters: ", number_of_empty_counters, 'out of', total_number_of_pairs)
+    # print(f_m_b[0])
+    # print(m_m_b[0])
+    # print(f_f_b[0])
+    # print(m_f_b[0])
+    print(adjacency_dict)
 
 
 if __name__ == '__main__':
