@@ -34,7 +34,7 @@ def create_liwc(vocab):
     return liwc
 
 
-def create_in_between_apl(liwc, orig_apl):
+def create_apl(liwc, orig_apl):
     """
     Parameters:
         liwc - dictionary of liwc categories (key) and list of its words (value)
@@ -58,26 +58,34 @@ def create_in_between_apl(liwc, orig_apl):
     return new_apl
 
 
-def prep_in_between_apl(target_gender):
+def prep_apl(target_gender):
     female_prime_list, male_prime_list = au.prime_lists(target_gender)
     apl = list()
 
     for pair in female_prime_list:
-        combined = pair["a"] + pair["fb"]
-        if sum(combined.values()) > 0 and sum(pair["b"].values()) > 0:
-            apl.append(("f", combined , pair["b"]))
+        if args.between:
+            combined = pair["a"] + pair["fb"]
+            if sum(combined.values()) > 0 and sum(pair["b"].values()) > 0:
+                apl.append(("f", combined , pair["b"]))
+        else:
+            if sum(pair["a"].values()) > 0 and sum(pair["b"].values()) > 0:
+                apl.append(("f", pair["a"] , pair["b"]))
 
 
     for pair in male_prime_list:
-        combined = pair["a"] + pair["mb"]
-        if sum(combined.values()) > 0 and sum(pair["b"].values()) > 0:
-            apl.append(("m",  combined, pair["b"]))
+        if args.between:
+            combined = pair["a"] + pair["mb"]
+            if sum(combined.values()) > 0 and sum(pair["b"].values()) > 0:
+                apl.append(("m",  combined, pair["b"]))
+        else:
+            if sum(pair["a"].values()) > 0 and sum(pair["b"].values()) > 0:
+                apl.append(("m",  pair["a"], pair["b"]))
 
     vocab = au.create_vocab(apl)
 
     liwc = create_liwc(vocab)
 
-    stylistic_apl = create_in_between_apl(liwc, apl)
+    stylistic_apl = create_apl(liwc, apl)
 
     with open(f"./stylistic/t_{target_gender}_prepped_apl.pkl", "wb") as f:
         pkl.dump(stylistic_apl, f)
@@ -85,20 +93,28 @@ def prep_in_between_apl(target_gender):
     return stylistic_apl
 
 
-def prep_in_between_apl_two(target_gender):
+def prep_apl_two(target_gender):
     female_prime_list, male_prime_list = au.prime_lists(target_gender)
     female_prime_apl = list()
 
     for pair in female_prime_list:
-        combined = pair["a"] + pair["fb"]
-        if sum(combined.values()) > 0 and sum(pair["b"].values()) > 0:
-            female_prime_apl.append(("f", combined , pair["b"]))
+        if args.between:
+            combined = pair["a"] + pair["fb"]
+            if sum(combined.values()) > 0 and sum(pair["b"].values()) > 0:
+                female_prime_apl.append(("f", combined , pair["b"]))
+        else:
+            if sum(pair["a"].values()) > 0 and sum(pair["b"].values()) > 0:
+                female_prime_apl.append(("f", pair["a"] , pair["b"]))
 
     male_prime_apl = list()
     for pair in male_prime_list:
-        combined = pair["a"] + pair["mb"]
-        if sum(combined.values()) > 0 and sum(pair["b"].values()) > 0:
-            male_prime_apl.append(("m",  combined, pair["b"]))
+        if args.between:
+            combined = pair["a"] + pair["mb"]
+            if sum(combined.values()) > 0 and sum(pair["b"].values()) > 0:
+                male_prime_apl.append(("m",  combined, pair["b"]))
+        else:
+            if sum(pair["a"].values()) > 0 and sum(pair["b"].values()) > 0:
+                male_prime_apl.append(("m",  pair["a"], pair["b"]))
 
     female_prime_vocab = au.create_vocab(female_prime_apl)
     male_prime_vocab = au.create_vocab(male_prime_apl)
@@ -107,8 +123,8 @@ def prep_in_between_apl_two(target_gender):
     male_prime_liwc = create_liwc(male_prime_vocab)
 
 
-    female_prime_stylistic_apl = create_in_between_apl(female_prime_liwc, female_prime_apl)
-    male_prime_stylistic_apl = create_in_between_apl(male_prime_liwc, male_prime_apl)
+    female_prime_stylistic_apl = create_apl(female_prime_liwc, female_prime_apl)
+    male_prime_stylistic_apl = create_apl(male_prime_liwc, male_prime_apl)
 
 
     with open(f"./stylistic/p_f_t_{target_gender}_prepped_apl.pkl", "wb") as f:
@@ -275,7 +291,7 @@ def main():
             with open(filename, "rb") as f:
                 adj_pair_list = pkl.load(f)
         else:
-            adj_pair_list = prep_in_between_apl(args.target_gender)
+            adj_pair_list = prep_apl(args.target_gender)
 
         calculate_alignment(adj_pair_list, args.analysis, normalise=args.normalise)
 
@@ -290,7 +306,7 @@ def main():
                 male_prime_apl = pkl.load(f)
             
         else:
-            female_prime_apl, male_prime_apl = prep_in_between_apl_two(args.target_gender)
+            female_prime_apl, male_prime_apl = prep_apl_two(args.target_gender)
 
         calculate_alignment(female_prime_apl, args.analysis)
         calculate_alignment(male_prime_apl, args.analysis, prime="m")
@@ -305,7 +321,9 @@ if __name__ == "__main__":
     parser.add_argument('--analysis', type=int, default=1,
 						help="1, 2 or 3, the type of analysis to perform (equation number)")
     parser.add_argument('--normalise', type=bool, default=False,
-                        help="to normalise c_count for equation 1")
+                        help="bool to normalise c_count for equation 1, default False")
+    parser.add_argument('--between', type=bool, default=False,
+                        help="bool to include the intermiediate utterances or not, default True")
 
     args = parser.parse_args()
     

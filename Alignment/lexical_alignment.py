@@ -59,8 +59,8 @@ def prep_in_between_apl_two(target_gender):
     global VOCAB
 
     female_prime_list, male_prime_list = au.prime_lists(target_gender)
+    
     female_prime_apl = list()
-
     for pair in female_prime_list:
         combined = pair["a"] + pair["fb"]
         if sum(combined.values()) > 0 and sum(pair["b"].values()) > 0:
