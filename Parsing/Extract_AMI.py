@@ -92,8 +92,8 @@ def extract_words(words_directory): ###
 
                 for child in root:
                     id = child.attrib['{http://nite.sourceforge.net/}id']
-                    start_time = child.attrib.get('starttime', None)
-                    end_time = child.attrib.get('endtime', None)
+                    start_time = float(child.attrib.get('starttime', -1))
+                    end_time = float(child.attrib.get('endtime', -1))
                     if child.tag == 'w' and child.text.isalnum():
                         text = wnl.lemmatize(child.text.lower())
                     else:
@@ -145,8 +145,7 @@ def dialogue_acts_words(href, words): # Retrieves words given the href from a di
     else:
         end_word_index = start_word_index+1
     act_words = list(words[meeting_id].values())[start_word_index:end_word_index]
-    # print('\n \n')
-    # print("Hello: ", act_words[0].start_time)
+
     words_list = [word.text for word in act_words if word.text != False]
     start_time = act_words[0].start_time
     end_time = act_words[-1].end_time
@@ -189,18 +188,26 @@ def extract_dialogue_acts(acts_directory, words, speakers): ### #Note: Note: Abo
                     gender = speakers[meeting_id][participant_letter]
                     dialogue_acts_by_id[id] = (counter, meeting_id, gender, start_time, end_time)
     dialogue_acts[meeting_id] = dialogue_acts_by_id # Also store the last one
-    return dialogue_acts
+    return dialogue_acts #TODO: Rerun this
    
-def retrieve_between_counter(dialogue_acts, meeting_id, start_time, end_time):
+def retrieve_between_counter(dialogue_acts, meeting_id, start_time, end_time): # TODO: Count the number of dialogue acts
+
     acts_in_meeting = dialogue_acts[meeting_id]
 
-    acts_between_male = sum([act[0] for act in acts_in_meeting 
-                                if (act[3] > start_time and act[4] < end_time and act[2] == 'm')], 
+    acts_between_male = [act[0] for act in acts_in_meeting.values() 
+                                if (act[3] > start_time and act[4] < end_time and act[2] == 'm')]
+    acts_between_female = [act[0] for act in acts_in_meeting.values() 
+                                if (act[3] > start_time and act[4] < end_time and act[2] == 'f')]
+
+    number_of_acts_between_male = len(acts_between_male)
+    number_of_acts_between_female = len(acts_between_female)
+
+    counter_acts_between_male = sum(acts_between_male, 
                                 start = Counter() )
-    acts_between_female = sum([act[0] for act in acts_in_meeting 
-                                if (act[3] > start_time and act[4] < end_time and act[2] == 'f')], 
+    counter_acts_between_female = sum(acts_between_female, 
                                 start = Counter() )
-    return acts_between_male, acts_between_female
+
+    return acts_between_male, acts_between_female, number_of_acts_between_male, number_of_acts_between_female
 
 def extract_adjacency_pairs(acts_directory, words, speakers, dialogue_acts): ###
     print("Extracting adjacency pairs...")
@@ -250,10 +257,12 @@ def extract_adjacency_pairs(acts_directory, words, speakers, dialogue_acts): ###
                     start_time = adjacency_pair['a'][3] # end time of first utterance
                     end_time = adjacency_pair['b'][2] #start time of last utterance
 
-                    adjacency_pair['mb'], adjacency_pair['fb'] = retrieve_between_counter(dialogue_acts, meeting_id, start_time, end_time)
+                    between_counters = retrieve_between_counter(dialogue_acts, meeting_id, start_time, end_time)
+                    adjacency_pair['mb'], adjacency_pair['fb'], adjacency_pair['n_mb'], adjacency_pair['n_fb'] = between_counters
                     
                     new_pair = {'a': adjacency_pair['a'][0], 'b': adjacency_pair['b'][0], 
-                        'mb': adjacency_pair['mb'], 'fb': adjacency_pair['fb']}
+                        'mb': adjacency_pair['mb'], 'fb': adjacency_pair['fb'], 'n_mb': adjacency_pair['n_mb'], 
+                            'n_fb': adjacency_pair['n_fb']}
 
                     if adjacency_pair['a'][1] == 'm' and adjacency_pair['b'][1] == 'm':
                         m_m.append(new_pair)
@@ -263,7 +272,7 @@ def extract_adjacency_pairs(acts_directory, words, speakers, dialogue_acts): ###
                         m_f.append(new_pair)
                     elif adjacency_pair['a'][1] == 'f' and adjacency_pair['b'][1] == 'f':
                         f_f.append(new_pair)
-    print("Number of missing turns: ", missing_turns, total_pairs) #TODO: Investigate this
+    print("Number of missing turns: ", missing_turns, total_pairs) 
     return (f_m, m_m, m_f, f_f)
 
 def main():
@@ -292,6 +301,7 @@ def main():
     (f_m, m_m, m_f, f_f) = unpickle_or_generate(extract_adjacency_pairs, split_path, acts_directory, words, speakers, dialogue_acts)
 
     print("Lengths: ", len(f_m), len(m_m), len(m_f), len(f_f))
+
 
 
 
