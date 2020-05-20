@@ -8,6 +8,8 @@ import alignment_utils as au
 
 CATEGORIES = ['articles', 'pronoun', 'prepositions', 'negations', 'tentative', 'certainty', 'discrepancy', 'exclusive', 'inclusive']
 
+SAVEDIR = "."
+
 
 def create_liwc(vocab):
     """
@@ -87,7 +89,7 @@ def prep_apl(target_gender):
 
     stylistic_apl = create_apl(liwc, apl)
 
-    with open(f"./stylistic/t_{target_gender}_prepped_apl.pkl", "wb") as f:
+    with open(f"{SAVEDIR}/t_{target_gender}_prepped_apl.pkl", "wb") as f:
         pkl.dump(stylistic_apl, f)
 
     return stylistic_apl
@@ -127,10 +129,10 @@ def prep_apl_two(target_gender):
     male_prime_stylistic_apl = create_apl(male_prime_liwc, male_prime_apl)
 
 
-    with open(f"./stylistic/p_f_t_{target_gender}_prepped_apl.pkl", "wb") as f:
+    with open(f"{SAVEDIR}/p_f_t_{target_gender}_prepped_apl.pkl", "wb") as f:
         pkl.dump(female_prime_stylistic_apl, f)
 
-    with open(f"./stylistic/p_m_t_{target_gender}_prepped_apl.pkl", "wb") as f:
+    with open(f"{SAVEDIR}/p_m_t_{target_gender}_prepped_apl.pkl", "wb") as f:
         pkl.dump(male_prime_stylistic_apl, f)
 
 
@@ -258,7 +260,9 @@ def calculate_alignment(apl, eq, prime="f", normalise=False):
     else:
         z, p = calculate_beta_three(apl)
 
-    with open("./stylistic/results.txt", "a") as f:
+    results_filename = f"{SAVEDIR}/results_between.txt" if args.between else f"{SAVEDIR}/results_orig.txt"
+
+    with open(results_filename, "a") as f:
         f.write("\n==================================\n")
         f.write(f"TARGET GENDER: {args.target_gender}\nEQUATION: {args.analysis}\n")
         
@@ -282,10 +286,12 @@ def calculate_alignment(apl, eq, prime="f", normalise=False):
 
 
 def main():
-    os.makedirs("./stylistic/", exist_ok=True)
+    SAVEDIR = f"./stylistic_{args.dataset}/between" if args.between else f"./stylistic_{args.dataset}/orig"
+
+    os.makedirs(SAVEDIR, exist_ok=True)
 
     if args.analysis == 1 or args.analysis == 3:
-        filename = f"./stylistic/t_{args.target_gender}_prepped_apl.pkl"
+        filename = f"{SAVEDIR}/t_{args.target_gender}_prepped_apl.pkl"
 
         if os.path.exists(filename):
             with open(filename, "rb") as f:
@@ -296,13 +302,13 @@ def main():
         calculate_alignment(adj_pair_list, args.analysis, normalise=args.normalise)
 
     elif args.analysis == 2:
-        filename = f"./stylistic/p_f_t_{args.target_gender}_prepped_apl.pkl"
+        filename = f"{SAVEDIR}/p_f_t_{args.target_gender}_prepped_apl.pkl"
         
         if os.path.exists(filename):
             with open(filename, "rb") as f:
                 female_prime_apl = pkl.load(f)
 
-            with open(f"./stylistic/p_m_t_{args.target_gender}_prepped_apl.pkl", "rb") as f:
+            with open(f"{SAVEDIR}/p_m_t_{args.target_gender}_prepped_apl.pkl", "rb") as f:
                 male_prime_apl = pkl.load(f)
             
         else:
@@ -316,6 +322,8 @@ args = None
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Arguments for stylistic alignment.')
+    parser.add_argument('--dataset', type=str, default="AMI",
+                        help="\"AMI\" or \"ICSI\", name of the dataset being analysed")
     parser.add_argument('--target_gender', type=str, default="m",
 						help="\"m\" or \"f\", gender of target speaker.")
     parser.add_argument('--analysis', type=int, default=1,
@@ -328,5 +336,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     
     print("Attention: Make sure you're in the 'Alignment' directory before running code!")
+    print(args)
 
     main()

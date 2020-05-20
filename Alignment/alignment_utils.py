@@ -3,7 +3,7 @@ import statsmodels.api as sm
 import pickle as pkl
 from collections import Counter
 
-def prime_lists(target_gender):
+def prime_lists(target_gender, dataset="ICSI"):
     """
     Parameters
         target_gender (str): "m" or "f"
@@ -12,7 +12,7 @@ def prime_lists(target_gender):
         tuple of original splits (split with female prime, split with male prime)
     """
     
-    with open("../Corpora/ICSI/in_between_split.pkl", "rb") as f:
+    with open(f"../Corpora/{dataset}/in_between_split.pkl", "rb") as f:
         mf, mm, fm, ff = pkl.load(f)
 
     if target_gender == "m":
