@@ -119,13 +119,13 @@ class DialogueAct():
         act_words = list(words_dict.values())[start_word_index:end_word_index]
         string = ' '.join([word.text for word in act_words if word.text])
         # self.text = string
-        print(string)
+        # print(string)
         return string
     
     def retrieve_participant(self, speakers):
         participant_id = self.participant_id
         participant = speakers[participant_id]
-        print(participant.tag)
+        # print(participant.tag)
         return participant
 
     def list_adjacency(self):
@@ -138,11 +138,11 @@ class DialogueAct():
         # print(self.adjacency)
         if self.adjacency is not None:
             adjacencies = self.adjacency.split('.')
-            print(adjacencies)
+            # print(adjacencies)
             # There is also a dash - 
             adjacency_dict = {}
             for tag in adjacencies:
-                print("Tag: ", tag)
+                # print("Tag: ", tag)
                 if (tag.count('a') + tag.count('b')) != 1:
                     continue
                 # Select the first a or b letter, this ends the adjacency pair tag
@@ -150,7 +150,7 @@ class DialogueAct():
                 final_tag = tag[:letter_index]
                 letter = tag[letter_index]
                 number = 1
-                print("final tag: ", final_tag, letter_index)
+                # print("final tag: ", final_tag, letter_index)
                 if '-' in tag:
                     number = tag[letter_index+2]
                 
@@ -269,8 +269,8 @@ def extract_adjacency_pairs(acts_directory, words):
                     if len(meeting_dict_time) > 0:
                         dialogue_acts_time[meeting_id] = meeting_dict_time
                         dialogue_acts_text[meeting_id] = meeting_dict_text
-                        print(meeting_dict_time)
-                        print(meeting_dict_text)
+                        # print(meeting_dict_time)
+                        # print(meeting_dict_text)
                     meeting_dict_time = {}
                     meeting_dict_text = {}
                 tree = ET.parse(filepath)
@@ -361,7 +361,7 @@ def process_adjacency_pairs(adjacency_dict):
     adjacency_pairs = []
     # Now we sould convert the 'text' entries to counters, and separate each a-b pair.
     for AP_tag in adjacency_dict.keys():
-        print(AP_tag, adjacency_dict[AP_tag])
+        # print(AP_tag, adjacency_dict[AP_tag])
         # this contains a list of dialogue acts that belong to this one adjacency pair
         for dialogue_act in adjacency_dict[AP_tag].get('a', []):
             a_counter = Counter()
@@ -373,7 +373,7 @@ def process_adjacency_pairs(adjacency_dict):
 
             a_participant_gender = dialogue_act[3][0]
             for dialogue_act in adjacency_dict[AP_tag].get('b', []):
-                print("Found b!")
+                # print("Found b!")
                 b_counter = Counter()
                 text = dialogue_act[2]
                 # b_starttime = dialogue_act[4]
@@ -436,6 +436,8 @@ def process_inbetween(adjacency_dict, dialogue_acts_time, dialogue_acts_text):
 
                 # in_between_counter = Counter()
                 # Make a male and female in between counter, which are separately counted
+                number_of_male_between = 0
+                number_of_female_between = 0
                 male_between_counter = Counter()
                 female_between_counter = Counter()
                 for (time, text) in time_text_dict.items():
@@ -443,8 +445,10 @@ def process_inbetween(adjacency_dict, dialogue_acts_time, dialogue_acts_text):
                         
                         if text[1] == 'f':
                             female_between_counter.update(text[0])
+                            number_of_female_between += 1
                         elif text[1] == 'm':
                             male_between_counter.update(text[0])
+                            number_of_male_between += 1
                         else:
                             print("Gender not defined correctly.")
 
@@ -464,12 +468,14 @@ def process_inbetween(adjacency_dict, dialogue_acts_time, dialogue_acts_text):
                     'male_between':
                         {
                             'counter': male_between_counter,
-                            'gender': 'm'                                
+                            'gender': 'm',
+                            'number': number_of_male_between                                
                         },
                     'female_between':
                         {
                             'counter': female_between_counter,
-                            'gender': 'f'
+                            'gender': 'f',
+                            'number': number_of_female_between
                         }
                         }
                 adjacency_pairs.append(dic)
@@ -503,7 +509,8 @@ def split_genders_between(in_between_pairs):
 
     for adjacency_pair in in_between_pairs:
         new_pair = {'a': adjacency_pair['a']['counter'], 'b': adjacency_pair['b']['counter'], 
-        'mb': adjacency_pair['male_between']['counter'], 'fb': adjacency_pair['female_between']['counter']}
+            'mb': adjacency_pair['male_between']['counter'], 'fb': adjacency_pair['female_between']['counter'], 
+            'n_mb': adjacency_pair['male_between']['number'], 'n_fb': adjacency_pair['female_between']['number']}
         if adjacency_pair['a']['gender'] == 'm' and adjacency_pair['b']['gender'] == 'm':
             m_m.append(new_pair)
         elif adjacency_pair['a']['gender'] == 'm' and adjacency_pair['b']['gender'] == 'f':
@@ -532,8 +539,8 @@ def main():
     acts_directory = ICSI_path + 'DialogueActs/'
     speakerspath = ICSI_path + 'speakers.xml'
     all_dialogue_acts_path = ICSI_path + 'speakers.xml'
-    in_between_path = ICSI_path + 'in_between.pkl'
-    split_in_between_path = ICSI_path + 'in_between_split.pkl'
+    in_between_path = ICSI_path + 'in_between_V3.pkl'
+    split_in_between_path = ICSI_path + 'in_between_split_V3.pkl'
     words = unpickle_or_generate(extract_words, parsed_words_path, words_directory)
 
     print(len(words))
@@ -571,7 +578,7 @@ def main():
     # print(m_m_b[0])
     # print(f_f_b[0])
     # print(m_f_b[0])
-    print(adjacency_dict)
+    # print(adjacency_dict)
 
 
 if __name__ == '__main__':
