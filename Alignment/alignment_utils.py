@@ -1,7 +1,5 @@
-import numpy as np
-import statsmodels.api as sm
 import pickle as pkl
-from collections import Counter
+import os
 
 
 #################################################
@@ -60,6 +58,17 @@ def prep_clean_split_list(dataset):
         pkl.dump((c_mf, c_mm, c_fm, c_ff), f)
 
 
+def prep(dataset):
+    c_filename = f"../Corpora/{dataset}/processed_clean_split.pkl"
+    e_filename = f"../Corpora/{dataset}/processed_in_between_split.pkl"
+    
+    if not os.path.exists(c_filename):
+        prep_clean_split_list(dataset)
+
+    if not os.path.exists(e_filename):
+        prep_in_between_split_list(dataset)
+
+    
 #################################################
 #################################################
 
@@ -72,6 +81,7 @@ def create_vocab(adj_pair_list):
         vocab |= set(target.keys())
 
     return vocab
+
 
 def prime_lists(target_gender, dataset, between):
     split_type = "in_between" if between else "clean"
