@@ -1,0 +1,36 @@
+
+==================================
+EQUATION: 1
+TARGET GENDER: m
+==================================
+
+BETA: 3
+CATEGORIES:	Z-SCORES	P-VALUES
+----------------------------------
+>> articles:	-4.416	0.000
+pronoun:	-1.835	0.066
+>> prepositions:	-7.430	0.000
+>> negations:	-1.979	0.048
+>> tentative:	-4.474	0.000
+>> certainty:	5.296	0.000
+>> discrepancy:	-6.922	0.000
+>> exclusive:	-2.096	0.036
+inclusive:	0.811	0.417
+
+==================================
+EQUATION: 1
+TARGET GENDER: f
+==================================
+
+BETA: 3
+CATEGORIES:	Z-SCORES	P-VALUES
+----------------------------------
+>> articles:	-3.684	0.000
+>> pronoun:	7.239	0.000
+>> prepositions:	2.836	0.005
+negations:	-0.910	0.363
+tentative:	0.435	0.663
+certainty:	0.080	0.936
+discrepancy:	-0.765	0.444
+exclusive:	-0.150	0.880
+inclusive:	0.561	0.575
