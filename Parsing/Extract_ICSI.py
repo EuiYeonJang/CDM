@@ -163,15 +163,40 @@ class DialogueAct():
         else:
             return None
 
-def unpickle_or_generate(gen_fun, pickle_path, *args):
-    if not os.path.isfile(pickle_path):
+def unpickle_or_generate(gen_fun, pickle_path, *args, two_files=False):
+    if two_files:
+        pickle_path1 = pickle_path + 'f_m.pkl'
+        pickle_path2 = pickle_path + 'm_m.pkl'
+        pickle_path3 = pickle_path + 'm_f.pkl'
+        pickle_path4 = pickle_path + 'f_f.pkl'
         obj = gen_fun(*args)
-        with open(pickle_path, 'wb') as file:
-            pickle.dump(obj, file)
+        print("Generated pairs.")
+        if len(obj)>1:
+            first_part = obj[0]
+            second_part = obj[1]
+            third_part = obj[2]
+            fourth_part = obj[3]
+            def identity(thing):
+                return thing
+            print("starting pickling")
+            unpickle_or_generate(identity, pickle_path1, first_part)
+            print("Pickled one.")
+            unpickle_or_generate(identity, pickle_path2, second_part)
+            unpickle_or_generate(identity, pickle_path3, third_part)
+            unpickle_or_generate(identity, pickle_path4, fourth_part)
+            return obj
+        else:
+            print("Object couldn't be split in two!")
+            unpickle_or_generate(gen_fun, pickle_path, *args)
     else:
-        with open(pickle_path, 'rb') as file:
-            obj = pickle.load(file)
-    return obj
+        if not os.path.isfile(pickle_path):
+            obj = gen_fun(*args)
+            with open(pickle_path, 'wb') as file:
+                pickle.dump(obj, file)
+        else:
+            with open(pickle_path, 'rb') as file:
+                obj = pickle.load(file)
+        return obj
 
 def extract_words(words_directory):
     wnl = WordNetLemmatizer()
@@ -396,7 +421,11 @@ def process_adjacency_pairs(adjacency_dict):
 
 def process_inbetween(adjacency_dict, dialogue_acts_time, dialogue_acts_text):
 
-    adjacency_pairs = []
+    # adjacency_pairs = []
+    f_m = []
+    m_m = []
+    m_f = []
+    f_f = []
     # Now we sould convert the 'text' entries to counters, and separate each a-b pair.
     for AP_tag in tqdm(adjacency_dict.keys()):
         # print(AP_tag, adjacency_dict[AP_tag])
@@ -440,15 +469,21 @@ def process_inbetween(adjacency_dict, dialogue_acts_time, dialogue_acts_text):
                 number_of_female_between = 0
                 male_between_counter = Counter()
                 female_between_counter = Counter()
+                male_between_list = []
+                female_between_list = []
                 for (time, text) in time_text_dict.items():
                     if time > float(a_starttime) and time < float(b_starttime):
                         
                         if text[1] == 'f':
-                            female_between_counter.update(text[0])
+                            this_counter = Counter(text[0])
+                            female_between_counter +=  this_counter
                             number_of_female_between += 1
+                            female_between_list.append(this_counter)
                         elif text[1] == 'm':
-                            male_between_counter.update(text[0])
+                            this_counter = Counter(text[0])
+                            male_between_counter += this_counter
                             number_of_male_between += 1
+                            male_between_list.append(this_counter)
                         else:
                             print("Gender not defined correctly.")
 
@@ -469,18 +504,33 @@ def process_inbetween(adjacency_dict, dialogue_acts_time, dialogue_acts_text):
                         {
                             'counter': male_between_counter,
                             'gender': 'm',
-                            'number': number_of_male_between                                
+                            'number': number_of_male_between,
+                            'list': male_between_list                             
                         },
                     'female_between':
                         {
                             'counter': female_between_counter,
                             'gender': 'f',
-                            'number': number_of_female_between
+                            'number': number_of_female_between,
+                            'list': female_between_list
                         }
                         }
-                adjacency_pairs.append(dic)
 
-    return adjacency_pairs
+                new_pair = {'a': dic['a']['counter'], 'b': dic['b']['counter'], 
+                    'mb': dic['male_between']['counter'], 'fb': dic['female_between']['counter'], 
+                    'n_mb': dic['male_between']['number'], 'n_fb': dic['female_between']['number'],
+                    'list_mb': dic['male_between']['list'], 'list_fb': dic['female_between']['list']}
+                if dic['a']['gender'] == 'm' and dic['b']['gender'] == 'm':
+                    m_m.append(new_pair)
+                elif dic['a']['gender'] == 'm' and dic['b']['gender'] == 'f':
+                    f_m.append(new_pair)
+                elif dic['a']['gender'] == 'f' and dic['b']['gender'] == 'm':
+                    m_f.append(new_pair)
+                elif dic['a']['gender'] == 'f' and dic['b']['gender'] == 'f':
+                    f_f.append(new_pair)
+
+    # return adjacency_pairs
+    return (f_m, m_m, m_f, f_f)
 
 def split_genders(adjacency_pairs):
     f_m = []
@@ -510,7 +560,8 @@ def split_genders_between(in_between_pairs):
     for adjacency_pair in in_between_pairs:
         new_pair = {'a': adjacency_pair['a']['counter'], 'b': adjacency_pair['b']['counter'], 
             'mb': adjacency_pair['male_between']['counter'], 'fb': adjacency_pair['female_between']['counter'], 
-            'n_mb': adjacency_pair['male_between']['number'], 'n_fb': adjacency_pair['female_between']['number']}
+            'n_mb': adjacency_pair['male_between']['number'], 'n_fb': adjacency_pair['female_between']['number'],
+            'list_mb': adjacency_pair['male_between']['list'], 'list_fb': adjacency_pair['female_between']['list']}
         if adjacency_pair['a']['gender'] == 'm' and adjacency_pair['b']['gender'] == 'm':
             m_m.append(new_pair)
         elif adjacency_pair['a']['gender'] == 'm' and adjacency_pair['b']['gender'] == 'f':
@@ -539,8 +590,8 @@ def main():
     acts_directory = ICSI_path + 'DialogueActs/'
     speakerspath = ICSI_path + 'speakers.xml'
     all_dialogue_acts_path = ICSI_path + 'speakers.xml'
-    in_between_path = ICSI_path + 'in_between_V3.pkl'
-    split_in_between_path = ICSI_path + 'in_between_split_V3.pkl'
+    in_between_path = ICSI_path + 'in_between.pkl'
+    split_in_between_path = ICSI_path + 'in_between_split.pkl'
     words = unpickle_or_generate(extract_words, parsed_words_path, words_directory)
 
     print(len(words))
@@ -550,12 +601,12 @@ def main():
 
     adjacency_dict, dialogue_acts_time, dialogue_acts_text = unpickle_or_generate(extract_adjacency_pairs, parsed_adjacency_path, acts_directory, words)
 
-    adjacency_pairs = unpickle_or_generate(process_adjacency_pairs, adjacency_pair_list_pickle, adjacency_dict)
+    # adjacency_pairs = unpickle_or_generate(process_adjacency_pairs, adjacency_pair_list_pickle, adjacency_dict)
 
-    in_between_pairs = unpickle_or_generate(process_inbetween, in_between_path, adjacency_dict, dialogue_acts_time, dialogue_acts_text)
-
-    (f_m, m_m, m_f, f_f) = unpickle_or_generate(split_genders, parsed_gender_split, adjacency_pairs)
-    (f_m_b, m_m_b, m_f_b, f_f_b) = unpickle_or_generate(split_genders_between, split_in_between_path, in_between_pairs)
+    (f_m_b, m_m_b, m_f_b, f_f_b) = unpickle_or_generate(process_inbetween, ICSI_path, adjacency_dict, dialogue_acts_time, dialogue_acts_text, two_files=True)
+    print("Finished in between pairs")
+    # (f_m, m_m, m_f, f_f) = unpickle_or_generate(split_genders, parsed_gender_split, adjacency_pairs)
+    #  = unpickle_or_generate(split_genders_between, split_in_between_path, in_between_pairs, two_files=True)
 
     # print('\n \n')
     # print(len(f_m_b[2]['fb']))
