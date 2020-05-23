@@ -2,9 +2,9 @@ import pickle as pkl
 import os
 
 
-#################################################
-########## ONE TIME PREPROCESSING STEP ##########
-#################################################
+######################################################
+########## PREPROCESSING STEP FOR Xu et al. ##########
+######################################################
 def __expand_split_list(split_list, prime_gender):
     expanded_split = list()
     b_str = f"list_{prime_gender}b"
@@ -23,7 +23,6 @@ def __expand_split_list(split_list, prime_gender):
 
 def __clean_split_list(split_list, prime_gender):
     clean_split = list()
-    b_str = f"list_{prime_gender}b"
 
     for adj_pair in split_list:
         if sum(adj_pair["b"].values()) > 0 and sum(adj_pair["a"].values()) > 0:
@@ -33,8 +32,23 @@ def __clean_split_list(split_list, prime_gender):
 
 
 def prep_in_between_split_list(dataset):
-    with open(f"../Corpora/{dataset}/final_split.pkl", "rb") as f:
-        mf, mm, fm, ff = pkl.load(f)
+    print("Please wait while I prepare expanded split list...")
+    if dataset == "ICSI":
+        with open(f"../Corpora/{dataset}/f_f.pkl", "rb") as f:
+            ff = pkl.load(f)
+
+        with open(f"../Corpora/{dataset}/f_m.pkl", "rb") as f:
+            mf = pkl.load(f)
+
+        with open(f"../Corpora/{dataset}/m_m.pkl", "rb") as f:
+            mm = pkl.load(f)
+
+        with open(f"../Corpora/{dataset}/m_f.pkl", "rb") as f:
+            fm = pkl.load(f)
+
+    else:
+        with open(f"../Corpora/{dataset}/final_split.pkl", "rb") as f:
+            mf, mm, fm, ff = pkl.load(f)
 
     e_mf = __expand_split_list(mf, "m")
     e_mm = __expand_split_list(mm, "m")
@@ -46,8 +60,23 @@ def prep_in_between_split_list(dataset):
 
 
 def prep_clean_split_list(dataset):
-    with open(f"../Corpora/{dataset}/final_split.pkl", "rb") as f:
-        mf, mm, fm, ff = pkl.load(f)
+    print("Please wait while I prepare clean split list...")
+    if dataset == "ICSI":
+        with open(f"../Corpora/{dataset}/f_f.pkl", "rb") as f:
+            ff = pkl.load(f)
+
+        with open(f"../Corpora/{dataset}/f_m.pkl", "rb") as f:
+            mf = pkl.load(f)
+
+        with open(f"../Corpora/{dataset}/m_m.pkl", "rb") as f:
+            mm = pkl.load(f)
+
+        with open(f"../Corpora/{dataset}/m_f.pkl", "rb") as f:
+            fm = pkl.load(f)
+
+    else:
+        with open(f"../Corpora/{dataset}/final_split.pkl", "rb") as f:
+            mf, mm, fm, ff = pkl.load(f)
 
     c_mf = __clean_split_list(mf, "m")
     c_mm = __clean_split_list(mm, "m")
@@ -69,11 +98,65 @@ def prep(dataset):
         prep_in_between_split_list(dataset)
 
     
-#################################################
-#################################################
+###############################################################
+###############################################################
+
+###########################################################
+########## PREPROCESSING STEP FOR Danescu et al. ##########
+###########################################################
+def __clean_split_list_danescu(split_list, prime_gender):
+    clean_split = list()
+
+    for adj_pair in split_list:
+        if sum(adj_pair["b"].values()) > 0 and sum(adj_pair["a"].values()) > 0:
+            clean_split.append((set(adj_pair["a"].keys()), set(adj_pair["b"].keys())))
+
+    return clean_split
+
+def prep_clean_split_list_danescu(dataset):
+    print("Please wait while I prepare clean split list...")
+    if dataset == "ICSI":
+        with open(f"../Corpora/{dataset}/f_f.pkl", "rb") as f:
+            ff = pkl.load(f)
+
+        with open(f"../Corpora/{dataset}/f_m.pkl", "rb") as f:
+            mf = pkl.load(f)
+
+        with open(f"../Corpora/{dataset}/m_m.pkl", "rb") as f:
+            mm = pkl.load(f)
+
+        with open(f"../Corpora/{dataset}/m_f.pkl", "rb") as f:
+            fm = pkl.load(f)
+
+    else:
+        with open(f"../Corpora/{dataset}/final_split.pkl", "rb") as f:
+            mf, mm, fm, ff = pkl.load(f)
+
+    c_mf = __clean_split_list_danescu(mf, "m")
+    c_mm = __clean_split_list_danescu(mm, "m")
+    c_fm = __clean_split_list_danescu(fm, "f")
+    c_ff = __clean_split_list_danescu(ff, "f")
+    
+    with open(f"../Corpora/{dataset}/danescu_processed_clean_split.pkl", "wb") as f:
+        pkl.dump((c_mf, c_mm, c_fm, c_ff), f)
+
+
+def prep_danescu(dataset):
+    c_filename = f"../Corpora/{dataset}/danescu_processed_clean_split.pkl"
+    e_filename = f"../Corpora/{dataset}/danescu_processed_in_between_split.pkl"
+    
+    if not os.path.exists(c_filename):
+        prep_clean_split_list(dataset)
+
+    # if not os.path.exists(e_filename):
+        # prep_in_between_split_list(dataset)
+
+###########################################################
+###########################################################
 
 
 def create_vocab(adj_pair_list):
+    print("Creating vocab...")
     vocab = set()
 
     for _, prime, target, _ in adj_pair_list:
