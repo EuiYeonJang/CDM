@@ -165,6 +165,7 @@ def calculate_beta_one(apl, normalise=False):
 
     pvalue_dict = {w: {i: "undefined" for i in range(4)} for w in CATEGORIES}
     zscores_dict = {w: {i: "undefined" for i in range(4)} for w in CATEGORIES}
+    betas_dict = {w: {i: "undefined" for i in range(4)} for w in CATEGORIES}
 
     for w in CATEGORIES:
         c_w = c_count[w]
@@ -187,8 +188,12 @@ def calculate_beta_one(apl, normalise=False):
             z_scores = res.tvalues
             for i, z in enumerate(z_scores):
                 zscores_dict[w][i] = z
-    
-    return zscores_dict, pvalue_dict
+
+            coefficents = res.params
+            for i, c in enumerate(coefficents):
+                betas_dict[w][i] = c
+
+    return zscores_dict, pvalue_dict, betas_dict
        
 
 def calculate_beta_two(apl):
@@ -253,7 +258,7 @@ def calculate_beta_three(apl):
 
 def calculate_alignment(apl, eq, prime="f", normalise=False):
     if eq == 1:
-        z, p = calculate_beta_one(apl, normalise)
+        z, p, b = calculate_beta_one(apl, normalise)
     elif eq == 2:
         z, p = calculate_beta_two(apl)
     else:
