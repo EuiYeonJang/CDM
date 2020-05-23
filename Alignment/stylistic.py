@@ -6,9 +6,8 @@ import statsmodels.api as sm
 from collections import Counter
 import alignment_utils as au
 
-CATEGORIES = ['articles', 'pronoun', 'prepositions', 'negations', 'tentative', 'certainty', 'discrepancy', 'exclusive', 'inclusive']
 
-SAVEDIR = "."
+CATEGORIES = ['articles', 'pronoun', 'prepositions', 'negations', 'tentative', 'certainty', 'discrepancy', 'exclusive', 'inclusive']
 
 
 def create_liwc(vocab):
@@ -61,7 +60,7 @@ def create_apl(liwc, orig_apl):
 
 
 def prep_apl(target_gender):
-    female_prime_list, male_prime_list = au.prime_lists(target_gender)
+    female_prime_list, male_prime_list = au.prime_lists(target_gender, args.dataset)
     apl = list()
 
     for pair in female_prime_list:
@@ -96,7 +95,7 @@ def prep_apl(target_gender):
 
 
 def prep_apl_two(target_gender):
-    female_prime_list, male_prime_list = au.prime_lists(target_gender)
+    female_prime_list, male_prime_list = au.prime_lists(target_gender, args.dataset)
     female_prime_apl = list()
 
     for pair in female_prime_list:
@@ -166,6 +165,7 @@ def calculate_beta_one(apl, normalise=False):
 
     pvalue_dict = {w: {i: "undefined" for i in range(4)} for w in CATEGORIES}
     zscores_dict = {w: {i: "undefined" for i in range(4)} for w in CATEGORIES}
+    betas_dict = {w: {i: "undefined" for i in range(4)} for w in CATEGORIES}
 
     for w in CATEGORIES:
         c_w = c_count[w]
@@ -188,8 +188,12 @@ def calculate_beta_one(apl, normalise=False):
             z_scores = res.tvalues
             for i, z in enumerate(z_scores):
                 zscores_dict[w][i] = z
-    
-    return zscores_dict, pvalue_dict
+
+            coefficents = res.params
+            for i, c in enumerate(coefficents):
+                betas_dict[w][i] = c
+
+    return zscores_dict, pvalue_dict, betas_dict
        
 
 def calculate_beta_two(apl):
@@ -254,7 +258,7 @@ def calculate_beta_three(apl):
 
 def calculate_alignment(apl, eq, prime="f", normalise=False):
     if eq == 1:
-        z, p = calculate_beta_one(apl, normalise)
+        z, p, b = calculate_beta_one(apl, normalise)
     elif eq == 2:
         z, p = calculate_beta_two(apl)
     else:
@@ -315,8 +319,6 @@ def main():
         calculate_alignment(female_prime_apl, args.analysis)
         calculate_alignment(male_prime_apl, args.analysis, prime="m")
 
-
-args = None
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Arguments for stylistic alignment.')

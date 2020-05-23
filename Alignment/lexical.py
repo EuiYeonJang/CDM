@@ -8,8 +8,6 @@ import itertools
 from collections import Counter
 import alignment_utils as au
 
-VOCAB = set()
-
 def create_vocab(adj_pair_list):
     """
     Parameters: 
@@ -28,7 +26,7 @@ def create_vocab(adj_pair_list):
 
 def prep_in_between_apl(target_gender):
     global VOCAB
-    female_prime_list, male_prime_list = au.prime_lists(target_gender)
+    female_prime_list, male_prime_list = au.prime_lists(target_gender, args.dataset)
 
     apl = list()
 
@@ -46,19 +44,17 @@ def prep_in_between_apl(target_gender):
 
     VOCAB = create_vocab(apl)
 
-    with open(f"./lexical/t_{target_gender}_prepped_apl.pkl", "wb") as f:
+    with open(f"{SAVEDIR}/t_{target_gender}_prepped_apl.pkl", "wb") as f:
         pkl.dump(apl, f)
 
-    with open(f"./lexical/t_{target_gender}_vocab.pkl", "wb") as f:
+    with open(f"{SAVEDIR}/t_{target_gender}_vocab.pkl", "wb") as f:
         pkl.dump(VOCAB, f)
 
     return apl
 
 
 def prep_in_between_apl_two(target_gender):
-    global VOCAB
-
-    female_prime_list, male_prime_list = au.prime_lists(target_gender)
+    female_prime_list, male_prime_list = au.prime_lists(target_gender, args.dataset)
     
     female_prime_apl = list()
     for pair in female_prime_list:
@@ -75,16 +71,16 @@ def prep_in_between_apl_two(target_gender):
     female_prime_vocab = create_vocab(female_prime_apl)
     male_prime_vocab = create_vocab(male_prime_apl)
 
-    with open(f"./stylistic/p_f_t_{target_gender}_prepped_apl.pkl", "wb") as f:
+    with open(f"{SAVEDIR}/p_f_t_{target_gender}_prepped_apl.pkl", "wb") as f:
         pkl.dump(female_prime_apl, f)
 
-    with open(f"./stylistic/p_m_t_{target_gender}_prepped_apl.pkl", "wb") as f:
+    with open(f"{SAVEDIR}/p_m_t_{target_gender}_prepped_apl.pkl", "wb") as f:
         pkl.dump(male_prime_apl, f)
 
-    with open(f"./stylistic/p_f_t_{target_gender}_vocab.pkl", "wb") as f:
+    with open(f"{SAVEDIR}/p_f_t_{target_gender}_vocab.pkl", "wb") as f:
         pkl.dump(female_prime_vocab, f)
 
-    with open(f"./stylistic/p_m_t_{target_gender}_vocab.pkl", "wb") as f:
+    with open(f"{SAVEDIR}/p_m_t_{target_gender}_vocab.pkl", "wb") as f:
         pkl.dump(male_prime_vocab, f)
 
 
@@ -240,8 +236,9 @@ def calculate_alignment(apl, eq, prime="f", normalise=False):
                     beta_track[b]["single_count"] += 1
                     beta_track[b]["single_list"].add(w)
 
+    results_filename = f"./lexical_{args.dataset}/results_between.txt" if args.between else f"./lexical_{args.dataset}/results_orig.txt"
 
-    with open("./lexical/results.txt", "a") as f:
+    with open(results_filename, "a") as f:
         f.write("\n==================================\n")
         f.write(f"TARGET GENDER: {args.target_gender}\nEQUATION: {args.analysis}\n")
         
@@ -266,16 +263,16 @@ def calculate_alignment(apl, eq, prime="f", normalise=False):
 def main():
     global VOCAB
 
-    os.makedirs("./lexical/", exist_ok=True)
+    os.makedirs(SAVEDIR, exist_ok=True)
 
     if args.analysis == 1 or args.analysis == 3:
-        filename = f"./lexical/t_{args.target_gender}_prepped_apl.pkl"
+        filename = f"{SAVEDIR}/t_{args.target_gender}_prepped_apl.pkl"
 
         if os.path.exists(filename):
             with open(filename, "rb") as f:
                 adj_pair_list = pkl.load(f)
 
-            with open(f"./lexical/t_{args.target_gender}_vocab.pkl", "rb") as f:
+            with open(f"{SAVEDIR}/t_{args.target_gender}_vocab.pkl", "rb") as f:
                 VOCAB = pkl.load(f)
         else:
             adj_pair_list = prep_in_between_apl(args.target_gender)
@@ -283,19 +280,19 @@ def main():
         calculate_alignment(adj_pair_list, args.analysis, normalise=args.normalise)
 
     elif args.analysis == 2:
-        filename = f"./lexical/p_f_t_{args.target_gender}_prepped_apl.pkl"
+        filename = f"{SAVEDIR}/p_f_t_{args.target_gender}_prepped_apl.pkl"
         
         if os.path.exists(filename):
             with open(filename, "rb") as f:
                 female_prime_apl = pkl.load(f)
 
-            with open(f"./lexical/p_m_t_{args.target_gender}_prepped_apl.pkl", "rb") as f:
+            with open(f"{SAVEDIR}/p_m_t_{args.target_gender}_prepped_apl.pkl", "rb") as f:
                 male_prime_apl = pkl.load(f)
 
-            with open(f"./lexical/p_f_t_{args.target_gender}_vocab.pkl", "rb") as f:
+            with open(f"{SAVEDIR}/p_f_t_{args.target_gender}_vocab.pkl", "rb") as f:
                 VOCAB = pkl.load(f)
 
-            with open(f"./lexical/p_m_t_{args.target_gender}_vocab.pkl", "rb") as f:
+            with open(f"{SAVEDIR}/p_m_t_{args.target_gender}_vocab.pkl", "rb") as f:
                 male_prime_vocab = pkl.load(f)
             
         else:
@@ -309,19 +306,26 @@ def main():
 
 
 
-args = None
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Arguments for lexical alignment.')
+    parser.add_argument('--dataset', type=str, default="AMI",
+						help="\"AMI\" or \"ICSI\", name of the dataset being analysed.")
     parser.add_argument('--target_gender', type=str, default="m",
 						help="\"m\" or \"f\", gender of target speaker.")
     parser.add_argument('--analysis', type=int, default=1,
 						help="1, 2 or 3, the type of analysis to perform (equation number)")
     parser.add_argument('--normalise', type=bool, default=False,
                         help="to normalise c_count for equation 1")
+    parser.add_argument('--between', type=bool, default=False,
+                        help="bool to include the intermiediate utterances or not, default True")
+
 
     args = parser.parse_args()
 
     print("Attention: Make sure you're in the 'Alignment' directory before running code!")
+    print(args)
+
+    SAVEDIR = f"./lexical_{args.dataset}/between" if args.between else f"./lexical_{args.dataset}/orig"
+    VOCAB = set()
 
     main()
