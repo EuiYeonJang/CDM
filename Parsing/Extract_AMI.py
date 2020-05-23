@@ -202,12 +202,15 @@ def retrieve_between_counter(dialogue_acts, meeting_id, start_time, end_time): #
     number_of_acts_between_male = len(acts_between_male)
     number_of_acts_between_female = len(acts_between_female)
 
+
+
     counter_acts_between_male = sum(acts_between_male, 
                                 start = Counter() )
     counter_acts_between_female = sum(acts_between_female, 
                                 start = Counter() )
 
-    return acts_between_male, acts_between_female, number_of_acts_between_male, number_of_acts_between_female
+    return counter_acts_between_male, counter_acts_between_female, acts_between_male, \
+        acts_between_female, number_of_acts_between_male, number_of_acts_between_female
 
 def extract_adjacency_pairs(acts_directory, words, speakers, dialogue_acts): ###
     print("Extracting adjacency pairs...")
@@ -258,11 +261,13 @@ def extract_adjacency_pairs(acts_directory, words, speakers, dialogue_acts): ###
                     end_time = adjacency_pair['b'][2] #start time of last utterance
 
                     between_counters = retrieve_between_counter(dialogue_acts, meeting_id, start_time, end_time)
-                    adjacency_pair['mb'], adjacency_pair['fb'], adjacency_pair['n_mb'], adjacency_pair['n_fb'] = between_counters
-                    
+                    adjacency_pair['mb'], adjacency_pair['fb'], adjacency_pair['list_mb'], adjacency_pair['list_fb'],\
+                        adjacency_pair['n_mb'], adjacency_pair['n_fb'] = between_counters
+
                     new_pair = {'a': adjacency_pair['a'][0], 'b': adjacency_pair['b'][0], 
                         'mb': adjacency_pair['mb'], 'fb': adjacency_pair['fb'], 'n_mb': adjacency_pair['n_mb'], 
-                            'n_fb': adjacency_pair['n_fb']}
+                            'n_fb': adjacency_pair['n_fb'], 'list_mb':adjacency_pair['list_mb'], 'list_fb':adjacency_pair['list_fb']}
+                            # This could be done more efficiently by just extending the existing adjacency_pair dict
 
                     if adjacency_pair['a'][1] == 'm' and adjacency_pair['b'][1] == 'm':
                         m_m.append(new_pair)
@@ -301,6 +306,7 @@ def main():
     (f_m, m_m, m_f, f_f) = unpickle_or_generate(extract_adjacency_pairs, split_path, acts_directory, words, speakers, dialogue_acts)
 
     print("Lengths: ", len(f_m), len(m_m), len(m_f), len(f_f))
+
 
 
 
