@@ -6,9 +6,8 @@ import statsmodels.api as sm
 from collections import Counter
 import alignment_utils as au
 
-CATEGORIES = ['articles', 'pronoun', 'prepositions', 'negations', 'tentative', 'certainty', 'discrepancy', 'exclusive', 'inclusive']
 
-SAVEDIR = "."
+CATEGORIES = ['articles', 'pronoun', 'prepositions', 'negations', 'tentative', 'certainty', 'discrepancy', 'exclusive', 'inclusive']
 
 
 def create_liwc(vocab):
@@ -61,7 +60,7 @@ def create_apl(liwc, orig_apl):
 
 
 def prep_apl(target_gender):
-    female_prime_list, male_prime_list = au.prime_lists(target_gender)
+    female_prime_list, male_prime_list = au.prime_lists(target_gender, args.dataset)
     apl = list()
 
     for pair in female_prime_list:
@@ -96,7 +95,7 @@ def prep_apl(target_gender):
 
 
 def prep_apl_two(target_gender):
-    female_prime_list, male_prime_list = au.prime_lists(target_gender)
+    female_prime_list, male_prime_list = au.prime_lists(target_gender, args.dataset)
     female_prime_apl = list()
 
     for pair in female_prime_list:
@@ -315,8 +314,6 @@ def main():
         calculate_alignment(female_prime_apl, args.analysis)
         calculate_alignment(male_prime_apl, args.analysis, prime="m")
 
-
-args = None
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Arguments for stylistic alignment.')
