@@ -231,7 +231,7 @@ def main():
             else:
                 adj_pair_list, vocab = prep_apl(target_gender)
 
-            # calculate_alignment(adj_pair_list, vocab, ARGS.analysis, target_gender)
+            calculate_alignment(adj_pair_list, vocab, ARGS.analysis, target_gender)
             print(f"Analysis {ARGS.analysis} target {target_gender} vocab length = {len(vocab)}")
 
         elif ARGS.analysis == 2:
@@ -253,9 +253,9 @@ def main():
             print(f"Analysis {ARGS.analysis} target {target_gender} female prime vocab length = {len(female_prime_vocab)}")
             print(f"Analysis {ARGS.analysis} target {target_gender} male prime vocab length = {len(male_prime_vocab)}")
 
-            # calculate_alignment(female_prime_apl, female_prime_vocab, ARGS.analysis, target_gender)
+            calculate_alignment(female_prime_apl, female_prime_vocab, ARGS.analysis, target_gender)
 
-            # calculate_alignment(male_prime_apl, male_prime_vocab, ARGS.analysis, target_gender, prime="m")
+            calculate_alignment(male_prime_apl, male_prime_vocab, ARGS.analysis, target_gender, prime="m")
 
 
 
