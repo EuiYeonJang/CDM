@@ -4,114 +4,114 @@ EQUATION: 1
 TARGET GENDER: m
 ==================================
 
-BETA: 0
+BETA: {'articles': {0: -1.0941619319911893, 1: 0.05595852918143849, 2: 0.2077049323702116, 3: -0.023110708470367846, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'pronoun': {0: -0.2128489642475095, 1: 0.045607798946527514, 2: 0.014868573520425726, 3: -0.02942319849775288, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'prepositions': {0: -1.080132638212287, 1: 0.07061774962545367, 2: 0.16414684971003946, 3: -0.03228727212518108, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'negations': {0: -2.1905665696238823, 1: 0.12235440944544665, 2: 0.23999372049676726, 3: 0.03028886909149639, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'tentative': {0: -1.8358039174611724, 1: 0.1573004683288548, 2: 0.2672272599895493, 3: -0.06993161337418657, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'certainty': {0: -2.1783097593120564, 1: -0.010461937811711706, 2: -0.19130546487687816, 3: 0.11364862070952401, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'discrepancy': {0: -2.1218597341379595, 1: 0.08289418741436662, 2: 0.031092652470880777, 3: -0.026435708041522107, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'exclusive': {0: -0.8654808179420829, 1: 0.03782759186081317, 2: -0.05485006721910107, 3: -0.003319991360775834, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'inclusive': {0: -1.481859977862749, 1: 0.070649057323869, 2: 0.10904672830274831, 3: -0.037796439000090304, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	-380.011	0.000
->> pronoun:	-71.153	0.000
->> prepositions:	-371.968	0.000
->> negations:	-516.781	0.000
->> tentative:	-489.719	0.000
->> certainty:	-505.981	0.000
->> discrepancy:	-507.756	0.000
->> exclusive:	-313.501	0.000
->> inclusive:	-445.949	0.000
+>> articles:	-52.359	0.000
+>> pronoun:	-10.646	0.000
+>> prepositions:	-51.905	0.000
+>> negations:	-81.265	0.000
+>> tentative:	-73.973	0.000
+>> certainty:	-80.122	0.000
+>> discrepancy:	-78.381	0.000
+>> exclusive:	-43.481	0.000
+>> inclusive:	-64.067	0.000
 
-BETA: 1
+BETA: {'articles': {0: -1.0941619319911893, 1: 0.05595852918143849, 2: 0.2077049323702116, 3: -0.023110708470367846, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'pronoun': {0: -0.2128489642475095, 1: 0.045607798946527514, 2: 0.014868573520425726, 3: -0.02942319849775288, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'prepositions': {0: -1.080132638212287, 1: 0.07061774962545367, 2: 0.16414684971003946, 3: -0.03228727212518108, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'negations': {0: -2.1905665696238823, 1: 0.12235440944544665, 2: 0.23999372049676726, 3: 0.03028886909149639, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'tentative': {0: -1.8358039174611724, 1: 0.1573004683288548, 2: 0.2672272599895493, 3: -0.06993161337418657, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'certainty': {0: -2.1783097593120564, 1: -0.010461937811711706, 2: -0.19130546487687816, 3: 0.11364862070952401, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'discrepancy': {0: -2.1218597341379595, 1: 0.08289418741436662, 2: 0.031092652470880777, 3: -0.026435708041522107, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'exclusive': {0: -0.8654808179420829, 1: 0.03782759186081317, 2: -0.05485006721910107, 3: -0.003319991360775834, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'inclusive': {0: -1.481859977862749, 1: 0.070649057323869, 2: 0.10904672830274831, 3: -0.037796439000090304, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	7.105	0.000
->> pronoun:	3.544	0.000
->> prepositions:	9.811	0.000
->> negations:	1.978	0.048
->> tentative:	5.257	0.000
->> certainty:	-5.641	0.000
->> discrepancy:	8.463	0.000
->> exclusive:	2.965	0.003
->> inclusive:	2.221	0.026
+>> articles:	4.133	0.000
+>> pronoun:	5.189	0.000
+>> prepositions:	5.498	0.000
+negations:	1.658	0.097
+>> tentative:	5.668	0.000
+certainty:	-0.146	0.884
+>> discrepancy:	2.319	0.020
+>> exclusive:	2.473	0.013
+>> inclusive:	4.275	0.000
 
-BETA: 2
+BETA: {'articles': {0: -1.0941619319911893, 1: 0.05595852918143849, 2: 0.2077049323702116, 3: -0.023110708470367846, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'pronoun': {0: -0.2128489642475095, 1: 0.045607798946527514, 2: 0.014868573520425726, 3: -0.02942319849775288, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'prepositions': {0: -1.080132638212287, 1: 0.07061774962545367, 2: 0.16414684971003946, 3: -0.03228727212518108, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'negations': {0: -2.1905665696238823, 1: 0.12235440944544665, 2: 0.23999372049676726, 3: 0.03028886909149639, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'tentative': {0: -1.8358039174611724, 1: 0.1573004683288548, 2: 0.2672272599895493, 3: -0.06993161337418657, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'certainty': {0: -2.1783097593120564, 1: -0.010461937811711706, 2: -0.19130546487687816, 3: 0.11364862070952401, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'discrepancy': {0: -2.1218597341379595, 1: 0.08289418741436662, 2: 0.031092652470880777, 3: -0.026435708041522107, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'exclusive': {0: -0.8654808179420829, 1: 0.03782759186081317, 2: -0.05485006721910107, 3: -0.003319991360775834, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'inclusive': {0: -1.481859977862749, 1: 0.070649057323869, 2: 0.10904672830274831, 3: -0.037796439000090304, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	99.705	0.000
->> pronoun:	-4.612	0.000
->> prepositions:	74.940	0.000
->> negations:	97.839	0.000
->> tentative:	119.937	0.000
->> certainty:	-65.679	0.000
->> discrepancy:	41.588	0.000
->> exclusive:	20.591	0.000
->> inclusive:	86.433	0.000
+>> articles:	9.395	0.000
+pronoun:	0.700	0.484
+>> prepositions:	7.436	0.000
+>> negations:	8.439	0.000
+>> tentative:	10.210	0.000
+>> certainty:	-6.546	0.000
+discrepancy:	1.080	0.280
+>> exclusive:	-2.589	0.010
+>> inclusive:	4.450	0.000
 
-BETA: 3
+BETA: {'articles': {0: -1.0941619319911893, 1: 0.05595852918143849, 2: 0.2077049323702116, 3: -0.023110708470367846, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'pronoun': {0: -0.2128489642475095, 1: 0.045607798946527514, 2: 0.014868573520425726, 3: -0.02942319849775288, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'prepositions': {0: -1.080132638212287, 1: 0.07061774962545367, 2: 0.16414684971003946, 3: -0.03228727212518108, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'negations': {0: -2.1905665696238823, 1: 0.12235440944544665, 2: 0.23999372049676726, 3: 0.03028886909149639, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'tentative': {0: -1.8358039174611724, 1: 0.1573004683288548, 2: 0.2672272599895493, 3: -0.06993161337418657, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'certainty': {0: -2.1783097593120564, 1: -0.010461937811711706, 2: -0.19130546487687816, 3: 0.11364862070952401, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'discrepancy': {0: -2.1218597341379595, 1: 0.08289418741436662, 2: 0.031092652470880777, 3: -0.026435708041522107, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'exclusive': {0: -0.8654808179420829, 1: 0.03782759186081317, 2: -0.05485006721910107, 3: -0.003319991360775834, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'inclusive': {0: -1.481859977862749, 1: 0.070649057323869, 2: 0.10904672830274831, 3: -0.037796439000090304, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	-4.416	0.000
-pronoun:	-1.835	0.066
->> prepositions:	-7.430	0.000
->> negations:	-1.979	0.048
->> tentative:	-4.474	0.000
->> certainty:	5.296	0.000
->> discrepancy:	-6.922	0.000
->> exclusive:	-2.096	0.036
-inclusive:	0.811	0.417
+articles:	-1.583	0.114
+>> pronoun:	-3.058	0.002
+>> prepositions:	-2.320	0.020
+negations:	0.387	0.699
+>> tentative:	-2.332	0.020
+certainty:	1.444	0.149
+discrepancy:	-0.672	0.502
+exclusive:	-0.197	0.844
+>> inclusive:	-2.092	0.036
 
 ==================================
 EQUATION: 1
 TARGET GENDER: f
 ==================================
 
-BETA: 0
+BETA: {'articles': {0: -1.3136945417691, 1: 0.04482586237747702, 2: 0.28992387501381534, 3: -0.02100336106050934, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'pronoun': {0: -0.18434037416046445, 1: 0.022545431047714514, 2: 0.04904502103842456, 3: 0.0036289406463878085, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'prepositions': {0: -1.2194149104784533, 1: 0.03511957105998, 2: 0.19588556220053532, 3: -0.01722197408453883, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'negations': {0: -2.481908035811512, 1: 0.08205634005105233, 2: 0.19545460801226677, 3: -0.3715987422812317, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'tentative': {0: -1.89175536904516, 1: 0.11896913783187908, 2: 0.16022984769257165, 3: -0.10559638628166207, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'certainty': {0: -2.2460427166686068, 1: 0.01703693202936802, 2: -0.006628539355573171, 3: -0.10236845033469025, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'discrepancy': {0: -2.19622298740791, 1: 0.051330763091069265, 2: 0.0125299508196699, 3: 0.04444626457241795, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'exclusive': {0: -0.7694384893310581, 1: 0.02458351740340082, 2: 0.08473086000262131, 3: -0.042749000415226314, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'inclusive': {0: -1.5290754441113779, 1: 0.044356562167812606, 2: 0.19405967261196633, 3: -0.03141625460570756, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	-609.164	0.000
->> pronoun:	-112.390	0.000
->> prepositions:	-573.203	0.000
->> negations:	-753.415	0.000
->> tentative:	-708.216	0.000
->> certainty:	-746.243	0.000
->> discrepancy:	-743.495	0.000
->> exclusive:	-392.132	0.000
->> inclusive:	-634.708	0.000
+>> articles:	-67.945	0.000
+>> pronoun:	-10.659	0.000
+>> prepositions:	-64.788	0.000
+>> negations:	-90.971	0.000
+>> tentative:	-83.519	0.000
+>> certainty:	-89.153	0.000
+>> discrepancy:	-88.600	0.000
+>> exclusive:	-44.265	0.000
+>> inclusive:	-74.251	0.000
 
-BETA: 1
+BETA: {'articles': {0: -1.3136945417691, 1: 0.04482586237747702, 2: 0.28992387501381534, 3: -0.02100336106050934, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'pronoun': {0: -0.18434037416046445, 1: 0.022545431047714514, 2: 0.04904502103842456, 3: 0.0036289406463878085, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'prepositions': {0: -1.2194149104784533, 1: 0.03511957105998, 2: 0.19588556220053532, 3: -0.01722197408453883, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'negations': {0: -2.481908035811512, 1: 0.08205634005105233, 2: 0.19545460801226677, 3: -0.3715987422812317, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'tentative': {0: -1.89175536904516, 1: 0.11896913783187908, 2: 0.16022984769257165, 3: -0.10559638628166207, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'certainty': {0: -2.2460427166686068, 1: 0.01703693202936802, 2: -0.006628539355573171, 3: -0.10236845033469025, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'discrepancy': {0: -2.19622298740791, 1: 0.051330763091069265, 2: 0.0125299508196699, 3: 0.04444626457241795, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'exclusive': {0: -0.7694384893310581, 1: 0.02458351740340082, 2: 0.08473086000262131, 3: -0.042749000415226314, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'inclusive': {0: -1.5290754441113779, 1: 0.044356562167812606, 2: 0.19405967261196633, 3: -0.03141625460570756, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	9.264	0.000
-pronoun:	0.037	0.970
->> prepositions:	6.722	0.000
-negations:	0.027	0.978
->> tentative:	3.060	0.002
-certainty:	-1.260	0.208
-discrepancy:	1.567	0.117
->> exclusive:	6.397	0.000
->> inclusive:	5.831	0.000
+>> articles:	2.779	0.005
+>> pronoun:	2.643	0.008
+>> prepositions:	2.332	0.020
+negations:	0.906	0.365
+>> tentative:	4.032	0.000
+certainty:	0.250	0.803
+discrepancy:	1.278	0.201
+exclusive:	1.542	0.123
+>> inclusive:	2.433	0.015
 
-BETA: 2
+BETA: {'articles': {0: -1.3136945417691, 1: 0.04482586237747702, 2: 0.28992387501381534, 3: -0.02100336106050934, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'pronoun': {0: -0.18434037416046445, 1: 0.022545431047714514, 2: 0.04904502103842456, 3: 0.0036289406463878085, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'prepositions': {0: -1.2194149104784533, 1: 0.03511957105998, 2: 0.19588556220053532, 3: -0.01722197408453883, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'negations': {0: -2.481908035811512, 1: 0.08205634005105233, 2: 0.19545460801226677, 3: -0.3715987422812317, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'tentative': {0: -1.89175536904516, 1: 0.11896913783187908, 2: 0.16022984769257165, 3: -0.10559638628166207, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'certainty': {0: -2.2460427166686068, 1: 0.01703693202936802, 2: -0.006628539355573171, 3: -0.10236845033469025, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'discrepancy': {0: -2.19622298740791, 1: 0.051330763091069265, 2: 0.0125299508196699, 3: 0.04444626457241795, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'exclusive': {0: -0.7694384893310581, 1: 0.02458351740340082, 2: 0.08473086000262131, 3: -0.042749000415226314, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'inclusive': {0: -1.5290754441113779, 1: 0.044356562167812606, 2: 0.19405967261196633, 3: -0.03141625460570756, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	115.334	0.000
->> pronoun:	37.429	0.000
->> prepositions:	99.064	0.000
->> negations:	35.995	0.000
->> tentative:	57.091	0.000
->> certainty:	6.699	0.000
->> discrepancy:	19.663	0.000
->> exclusive:	41.097	0.000
->> inclusive:	43.696	0.000
+>> articles:	12.113	0.000
+>> pronoun:	2.232	0.026
+>> prepositions:	8.276	0.000
+>> negations:	5.808	0.000
+>> tentative:	5.689	0.000
+certainty:	-0.208	0.835
+discrepancy:	0.399	0.690
+>> exclusive:	3.877	0.000
+>> inclusive:	7.592	0.000
 
-BETA: 3
+BETA: {'articles': {0: -1.3136945417691, 1: 0.04482586237747702, 2: 0.28992387501381534, 3: -0.02100336106050934, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'pronoun': {0: -0.18434037416046445, 1: 0.022545431047714514, 2: 0.04904502103842456, 3: 0.0036289406463878085, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'prepositions': {0: -1.2194149104784533, 1: 0.03511957105998, 2: 0.19588556220053532, 3: -0.01722197408453883, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'negations': {0: -2.481908035811512, 1: 0.08205634005105233, 2: 0.19545460801226677, 3: -0.3715987422812317, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'tentative': {0: -1.89175536904516, 1: 0.11896913783187908, 2: 0.16022984769257165, 3: -0.10559638628166207, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'certainty': {0: -2.2460427166686068, 1: 0.01703693202936802, 2: -0.006628539355573171, 3: -0.10236845033469025, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'discrepancy': {0: -2.19622298740791, 1: 0.051330763091069265, 2: 0.0125299508196699, 3: 0.04444626457241795, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'exclusive': {0: -0.7694384893310581, 1: 0.02458351740340082, 2: 0.08473086000262131, 3: -0.042749000415226314, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'inclusive': {0: -1.5290754441113779, 1: 0.044356562167812606, 2: 0.19405967261196633, 3: -0.03141625460570756, 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	-3.684	0.000
->> pronoun:	7.239	0.000
->> prepositions:	2.836	0.005
-negations:	-0.910	0.363
-tentative:	0.435	0.663
-certainty:	0.080	0.936
-discrepancy:	-0.765	0.444
-exclusive:	-0.150	0.880
-inclusive:	0.561	0.575
+articles:	-1.081	0.280
+pronoun:	0.327	0.744
+prepositions:	-0.936	0.349
+>> negations:	-3.189	0.001
+>> tentative:	-2.784	0.005
+certainty:	-1.090	0.276
+discrepancy:	0.881	0.378
+>> exclusive:	-2.058	0.040
+inclusive:	-1.353	0.176
 
 ==================================
 EQUATION: 2
@@ -119,31 +119,31 @@ TARGET GENDER: m
 PRIME GENDER: f
 ==================================
 
-BETA: 0
+BETA: {'articles': {0: -1.0941619319911902, 1: 0.055958529181445664, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'pronoun': {0: -0.21284896424749528, 1: 0.04560779894652556, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'prepositions': {0: -1.0801326382121972, 1: 0.0706177496254787, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'negations': {0: -2.1905665696240297, 1: 0.12235440944547725, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'tentative': {0: -1.835803917460841, 1: 0.15730046832879335, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'certainty': {0: -2.1783097593120564, 1: -0.010461937811703034, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'discrepancy': {0: -2.121859734137626, 1: 0.0828941874143077, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'exclusive': {0: -0.8654808179421319, 1: 0.03782759186081065, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'inclusive': {0: -1.4818599778626695, 1: 0.07064905732435373, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	-380.011	0.000
->> pronoun:	-71.153	0.000
->> prepositions:	-371.968	0.000
->> negations:	-516.781	0.000
->> tentative:	-489.719	0.000
->> certainty:	-505.981	0.000
->> discrepancy:	-507.756	0.000
->> exclusive:	-313.501	0.000
->> inclusive:	-445.949	0.000
+>> articles:	-52.359	0.000
+>> pronoun:	-10.646	0.000
+>> prepositions:	-51.905	0.000
+>> negations:	-81.265	0.000
+>> tentative:	-73.973	0.000
+>> certainty:	-80.122	0.000
+>> discrepancy:	-78.381	0.000
+>> exclusive:	-43.481	0.000
+>> inclusive:	-64.067	0.000
 
-BETA: 1
+BETA: {'articles': {0: -1.0941619319911902, 1: 0.055958529181445664, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'pronoun': {0: -0.21284896424749528, 1: 0.04560779894652556, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'prepositions': {0: -1.0801326382121972, 1: 0.0706177496254787, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'negations': {0: -2.1905665696240297, 1: 0.12235440944547725, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'tentative': {0: -1.835803917460841, 1: 0.15730046832879335, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'certainty': {0: -2.1783097593120564, 1: -0.010461937811703034, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'discrepancy': {0: -2.121859734137626, 1: 0.0828941874143077, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'exclusive': {0: -0.8654808179421319, 1: 0.03782759186081065, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'inclusive': {0: -1.4818599778626695, 1: 0.07064905732435373, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	7.105	0.000
->> pronoun:	3.544	0.000
->> prepositions:	9.811	0.000
->> negations:	1.978	0.048
->> tentative:	5.257	0.000
->> certainty:	-5.641	0.000
->> discrepancy:	8.463	0.000
->> exclusive:	2.965	0.003
->> inclusive:	2.221	0.026
+>> articles:	4.133	0.000
+>> pronoun:	5.189	0.000
+>> prepositions:	5.498	0.000
+negations:	1.658	0.097
+>> tentative:	5.668	0.000
+certainty:	-0.146	0.884
+>> discrepancy:	2.319	0.020
+>> exclusive:	2.473	0.013
+>> inclusive:	4.275	0.000
 
 ==================================
 EQUATION: 2
@@ -151,31 +151,31 @@ TARGET GENDER: m
 PRIME GENDER: m
 ==================================
 
-BETA: 0
+BETA: {'articles': {0: -0.8864569996210743, 1: 0.03284782071107658, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'pronoun': {0: -0.19798039072708534, 1: 0.016184600448771645, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'prepositions': {0: -0.9159857885022054, 1: 0.038330477500290346, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'negations': {0: -1.9505728491271555, 1: 0.15264327853699058, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'tentative': {0: -1.568576657471807, 1: 0.08736885495464349, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'certainty': {0: -2.3696152241895705, 1: 0.10318668289774037, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'discrepancy': {0: -2.0907670816676465, 1: 0.05645847937284275, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'exclusive': {0: -0.9203308851612739, 1: 0.03450760050002931, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'inclusive': {0: -1.3728132495599648, 1: 0.03285261832378726, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	-708.546	0.000
->> pronoun:	-184.206	0.000
->> prepositions:	-733.146	0.000
->> negations:	-1191.651	0.000
->> tentative:	-1060.447	0.000
->> certainty:	-1230.124	0.000
->> discrepancy:	-1197.293	0.000
->> exclusive:	-714.425	0.000
->> inclusive:	-949.671	0.000
+>> articles:	-122.813	0.000
+>> pronoun:	-27.654	0.000
+>> prepositions:	-124.363	0.000
+>> negations:	-215.211	0.000
+>> tentative:	-188.703	0.000
+>> certainty:	-221.114	0.000
+>> discrepancy:	-213.838	0.000
+>> exclusive:	-126.780	0.000
+>> inclusive:	-169.731	0.000
 
-BETA: 1
+BETA: {'articles': {0: -0.8864569996210743, 1: 0.03284782071107658, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'pronoun': {0: -0.19798039072708534, 1: 0.016184600448771645, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'prepositions': {0: -0.9159857885022054, 1: 0.038330477500290346, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'negations': {0: -1.9505728491271555, 1: 0.15264327853699058, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'tentative': {0: -1.568576657471807, 1: 0.08736885495464349, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'certainty': {0: -2.3696152241895705, 1: 0.10318668289774037, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'discrepancy': {0: -2.0907670816676465, 1: 0.05645847937284275, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'exclusive': {0: -0.9203308851612739, 1: 0.03450760050002931, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'inclusive': {0: -1.3728132495599648, 1: 0.03285261832378726, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	7.527	0.000
->> pronoun:	3.719	0.000
->> prepositions:	5.680	0.000
-negations:	-0.292	0.770
-tentative:	1.686	0.092
-certainty:	0.441	0.659
->> discrepancy:	2.715	0.007
-exclusive:	1.876	0.061
->> inclusive:	8.930	0.000
+>> articles:	6.000	0.000
+>> pronoun:	4.133	0.000
+>> prepositions:	7.160	0.000
+>> negations:	5.858	0.000
+>> tentative:	7.698	0.000
+>> certainty:	3.165	0.002
+>> discrepancy:	3.437	0.001
+>> exclusive:	4.878	0.000
+>> inclusive:	4.501	0.000
 
 ==================================
 EQUATION: 2
@@ -183,31 +183,31 @@ TARGET GENDER: f
 PRIME GENDER: f
 ==================================
 
-BETA: 0
+BETA: {'articles': {0: -1.3136945417690613, 1: 0.04482586237747563, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'pronoun': {0: -0.18434037416046517, 1: 0.02254543104771553, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'prepositions': {0: -1.219414910478483, 1: 0.03511957105997887, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'negations': {0: -2.4819080358107666, 1: 0.08205634005064194, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'tentative': {0: -1.8917553690452622, 1: 0.11896913783188018, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'certainty': {0: -2.2460427166685695, 1: 0.017036932029388052, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'discrepancy': {0: -2.1962229874077117, 1: 0.05133076309105558, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'exclusive': {0: -0.7694384893310582, 1: 0.024583517403401874, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'inclusive': {0: -1.5290754441114593, 1: 0.04435656216788518, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	-609.164	0.000
->> pronoun:	-112.390	0.000
->> prepositions:	-573.203	0.000
->> negations:	-753.415	0.000
->> tentative:	-708.216	0.000
->> certainty:	-746.243	0.000
->> discrepancy:	-743.495	0.000
->> exclusive:	-392.132	0.000
->> inclusive:	-634.708	0.000
+>> articles:	-67.945	0.000
+>> pronoun:	-10.659	0.000
+>> prepositions:	-64.788	0.000
+>> negations:	-90.971	0.000
+>> tentative:	-83.519	0.000
+>> certainty:	-89.153	0.000
+>> discrepancy:	-88.600	0.000
+>> exclusive:	-44.265	0.000
+>> inclusive:	-74.251	0.000
 
-BETA: 1
+BETA: {'articles': {0: -1.3136945417690613, 1: 0.04482586237747563, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'pronoun': {0: -0.18434037416046517, 1: 0.02254543104771553, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'prepositions': {0: -1.219414910478483, 1: 0.03511957105997887, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'negations': {0: -2.4819080358107666, 1: 0.08205634005064194, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'tentative': {0: -1.8917553690452622, 1: 0.11896913783188018, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'certainty': {0: -2.2460427166685695, 1: 0.017036932029388052, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'discrepancy': {0: -2.1962229874077117, 1: 0.05133076309105558, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'exclusive': {0: -0.7694384893310582, 1: 0.024583517403401874, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'inclusive': {0: -1.5290754441114593, 1: 0.04435656216788518, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	9.264	0.000
-pronoun:	0.037	0.970
->> prepositions:	6.722	0.000
-negations:	0.027	0.978
->> tentative:	3.060	0.002
-certainty:	-1.260	0.208
-discrepancy:	1.567	0.117
->> exclusive:	6.397	0.000
->> inclusive:	5.831	0.000
+>> articles:	2.779	0.005
+>> pronoun:	2.643	0.008
+>> prepositions:	2.332	0.020
+negations:	0.906	0.365
+>> tentative:	4.032	0.000
+certainty:	0.250	0.803
+discrepancy:	1.278	0.201
+exclusive:	1.542	0.123
+>> inclusive:	2.433	0.015
 
 ==================================
 EQUATION: 2
@@ -215,246 +215,246 @@ TARGET GENDER: f
 PRIME GENDER: m
 ==================================
 
-BETA: 0
+BETA: {'articles': {0: -1.023770666755269, 1: 0.02382250131696914, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'pronoun': {0: -0.1352953531220439, 1: 0.026174371694103808, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'prepositions': {0: -1.0235293482779189, 1: 0.017897596975440452, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'negations': {0: -2.286453427798995, 1: -0.2895424022301717, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'tentative': {0: -1.7315255213525658, 1: 0.013372751550220323, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'certainty': {0: -2.252671256023839, 1: -0.08533151830532743, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'discrepancy': {0: -2.1836930365882976, 1: 0.09577702766347417, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'exclusive': {0: -0.6847076293282786, 1: -0.018165483011759322, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'inclusive': {0: -1.335015771499421, 1: 0.0129403075621077, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	-442.312	0.000
->> pronoun:	-50.964	0.000
->> prepositions:	-412.612	0.000
->> negations:	-681.376	0.000
->> tentative:	-612.155	0.000
->> certainty:	-676.784	0.000
->> discrepancy:	-661.983	0.000
->> exclusive:	-306.226	0.000
->> inclusive:	-541.916	0.000
+>> articles:	-72.563	0.000
+>> pronoun:	-9.987	0.000
+>> prepositions:	-71.312	0.000
+>> negations:	-116.051	0.000
+>> tentative:	-103.417	0.000
+>> certainty:	-115.737	0.000
+>> discrepancy:	-113.279	0.000
+>> exclusive:	-51.689	0.000
+>> inclusive:	-88.181	0.000
 
-BETA: 1
+BETA: {'articles': {0: -1.023770666755269, 1: 0.02382250131696914, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'pronoun': {0: -0.1352953531220439, 1: 0.026174371694103808, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'prepositions': {0: -1.0235293482779189, 1: 0.017897596975440452, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'negations': {0: -2.286453427798995, 1: -0.2895424022301717, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'tentative': {0: -1.7315255213525658, 1: 0.013372751550220323, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'certainty': {0: -2.252671256023839, 1: -0.08533151830532743, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'discrepancy': {0: -2.1836930365882976, 1: 0.09577702766347417, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'exclusive': {0: -0.6847076293282786, 1: -0.018165483011759322, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}, 'inclusive': {0: -1.335015771499421, 1: 0.0129403075621077, 2: 'undefined', 3: 'undefined', 4: 'undefined', 5: 'undefined', 6: 'undefined', 7: 'undefined'}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	5.961	0.000
->> pronoun:	10.036	0.000
->> prepositions:	12.857	0.000
-negations:	-1.385	0.166
->> tentative:	3.917	0.000
-certainty:	-1.097	0.273
-discrepancy:	0.620	0.535
->> exclusive:	6.537	0.000
->> inclusive:	7.149	0.000
+>> articles:	2.199	0.028
+>> pronoun:	3.693	0.000
+prepositions:	1.693	0.090
+>> negations:	-3.946	0.000
+tentative:	0.561	0.575
+certainty:	-1.320	0.187
+>> discrepancy:	3.137	0.002
+exclusive:	-1.364	0.173
+inclusive:	0.900	0.368
 
 ==================================
 EQUATION: 3
 TARGET GENDER: m
 ==================================
 
-BETA: 0
+BETA: {'articles': {0: -1.1613759903457928, 1: 0.04148632586939505, 2: 0.2526576853852216, 3: 0.009153168317770655, 4: -0.04490065737208109, 5: -0.0011801597458767786, 6: -0.004430014999986416, 7: 0.0014027464301089017}, 'pronoun': {0: -0.2468373602046756, 1: 0.01437158220052326, 2: 0.05337598758706279, 3: 0.007896707201159064, 4: -0.020597583510374107, 5: -0.000264747093209272, 6: -0.0071393690651008045, 7: 0.0009040377741592763}, 'prepositions': {0: -1.1672928027440932, 1: 0.023981594860082542, 2: 0.2476013422665514, 3: 0.013230062791289472, 4: -0.0037484905888123298, 5: -0.0010694650519195987, 6: -0.01194897683408671, 7: 0.001385444686148398}, 'negations': {0: -2.2425445857026807, 1: 0.18580682459618317, 2: 0.2670207463731127, 3: 0.004907849656313931, 4: -0.021887403292313923, 5: -0.004837906244214459, 6: -0.0019222309986483017, 7: 0.003137444598234655}, 'tentative': {0: -1.9448667855309758, 1: 0.07994137192725671, 2: 0.3491074885411889, 3: 0.012789475572867779, 4: -0.043733187693602564, 5: -0.00114829587376451, 6: -0.008605258867281274, 7: 0.0018983202956283434}, 'certainty': {0: -2.110031733251041, 1: -0.009499656244631819, 2: -0.2778243084896359, 3: -0.007055110840522879, 4: 0.04992930730908368, 5: 0.0026853804163352343, 6: 0.009334929322202456, 7: -0.000556085403450101}, 'discrepancy': {0: -2.236942205772248, 1: 0.07737739311997263, 2: 0.15038928782204808, 3: 0.012229259307266134, 4: -0.09072177511799898, 5: -0.003227159293234994, 6: -0.012402426244362066, 7: 0.005722339954768038}, 'exclusive': {0: -0.9017644539210914, 1: -0.004579218717552722, 2: -0.03699425463748096, 3: 0.005822935835417856, 4: 0.005325638902554275, 5: -5.540168642065082e-06, 6: -0.002319019493323118, 7: 0.00039575343551089427}, 'inclusive': {0: -1.533580642816052, 1: 0.03560291118866636, 2: 0.13749430530556528, 3: 0.007435202354223973, 4: -0.040669743268526126, 5: -0.00045907457447263793, 6: -0.0030404909542412553, 7: 0.0007724062947552804}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	-288.385	0.000
->> pronoun:	-58.211	0.000
->> prepositions:	-283.307	0.000
->> negations:	-384.056	0.000
->> tentative:	-374.534	0.000
->> certainty:	-361.407	0.000
->> discrepancy:	-377.333	0.000
->> exclusive:	-242.308	0.000
->> inclusive:	-336.788	0.000
+>> articles:	-42.563	0.000
+>> pronoun:	-9.894	0.000
+>> prepositions:	-42.979	0.000
+>> negations:	-61.291	0.000
+>> tentative:	-58.533	0.000
+>> certainty:	-56.889	0.000
+>> discrepancy:	-61.275	0.000
+>> exclusive:	-34.941	0.000
+>> inclusive:	-50.140	0.000
 
-BETA: 1
+BETA: {'articles': {0: -1.1613759903457928, 1: 0.04148632586939505, 2: 0.2526576853852216, 3: 0.009153168317770655, 4: -0.04490065737208109, 5: -0.0011801597458767786, 6: -0.004430014999986416, 7: 0.0014027464301089017}, 'pronoun': {0: -0.2468373602046756, 1: 0.01437158220052326, 2: 0.05337598758706279, 3: 0.007896707201159064, 4: -0.020597583510374107, 5: -0.000264747093209272, 6: -0.0071393690651008045, 7: 0.0009040377741592763}, 'prepositions': {0: -1.1672928027440932, 1: 0.023981594860082542, 2: 0.2476013422665514, 3: 0.013230062791289472, 4: -0.0037484905888123298, 5: -0.0010694650519195987, 6: -0.01194897683408671, 7: 0.001385444686148398}, 'negations': {0: -2.2425445857026807, 1: 0.18580682459618317, 2: 0.2670207463731127, 3: 0.004907849656313931, 4: -0.021887403292313923, 5: -0.004837906244214459, 6: -0.0019222309986483017, 7: 0.003137444598234655}, 'tentative': {0: -1.9448667855309758, 1: 0.07994137192725671, 2: 0.3491074885411889, 3: 0.012789475572867779, 4: -0.043733187693602564, 5: -0.00114829587376451, 6: -0.008605258867281274, 7: 0.0018983202956283434}, 'certainty': {0: -2.110031733251041, 1: -0.009499656244631819, 2: -0.2778243084896359, 3: -0.007055110840522879, 4: 0.04992930730908368, 5: 0.0026853804163352343, 6: 0.009334929322202456, 7: -0.000556085403450101}, 'discrepancy': {0: -2.236942205772248, 1: 0.07737739311997263, 2: 0.15038928782204808, 3: 0.012229259307266134, 4: -0.09072177511799898, 5: -0.003227159293234994, 6: -0.012402426244362066, 7: 0.005722339954768038}, 'exclusive': {0: -0.9017644539210914, 1: -0.004579218717552722, 2: -0.03699425463748096, 3: 0.005822935835417856, 4: 0.005325638902554275, 5: -5.540168642065082e-06, 6: -0.002319019493323118, 7: 0.00039575343551089427}, 'inclusive': {0: -1.533580642816052, 1: 0.03560291118866636, 2: 0.13749430530556528, 3: 0.007435202354223973, 4: -0.040669743268526126, 5: -0.00045907457447263793, 6: -0.0030404909542412553, 7: 0.0007724062947552804}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
-articles:	0.735	0.463
-pronoun:	1.594	0.111
->> prepositions:	4.423	0.000
-negations:	0.161	0.872
-tentative:	-1.719	0.086
->> certainty:	-4.488	0.000
->> discrepancy:	3.843	0.000
-exclusive:	0.641	0.521
->> inclusive:	-2.319	0.020
+articles:	1.681	0.093
+pronoun:	0.911	0.362
+prepositions:	0.979	0.328
+negations:	1.651	0.099
+tentative:	1.794	0.073
+certainty:	-0.086	0.932
+discrepancy:	1.216	0.224
+exclusive:	-0.184	0.854
+inclusive:	1.269	0.204
 
-BETA: 2
+BETA: {'articles': {0: -1.1613759903457928, 1: 0.04148632586939505, 2: 0.2526576853852216, 3: 0.009153168317770655, 4: -0.04490065737208109, 5: -0.0011801597458767786, 6: -0.004430014999986416, 7: 0.0014027464301089017}, 'pronoun': {0: -0.2468373602046756, 1: 0.01437158220052326, 2: 0.05337598758706279, 3: 0.007896707201159064, 4: -0.020597583510374107, 5: -0.000264747093209272, 6: -0.0071393690651008045, 7: 0.0009040377741592763}, 'prepositions': {0: -1.1672928027440932, 1: 0.023981594860082542, 2: 0.2476013422665514, 3: 0.013230062791289472, 4: -0.0037484905888123298, 5: -0.0010694650519195987, 6: -0.01194897683408671, 7: 0.001385444686148398}, 'negations': {0: -2.2425445857026807, 1: 0.18580682459618317, 2: 0.2670207463731127, 3: 0.004907849656313931, 4: -0.021887403292313923, 5: -0.004837906244214459, 6: -0.0019222309986483017, 7: 0.003137444598234655}, 'tentative': {0: -1.9448667855309758, 1: 0.07994137192725671, 2: 0.3491074885411889, 3: 0.012789475572867779, 4: -0.043733187693602564, 5: -0.00114829587376451, 6: -0.008605258867281274, 7: 0.0018983202956283434}, 'certainty': {0: -2.110031733251041, 1: -0.009499656244631819, 2: -0.2778243084896359, 3: -0.007055110840522879, 4: 0.04992930730908368, 5: 0.0026853804163352343, 6: 0.009334929322202456, 7: -0.000556085403450101}, 'discrepancy': {0: -2.236942205772248, 1: 0.07737739311997263, 2: 0.15038928782204808, 3: 0.012229259307266134, 4: -0.09072177511799898, 5: -0.003227159293234994, 6: -0.012402426244362066, 7: 0.005722339954768038}, 'exclusive': {0: -0.9017644539210914, 1: -0.004579218717552722, 2: -0.03699425463748096, 3: 0.005822935835417856, 4: 0.005325638902554275, 5: -5.540168642065082e-06, 6: -0.002319019493323118, 7: 0.00039575343551089427}, 'inclusive': {0: -1.533580642816052, 1: 0.03560291118866636, 2: 0.13749430530556528, 3: 0.007435202354223973, 4: -0.040669743268526126, 5: -0.00045907457447263793, 6: -0.0030404909542412553, 7: 0.0007724062947552804}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	78.815	0.000
-pronoun:	0.128	0.898
->> prepositions:	62.525	0.000
->> negations:	78.509	0.000
->> tentative:	98.152	0.000
->> certainty:	-54.118	0.000
->> discrepancy:	32.518	0.000
->> exclusive:	19.822	0.000
->> inclusive:	66.305	0.000
+>> articles:	8.765	0.000
+>> pronoun:	2.017	0.044
+>> prepositions:	8.612	0.000
+>> negations:	6.924	0.000
+>> tentative:	9.978	0.000
+>> certainty:	-6.983	0.000
+>> discrepancy:	3.884	0.000
+exclusive:	-1.346	0.178
+>> inclusive:	4.252	0.000
 
-BETA: 3
+BETA: {'articles': {0: -1.1613759903457928, 1: 0.04148632586939505, 2: 0.2526576853852216, 3: 0.009153168317770655, 4: -0.04490065737208109, 5: -0.0011801597458767786, 6: -0.004430014999986416, 7: 0.0014027464301089017}, 'pronoun': {0: -0.2468373602046756, 1: 0.01437158220052326, 2: 0.05337598758706279, 3: 0.007896707201159064, 4: -0.020597583510374107, 5: -0.000264747093209272, 6: -0.0071393690651008045, 7: 0.0009040377741592763}, 'prepositions': {0: -1.1672928027440932, 1: 0.023981594860082542, 2: 0.2476013422665514, 3: 0.013230062791289472, 4: -0.0037484905888123298, 5: -0.0010694650519195987, 6: -0.01194897683408671, 7: 0.001385444686148398}, 'negations': {0: -2.2425445857026807, 1: 0.18580682459618317, 2: 0.2670207463731127, 3: 0.004907849656313931, 4: -0.021887403292313923, 5: -0.004837906244214459, 6: -0.0019222309986483017, 7: 0.003137444598234655}, 'tentative': {0: -1.9448667855309758, 1: 0.07994137192725671, 2: 0.3491074885411889, 3: 0.012789475572867779, 4: -0.043733187693602564, 5: -0.00114829587376451, 6: -0.008605258867281274, 7: 0.0018983202956283434}, 'certainty': {0: -2.110031733251041, 1: -0.009499656244631819, 2: -0.2778243084896359, 3: -0.007055110840522879, 4: 0.04992930730908368, 5: 0.0026853804163352343, 6: 0.009334929322202456, 7: -0.000556085403450101}, 'discrepancy': {0: -2.236942205772248, 1: 0.07737739311997263, 2: 0.15038928782204808, 3: 0.012229259307266134, 4: -0.09072177511799898, 5: -0.003227159293234994, 6: -0.012402426244362066, 7: 0.005722339954768038}, 'exclusive': {0: -0.9017644539210914, 1: -0.004579218717552722, 2: -0.03699425463748096, 3: 0.005822935835417856, 4: 0.005325638902554275, 5: -5.540168642065082e-06, 6: -0.002319019493323118, 7: 0.00039575343551089427}, 'inclusive': {0: -1.533580642816052, 1: 0.03560291118866636, 2: 0.13749430530556528, 3: 0.007435202354223973, 4: -0.040669743268526126, 5: -0.00045907457447263793, 6: -0.0030404909542412553, 7: 0.0007724062947552804}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	6.940	0.000
->> pronoun:	2.410	0.016
->> prepositions:	9.260	0.000
->> negations:	9.518	0.000
->> tentative:	15.082	0.000
->> certainty:	-11.778	0.000
->> discrepancy:	5.511	0.000
->> exclusive:	6.795	0.000
->> inclusive:	3.047	0.002
+>> articles:	3.834	0.000
+>> pronoun:	3.080	0.002
+>> prepositions:	5.255	0.000
+>> negations:	2.148	0.032
+>> tentative:	5.526	0.000
+>> certainty:	-2.641	0.008
+>> discrepancy:	4.936	0.000
+>> exclusive:	2.761	0.006
+>> inclusive:	2.999	0.003
 
-BETA: 4
+BETA: {'articles': {0: -1.1613759903457928, 1: 0.04148632586939505, 2: 0.2526576853852216, 3: 0.009153168317770655, 4: -0.04490065737208109, 5: -0.0011801597458767786, 6: -0.004430014999986416, 7: 0.0014027464301089017}, 'pronoun': {0: -0.2468373602046756, 1: 0.01437158220052326, 2: 0.05337598758706279, 3: 0.007896707201159064, 4: -0.020597583510374107, 5: -0.000264747093209272, 6: -0.0071393690651008045, 7: 0.0009040377741592763}, 'prepositions': {0: -1.1672928027440932, 1: 0.023981594860082542, 2: 0.2476013422665514, 3: 0.013230062791289472, 4: -0.0037484905888123298, 5: -0.0010694650519195987, 6: -0.01194897683408671, 7: 0.001385444686148398}, 'negations': {0: -2.2425445857026807, 1: 0.18580682459618317, 2: 0.2670207463731127, 3: 0.004907849656313931, 4: -0.021887403292313923, 5: -0.004837906244214459, 6: -0.0019222309986483017, 7: 0.003137444598234655}, 'tentative': {0: -1.9448667855309758, 1: 0.07994137192725671, 2: 0.3491074885411889, 3: 0.012789475572867779, 4: -0.043733187693602564, 5: -0.00114829587376451, 6: -0.008605258867281274, 7: 0.0018983202956283434}, 'certainty': {0: -2.110031733251041, 1: -0.009499656244631819, 2: -0.2778243084896359, 3: -0.007055110840522879, 4: 0.04992930730908368, 5: 0.0026853804163352343, 6: 0.009334929322202456, 7: -0.000556085403450101}, 'discrepancy': {0: -2.236942205772248, 1: 0.07737739311997263, 2: 0.15038928782204808, 3: 0.012229259307266134, 4: -0.09072177511799898, 5: -0.003227159293234994, 6: -0.012402426244362066, 7: 0.005722339954768038}, 'exclusive': {0: -0.9017644539210914, 1: -0.004579218717552722, 2: -0.03699425463748096, 3: 0.005822935835417856, 4: 0.005325638902554275, 5: -5.540168642065082e-06, 6: -0.002319019493323118, 7: 0.00039575343551089427}, 'inclusive': {0: -1.533580642816052, 1: 0.03560291118866636, 2: 0.13749430530556528, 3: 0.007435202354223973, 4: -0.040669743268526126, 5: -0.00045907457447263793, 6: -0.0030404909542412553, 7: 0.0007724062947552804}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	-2.601	0.009
-pronoun:	0.242	0.809
->> prepositions:	-5.690	0.000
-negations:	-0.807	0.420
-tentative:	0.982	0.326
->> certainty:	4.247	0.000
->> discrepancy:	-3.037	0.002
-exclusive:	-1.471	0.141
->> inclusive:	2.621	0.009
+articles:	-1.677	0.094
+pronoun:	-1.194	0.232
+prepositions:	-0.141	0.888
+negations:	-0.184	0.854
+tentative:	-0.904	0.366
+certainty:	0.408	0.683
+discrepancy:	-1.318	0.187
+exclusive:	0.193	0.847
+inclusive:	-1.322	0.186
 
-BETA: 5
+BETA: {'articles': {0: -1.1613759903457928, 1: 0.04148632586939505, 2: 0.2526576853852216, 3: 0.009153168317770655, 4: -0.04490065737208109, 5: -0.0011801597458767786, 6: -0.004430014999986416, 7: 0.0014027464301089017}, 'pronoun': {0: -0.2468373602046756, 1: 0.01437158220052326, 2: 0.05337598758706279, 3: 0.007896707201159064, 4: -0.020597583510374107, 5: -0.000264747093209272, 6: -0.0071393690651008045, 7: 0.0009040377741592763}, 'prepositions': {0: -1.1672928027440932, 1: 0.023981594860082542, 2: 0.2476013422665514, 3: 0.013230062791289472, 4: -0.0037484905888123298, 5: -0.0010694650519195987, 6: -0.01194897683408671, 7: 0.001385444686148398}, 'negations': {0: -2.2425445857026807, 1: 0.18580682459618317, 2: 0.2670207463731127, 3: 0.004907849656313931, 4: -0.021887403292313923, 5: -0.004837906244214459, 6: -0.0019222309986483017, 7: 0.003137444598234655}, 'tentative': {0: -1.9448667855309758, 1: 0.07994137192725671, 2: 0.3491074885411889, 3: 0.012789475572867779, 4: -0.043733187693602564, 5: -0.00114829587376451, 6: -0.008605258867281274, 7: 0.0018983202956283434}, 'certainty': {0: -2.110031733251041, 1: -0.009499656244631819, 2: -0.2778243084896359, 3: -0.007055110840522879, 4: 0.04992930730908368, 5: 0.0026853804163352343, 6: 0.009334929322202456, 7: -0.000556085403450101}, 'discrepancy': {0: -2.236942205772248, 1: 0.07737739311997263, 2: 0.15038928782204808, 3: 0.012229259307266134, 4: -0.09072177511799898, 5: -0.003227159293234994, 6: -0.012402426244362066, 7: 0.005722339954768038}, 'exclusive': {0: -0.9017644539210914, 1: -0.004579218717552722, 2: -0.03699425463748096, 3: 0.005822935835417856, 4: 0.005325638902554275, 5: -5.540168642065082e-06, 6: -0.002319019493323118, 7: 0.00039575343551089427}, 'inclusive': {0: -1.533580642816052, 1: 0.03560291118866636, 2: 0.13749430530556528, 3: 0.007435202354223973, 4: -0.040669743268526126, 5: -0.00045907457447263793, 6: -0.0030404909542412553, 7: 0.0007724062947552804}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
-articles:	-0.930	0.353
-pronoun:	-1.386	0.166
->> prepositions:	-5.678	0.000
-negations:	0.518	0.604
-tentative:	-0.273	0.785
->> certainty:	3.326	0.001
-discrepancy:	-0.689	0.491
->> exclusive:	-2.015	0.044
->> inclusive:	2.482	0.013
+>> articles:	-2.291	0.022
+pronoun:	-0.745	0.456
+>> prepositions:	-2.416	0.016
+negations:	-1.066	0.286
+tentative:	-1.262	0.207
+certainty:	0.654	0.513
+discrepancy:	-1.883	0.060
+exclusive:	-0.011	0.991
+inclusive:	-0.660	0.509
 
-BETA: 6
+BETA: {'articles': {0: -1.1613759903457928, 1: 0.04148632586939505, 2: 0.2526576853852216, 3: 0.009153168317770655, 4: -0.04490065737208109, 5: -0.0011801597458767786, 6: -0.004430014999986416, 7: 0.0014027464301089017}, 'pronoun': {0: -0.2468373602046756, 1: 0.01437158220052326, 2: 0.05337598758706279, 3: 0.007896707201159064, 4: -0.020597583510374107, 5: -0.000264747093209272, 6: -0.0071393690651008045, 7: 0.0009040377741592763}, 'prepositions': {0: -1.1672928027440932, 1: 0.023981594860082542, 2: 0.2476013422665514, 3: 0.013230062791289472, 4: -0.0037484905888123298, 5: -0.0010694650519195987, 6: -0.01194897683408671, 7: 0.001385444686148398}, 'negations': {0: -2.2425445857026807, 1: 0.18580682459618317, 2: 0.2670207463731127, 3: 0.004907849656313931, 4: -0.021887403292313923, 5: -0.004837906244214459, 6: -0.0019222309986483017, 7: 0.003137444598234655}, 'tentative': {0: -1.9448667855309758, 1: 0.07994137192725671, 2: 0.3491074885411889, 3: 0.012789475572867779, 4: -0.043733187693602564, 5: -0.00114829587376451, 6: -0.008605258867281274, 7: 0.0018983202956283434}, 'certainty': {0: -2.110031733251041, 1: -0.009499656244631819, 2: -0.2778243084896359, 3: -0.007055110840522879, 4: 0.04992930730908368, 5: 0.0026853804163352343, 6: 0.009334929322202456, 7: -0.000556085403450101}, 'discrepancy': {0: -2.236942205772248, 1: 0.07737739311997263, 2: 0.15038928782204808, 3: 0.012229259307266134, 4: -0.09072177511799898, 5: -0.003227159293234994, 6: -0.012402426244362066, 7: 0.005722339954768038}, 'exclusive': {0: -0.9017644539210914, 1: -0.004579218717552722, 2: -0.03699425463748096, 3: 0.005822935835417856, 4: 0.005325638902554275, 5: -5.540168642065082e-06, 6: -0.002319019493323118, 7: 0.00039575343551089427}, 'inclusive': {0: -1.533580642816052, 1: 0.03560291118866636, 2: 0.13749430530556528, 3: 0.007435202354223973, 4: -0.040669743268526126, 5: -0.00045907457447263793, 6: -0.0030404909542412553, 7: 0.0007724062947552804}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	-5.665	0.000
->> pronoun:	-6.255	0.000
->> prepositions:	-8.788	0.000
->> negations:	-10.306	0.000
->> tentative:	-13.826	0.000
->> certainty:	9.075	0.000
->> discrepancy:	-3.072	0.002
->> exclusive:	-6.540	0.000
->> inclusive:	-2.309	0.021
+articles:	-1.711	0.087
+>> pronoun:	-2.594	0.009
+>> prepositions:	-4.352	0.000
+negations:	-0.775	0.438
+>> tentative:	-3.430	0.001
+>> certainty:	3.208	0.001
+>> discrepancy:	-4.559	0.000
+exclusive:	-1.005	0.315
+inclusive:	-1.131	0.258
 
-BETA: 7
+BETA: {'articles': {0: -1.1613759903457928, 1: 0.04148632586939505, 2: 0.2526576853852216, 3: 0.009153168317770655, 4: -0.04490065737208109, 5: -0.0011801597458767786, 6: -0.004430014999986416, 7: 0.0014027464301089017}, 'pronoun': {0: -0.2468373602046756, 1: 0.01437158220052326, 2: 0.05337598758706279, 3: 0.007896707201159064, 4: -0.020597583510374107, 5: -0.000264747093209272, 6: -0.0071393690651008045, 7: 0.0009040377741592763}, 'prepositions': {0: -1.1672928027440932, 1: 0.023981594860082542, 2: 0.2476013422665514, 3: 0.013230062791289472, 4: -0.0037484905888123298, 5: -0.0010694650519195987, 6: -0.01194897683408671, 7: 0.001385444686148398}, 'negations': {0: -2.2425445857026807, 1: 0.18580682459618317, 2: 0.2670207463731127, 3: 0.004907849656313931, 4: -0.021887403292313923, 5: -0.004837906244214459, 6: -0.0019222309986483017, 7: 0.003137444598234655}, 'tentative': {0: -1.9448667855309758, 1: 0.07994137192725671, 2: 0.3491074885411889, 3: 0.012789475572867779, 4: -0.043733187693602564, 5: -0.00114829587376451, 6: -0.008605258867281274, 7: 0.0018983202956283434}, 'certainty': {0: -2.110031733251041, 1: -0.009499656244631819, 2: -0.2778243084896359, 3: -0.007055110840522879, 4: 0.04992930730908368, 5: 0.0026853804163352343, 6: 0.009334929322202456, 7: -0.000556085403450101}, 'discrepancy': {0: -2.236942205772248, 1: 0.07737739311997263, 2: 0.15038928782204808, 3: 0.012229259307266134, 4: -0.09072177511799898, 5: -0.003227159293234994, 6: -0.012402426244362066, 7: 0.005722339954768038}, 'exclusive': {0: -0.9017644539210914, 1: -0.004579218717552722, 2: -0.03699425463748096, 3: 0.005822935835417856, 4: 0.005325638902554275, 5: -5.540168642065082e-06, 6: -0.002319019493323118, 7: 0.00039575343551089427}, 'inclusive': {0: -1.533580642816052, 1: 0.03560291118866636, 2: 0.13749430530556528, 3: 0.007435202354223973, 4: -0.040669743268526126, 5: -0.00045907457447263793, 6: -0.0030404909542412553, 7: 0.0007724062947552804}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	3.722	0.000
->> pronoun:	3.472	0.001
->> prepositions:	8.198	0.000
-negations:	0.349	0.727
-tentative:	1.157	0.247
->> certainty:	-2.838	0.005
-discrepancy:	-0.021	0.983
->> exclusive:	3.311	0.001
-inclusive:	-1.384	0.166
+>> articles:	2.426	0.015
+>> pronoun:	2.203	0.028
+>> prepositions:	2.699	0.007
+negations:	0.645	0.519
+tentative:	1.727	0.084
+certainty:	-0.121	0.904
+>> discrepancy:	3.074	0.002
+exclusive:	0.622	0.534
+inclusive:	0.988	0.323
 
 ==================================
 EQUATION: 3
 TARGET GENDER: f
 ==================================
 
-BETA: 0
+BETA: {'articles': {0: -1.3543637183161032, 1: 0.004750407833782899, 2: 0.33609076875409016, 3: 0.008019542083982407, 4: -0.022085074999891305, 5: -0.0005277302408686481, 6: -0.007598125944418946, 7: 0.0016995017192897133}, 'pronoun': {0: -0.212364507344157, 1: 0.02386880764988432, 2: 0.07358648364185835, 3: 0.005639591680844178, 4: -0.022954473376841908, 5: -0.000892784671501977, 6: -0.003105018390318773, 7: 0.0013432300543303576}, 'prepositions': {0: -1.256295002919038, 1: 0.040415276452315935, 2: 0.22137702986448338, 3: 0.006178984053126302, 4: -0.0389081344244522, 5: -0.0013965298148565755, 6: -0.003625844151513593, 7: 0.0013990864518435592}, 'negations': {0: -2.477359287585063, 1: 0.2337928726122622, 2: 0.22188970804660024, 3: -0.0006011405670807613, 4: -0.5820078581046215, 5: -0.008950255218910562, 6: -0.003218712162222208, 7: 0.013669908631843777}, 'tentative': {0: -1.913403301836822, 1: 0.080878352599475, 2: 0.17735329513473186, 3: 0.0036627470221482815, 4: -0.142805304708309, 5: 0.00017017508501389645, 6: -0.002467525632226823, 7: 0.0024115012001903833}, 'certainty': {0: -2.218982512976252, 1: -0.05843295007735436, 2: -0.06342671777233577, 3: -0.0034438926975986486, 4: -0.028119375524365414, 5: 0.0049826266193651785, 6: 0.007070949517301473, 7: -0.006403816374909712}, 'discrepancy': {0: -2.2162078338262132, 1: 0.00027429532425848256, 2: -0.026743714481490155, 3: 0.0030366209665210094, 4: 0.007297823031650899, 5: 0.0008140379581798599, 6: 0.005120469522492978, 7: -7.026375442636631e-05}, 'exclusive': {0: -0.8103645942580885, 1: -0.03418907228492404, 2: 0.12673801421720354, 3: 0.008476332494143974, 4: -0.06976641469018897, 5: -1.3775887605452916e-08, 6: -0.006985646065978153, 7: 0.002793522888005784}, 'inclusive': {0: -1.5863168910929246, 1: 0.12730204841795487, 2: 0.2731112988040749, 3: 0.007730866256767123, 4: -0.20601130046937477, 5: -0.004621578748873597, 6: -0.009358280255163139, 7: 0.00805418920154687}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	-460.952	0.000
->> pronoun:	-95.813	0.000
->> prepositions:	-436.932	0.000
->> negations:	-563.092	0.000
->> tentative:	-541.591	0.000
->> certainty:	-557.226	0.000
->> discrepancy:	-559.548	0.000
->> exclusive:	-303.763	0.000
->> inclusive:	-482.649	0.000
+>> articles:	-56.312	0.000
+>> pronoun:	-10.037	0.000
+>> prepositions:	-52.895	0.000
+>> negations:	-69.861	0.000
+>> tentative:	-66.831	0.000
+>> certainty:	-68.014	0.000
+>> discrepancy:	-69.217	0.000
+>> exclusive:	-37.481	0.000
+>> inclusive:	-59.535	0.000
 
-BETA: 1
+BETA: {'articles': {0: -1.3543637183161032, 1: 0.004750407833782899, 2: 0.33609076875409016, 3: 0.008019542083982407, 4: -0.022085074999891305, 5: -0.0005277302408686481, 6: -0.007598125944418946, 7: 0.0016995017192897133}, 'pronoun': {0: -0.212364507344157, 1: 0.02386880764988432, 2: 0.07358648364185835, 3: 0.005639591680844178, 4: -0.022954473376841908, 5: -0.000892784671501977, 6: -0.003105018390318773, 7: 0.0013432300543303576}, 'prepositions': {0: -1.256295002919038, 1: 0.040415276452315935, 2: 0.22137702986448338, 3: 0.006178984053126302, 4: -0.0389081344244522, 5: -0.0013965298148565755, 6: -0.003625844151513593, 7: 0.0013990864518435592}, 'negations': {0: -2.477359287585063, 1: 0.2337928726122622, 2: 0.22188970804660024, 3: -0.0006011405670807613, 4: -0.5820078581046215, 5: -0.008950255218910562, 6: -0.003218712162222208, 7: 0.013669908631843777}, 'tentative': {0: -1.913403301836822, 1: 0.080878352599475, 2: 0.17735329513473186, 3: 0.0036627470221482815, 4: -0.142805304708309, 5: 0.00017017508501389645, 6: -0.002467525632226823, 7: 0.0024115012001903833}, 'certainty': {0: -2.218982512976252, 1: -0.05843295007735436, 2: -0.06342671777233577, 3: -0.0034438926975986486, 4: -0.028119375524365414, 5: 0.0049826266193651785, 6: 0.007070949517301473, 7: -0.006403816374909712}, 'discrepancy': {0: -2.2162078338262132, 1: 0.00027429532425848256, 2: -0.026743714481490155, 3: 0.0030366209665210094, 4: 0.007297823031650899, 5: 0.0008140379581798599, 6: 0.005120469522492978, 7: -7.026375442636631e-05}, 'exclusive': {0: -0.8103645942580885, 1: -0.03418907228492404, 2: 0.12673801421720354, 3: 0.008476332494143974, 4: -0.06976641469018897, 5: -1.3775887605452916e-08, 6: -0.006985646065978153, 7: 0.002793522888005784}, 'inclusive': {0: -1.5863168910929246, 1: 0.12730204841795487, 2: 0.2731112988040749, 3: 0.007730866256767123, 4: -0.20601130046937477, 5: -0.004621578748873597, 6: -0.009358280255163139, 7: 0.00805418920154687}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	2.958	0.003
->> pronoun:	-5.726	0.000
->> prepositions:	3.043	0.002
-negations:	-1.441	0.150
-tentative:	-0.454	0.650
-certainty:	-1.228	0.219
-discrepancy:	0.040	0.968
->> exclusive:	2.235	0.025
->> inclusive:	2.473	0.013
+articles:	0.156	0.876
+pronoun:	1.431	0.152
+prepositions:	1.311	0.190
+negations:	1.719	0.086
+tentative:	1.759	0.079
+certainty:	-0.551	0.581
+discrepancy:	0.004	0.997
+exclusive:	-1.313	0.189
+>> inclusive:	3.638	0.000
 
-BETA: 2
+BETA: {'articles': {0: -1.3543637183161032, 1: 0.004750407833782899, 2: 0.33609076875409016, 3: 0.008019542083982407, 4: -0.022085074999891305, 5: -0.0005277302408686481, 6: -0.007598125944418946, 7: 0.0016995017192897133}, 'pronoun': {0: -0.212364507344157, 1: 0.02386880764988432, 2: 0.07358648364185835, 3: 0.005639591680844178, 4: -0.022954473376841908, 5: -0.000892784671501977, 6: -0.003105018390318773, 7: 0.0013432300543303576}, 'prepositions': {0: -1.256295002919038, 1: 0.040415276452315935, 2: 0.22137702986448338, 3: 0.006178984053126302, 4: -0.0389081344244522, 5: -0.0013965298148565755, 6: -0.003625844151513593, 7: 0.0013990864518435592}, 'negations': {0: -2.477359287585063, 1: 0.2337928726122622, 2: 0.22188970804660024, 3: -0.0006011405670807613, 4: -0.5820078581046215, 5: -0.008950255218910562, 6: -0.003218712162222208, 7: 0.013669908631843777}, 'tentative': {0: -1.913403301836822, 1: 0.080878352599475, 2: 0.17735329513473186, 3: 0.0036627470221482815, 4: -0.142805304708309, 5: 0.00017017508501389645, 6: -0.002467525632226823, 7: 0.0024115012001903833}, 'certainty': {0: -2.218982512976252, 1: -0.05843295007735436, 2: -0.06342671777233577, 3: -0.0034438926975986486, 4: -0.028119375524365414, 5: 0.0049826266193651785, 6: 0.007070949517301473, 7: -0.006403816374909712}, 'discrepancy': {0: -2.2162078338262132, 1: 0.00027429532425848256, 2: -0.026743714481490155, 3: 0.0030366209665210094, 4: 0.007297823031650899, 5: 0.0008140379581798599, 6: 0.005120469522492978, 7: -7.026375442636631e-05}, 'exclusive': {0: -0.8103645942580885, 1: -0.03418907228492404, 2: 0.12673801421720354, 3: 0.008476332494143974, 4: -0.06976641469018897, 5: -1.3775887605452916e-08, 6: -0.006985646065978153, 7: 0.002793522888005784}, 'inclusive': {0: -1.5863168910929246, 1: 0.12730204841795487, 2: 0.2731112988040749, 3: 0.007730866256767123, 4: -0.20601130046937477, 5: -0.004621578748873597, 6: -0.009358280255163139, 7: 0.00805418920154687}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	86.304	0.000
->> pronoun:	34.639	0.000
->> prepositions:	74.766	0.000
->> negations:	29.937	0.000
->> tentative:	43.206	0.000
->> certainty:	2.033	0.042
->> discrepancy:	13.643	0.000
->> exclusive:	30.822	0.000
->> inclusive:	31.751	0.000
+>> articles:	11.175	0.000
+>> pronoun:	2.730	0.006
+>> prepositions:	7.375	0.000
+>> negations:	5.028	0.000
+>> tentative:	4.913	0.000
+certainty:	-1.520	0.128
+discrepancy:	-0.652	0.515
+>> exclusive:	4.593	0.000
+>> inclusive:	8.249	0.000
 
-BETA: 3
+BETA: {'articles': {0: -1.3543637183161032, 1: 0.004750407833782899, 2: 0.33609076875409016, 3: 0.008019542083982407, 4: -0.022085074999891305, 5: -0.0005277302408686481, 6: -0.007598125944418946, 7: 0.0016995017192897133}, 'pronoun': {0: -0.212364507344157, 1: 0.02386880764988432, 2: 0.07358648364185835, 3: 0.005639591680844178, 4: -0.022954473376841908, 5: -0.000892784671501977, 6: -0.003105018390318773, 7: 0.0013432300543303576}, 'prepositions': {0: -1.256295002919038, 1: 0.040415276452315935, 2: 0.22137702986448338, 3: 0.006178984053126302, 4: -0.0389081344244522, 5: -0.0013965298148565755, 6: -0.003625844151513593, 7: 0.0013990864518435592}, 'negations': {0: -2.477359287585063, 1: 0.2337928726122622, 2: 0.22188970804660024, 3: -0.0006011405670807613, 4: -0.5820078581046215, 5: -0.008950255218910562, 6: -0.003218712162222208, 7: 0.013669908631843777}, 'tentative': {0: -1.913403301836822, 1: 0.080878352599475, 2: 0.17735329513473186, 3: 0.0036627470221482815, 4: -0.142805304708309, 5: 0.00017017508501389645, 6: -0.002467525632226823, 7: 0.0024115012001903833}, 'certainty': {0: -2.218982512976252, 1: -0.05843295007735436, 2: -0.06342671777233577, 3: -0.0034438926975986486, 4: -0.028119375524365414, 5: 0.0049826266193651785, 6: 0.007070949517301473, 7: -0.006403816374909712}, 'discrepancy': {0: -2.2162078338262132, 1: 0.00027429532425848256, 2: -0.026743714481490155, 3: 0.0030366209665210094, 4: 0.007297823031650899, 5: 0.0008140379581798599, 6: 0.005120469522492978, 7: -7.026375442636631e-05}, 'exclusive': {0: -0.8103645942580885, 1: -0.03418907228492404, 2: 0.12673801421720354, 3: 0.008476332494143974, 4: -0.06976641469018897, 5: -1.3775887605452916e-08, 6: -0.006985646065978153, 7: 0.002793522888005784}, 'inclusive': {0: -1.5863168910929246, 1: 0.12730204841795487, 2: 0.2731112988040749, 3: 0.007730866256767123, 4: -0.20601130046937477, 5: -0.004621578748873597, 6: -0.009358280255163139, 7: 0.00805418920154687}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	6.714	0.000
->> pronoun:	10.599	0.000
->> prepositions:	4.738	0.000
-negations:	-0.454	0.650
->> tentative:	5.915	0.000
-certainty:	-1.327	0.184
-discrepancy:	0.244	0.807
->> exclusive:	6.001	0.000
->> inclusive:	4.618	0.000
+>> articles:	3.082	0.002
+>> pronoun:	2.043	0.041
+>> prepositions:	2.253	0.024
+negations:	-0.207	0.836
+tentative:	1.399	0.162
+certainty:	-1.244	0.213
+discrepancy:	1.079	0.281
+>> exclusive:	3.951	0.000
+>> inclusive:	2.783	0.005
 
-BETA: 4
+BETA: {'articles': {0: -1.3543637183161032, 1: 0.004750407833782899, 2: 0.33609076875409016, 3: 0.008019542083982407, 4: -0.022085074999891305, 5: -0.0005277302408686481, 6: -0.007598125944418946, 7: 0.0016995017192897133}, 'pronoun': {0: -0.212364507344157, 1: 0.02386880764988432, 2: 0.07358648364185835, 3: 0.005639591680844178, 4: -0.022954473376841908, 5: -0.000892784671501977, 6: -0.003105018390318773, 7: 0.0013432300543303576}, 'prepositions': {0: -1.256295002919038, 1: 0.040415276452315935, 2: 0.22137702986448338, 3: 0.006178984053126302, 4: -0.0389081344244522, 5: -0.0013965298148565755, 6: -0.003625844151513593, 7: 0.0013990864518435592}, 'negations': {0: -2.477359287585063, 1: 0.2337928726122622, 2: 0.22188970804660024, 3: -0.0006011405670807613, 4: -0.5820078581046215, 5: -0.008950255218910562, 6: -0.003218712162222208, 7: 0.013669908631843777}, 'tentative': {0: -1.913403301836822, 1: 0.080878352599475, 2: 0.17735329513473186, 3: 0.0036627470221482815, 4: -0.142805304708309, 5: 0.00017017508501389645, 6: -0.002467525632226823, 7: 0.0024115012001903833}, 'certainty': {0: -2.218982512976252, 1: -0.05843295007735436, 2: -0.06342671777233577, 3: -0.0034438926975986486, 4: -0.028119375524365414, 5: 0.0049826266193651785, 6: 0.007070949517301473, 7: -0.006403816374909712}, 'discrepancy': {0: -2.2162078338262132, 1: 0.00027429532425848256, 2: -0.026743714481490155, 3: 0.0030366209665210094, 4: 0.007297823031650899, 5: 0.0008140379581798599, 6: 0.005120469522492978, 7: -7.026375442636631e-05}, 'exclusive': {0: -0.8103645942580885, 1: -0.03418907228492404, 2: 0.12673801421720354, 3: 0.008476332494143974, 4: -0.06976641469018897, 5: -1.3775887605452916e-08, 6: -0.006985646065978153, 7: 0.002793522888005784}, 'inclusive': {0: -1.5863168910929246, 1: 0.12730204841795487, 2: 0.2731112988040749, 3: 0.007730866256767123, 4: -0.20601130046937477, 5: -0.004621578748873597, 6: -0.009358280255163139, 7: 0.00805418920154687}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	-3.958	0.000
->> pronoun:	3.430	0.001
-prepositions:	-1.585	0.113
-negations:	1.260	0.208
-tentative:	1.056	0.291
-certainty:	-0.477	0.633
-discrepancy:	-1.118	0.264
->> exclusive:	-5.600	0.000
->> inclusive:	-3.532	0.000
+articles:	-0.597	0.551
+pronoun:	-1.080	0.280
+prepositions:	-1.050	0.294
+>> negations:	-3.405	0.001
+>> tentative:	-2.343	0.019
+certainty:	-0.185	0.853
+discrepancy:	0.080	0.936
+>> exclusive:	-2.016	0.044
+>> inclusive:	-4.714	0.000
 
-BETA: 5
+BETA: {'articles': {0: -1.3543637183161032, 1: 0.004750407833782899, 2: 0.33609076875409016, 3: 0.008019542083982407, 4: -0.022085074999891305, 5: -0.0005277302408686481, 6: -0.007598125944418946, 7: 0.0016995017192897133}, 'pronoun': {0: -0.212364507344157, 1: 0.02386880764988432, 2: 0.07358648364185835, 3: 0.005639591680844178, 4: -0.022954473376841908, 5: -0.000892784671501977, 6: -0.003105018390318773, 7: 0.0013432300543303576}, 'prepositions': {0: -1.256295002919038, 1: 0.040415276452315935, 2: 0.22137702986448338, 3: 0.006178984053126302, 4: -0.0389081344244522, 5: -0.0013965298148565755, 6: -0.003625844151513593, 7: 0.0013990864518435592}, 'negations': {0: -2.477359287585063, 1: 0.2337928726122622, 2: 0.22188970804660024, 3: -0.0006011405670807613, 4: -0.5820078581046215, 5: -0.008950255218910562, 6: -0.003218712162222208, 7: 0.013669908631843777}, 'tentative': {0: -1.913403301836822, 1: 0.080878352599475, 2: 0.17735329513473186, 3: 0.0036627470221482815, 4: -0.142805304708309, 5: 0.00017017508501389645, 6: -0.002467525632226823, 7: 0.0024115012001903833}, 'certainty': {0: -2.218982512976252, 1: -0.05843295007735436, 2: -0.06342671777233577, 3: -0.0034438926975986486, 4: -0.028119375524365414, 5: 0.0049826266193651785, 6: 0.007070949517301473, 7: -0.006403816374909712}, 'discrepancy': {0: -2.2162078338262132, 1: 0.00027429532425848256, 2: -0.026743714481490155, 3: 0.0030366209665210094, 4: 0.007297823031650899, 5: 0.0008140379581798599, 6: 0.005120469522492978, 7: -7.026375442636631e-05}, 'exclusive': {0: -0.8103645942580885, 1: -0.03418907228492404, 2: 0.12673801421720354, 3: 0.008476332494143974, 4: -0.06976641469018897, 5: -1.3775887605452916e-08, 6: -0.006985646065978153, 7: 0.002793522888005784}, 'inclusive': {0: -1.5863168910929246, 1: 0.12730204841795487, 2: 0.2731112988040749, 3: 0.007730866256767123, 4: -0.20601130046937477, 5: -0.004621578748873597, 6: -0.009358280255163139, 7: 0.00805418920154687}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
->> articles:	-2.083	0.037
-pronoun:	-1.940	0.052
->> prepositions:	-2.844	0.004
->> negations:	2.004	0.045
-tentative:	0.308	0.758
-certainty:	0.783	0.434
-discrepancy:	0.860	0.390
-exclusive:	-0.993	0.321
-inclusive:	-1.338	0.181
+articles:	-0.768	0.443
+pronoun:	-1.934	0.053
+prepositions:	-1.927	0.054
+negations:	-1.292	0.196
+tentative:	0.144	0.885
+certainty:	1.215	0.225
+discrepancy:	0.362	0.718
+exclusive:	-0.000	1.000
+>> inclusive:	-3.843	0.000
 
-BETA: 6
+BETA: {'articles': {0: -1.3543637183161032, 1: 0.004750407833782899, 2: 0.33609076875409016, 3: 0.008019542083982407, 4: -0.022085074999891305, 5: -0.0005277302408686481, 6: -0.007598125944418946, 7: 0.0016995017192897133}, 'pronoun': {0: -0.212364507344157, 1: 0.02386880764988432, 2: 0.07358648364185835, 3: 0.005639591680844178, 4: -0.022954473376841908, 5: -0.000892784671501977, 6: -0.003105018390318773, 7: 0.0013432300543303576}, 'prepositions': {0: -1.256295002919038, 1: 0.040415276452315935, 2: 0.22137702986448338, 3: 0.006178984053126302, 4: -0.0389081344244522, 5: -0.0013965298148565755, 6: -0.003625844151513593, 7: 0.0013990864518435592}, 'negations': {0: -2.477359287585063, 1: 0.2337928726122622, 2: 0.22188970804660024, 3: -0.0006011405670807613, 4: -0.5820078581046215, 5: -0.008950255218910562, 6: -0.003218712162222208, 7: 0.013669908631843777}, 'tentative': {0: -1.913403301836822, 1: 0.080878352599475, 2: 0.17735329513473186, 3: 0.0036627470221482815, 4: -0.142805304708309, 5: 0.00017017508501389645, 6: -0.002467525632226823, 7: 0.0024115012001903833}, 'certainty': {0: -2.218982512976252, 1: -0.05843295007735436, 2: -0.06342671777233577, 3: -0.0034438926975986486, 4: -0.028119375524365414, 5: 0.0049826266193651785, 6: 0.007070949517301473, 7: -0.006403816374909712}, 'discrepancy': {0: -2.2162078338262132, 1: 0.00027429532425848256, 2: -0.026743714481490155, 3: 0.0030366209665210094, 4: 0.007297823031650899, 5: 0.0008140379581798599, 6: 0.005120469522492978, 7: -7.026375442636631e-05}, 'exclusive': {0: -0.8103645942580885, 1: -0.03418907228492404, 2: 0.12673801421720354, 3: 0.008476332494143974, 4: -0.06976641469018897, 5: -1.3775887605452916e-08, 6: -0.006985646065978153, 7: 0.002793522888005784}, 'inclusive': {0: -1.5863168910929246, 1: 0.12730204841795487, 2: 0.2731112988040749, 3: 0.007730866256767123, 4: -0.20601130046937477, 5: -0.004621578748873597, 6: -0.009358280255163139, 7: 0.00805418920154687}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
-articles:	1.424	0.154
->> pronoun:	-8.003	0.000
-prepositions:	1.090	0.276
->> negations:	-4.247	0.000
-tentative:	-0.899	0.369
->> certainty:	4.180	0.000
-discrepancy:	1.558	0.119
-exclusive:	1.146	0.252
->> inclusive:	1.992	0.046
+>> articles:	-2.347	0.019
+pronoun:	-0.921	0.357
+prepositions:	-1.037	0.300
+negations:	-0.886	0.376
+tentative:	-0.747	0.455
+>> certainty:	2.048	0.041
+discrepancy:	1.446	0.148
+>> exclusive:	-2.542	0.011
+>> inclusive:	-2.733	0.006
 
-BETA: 7
+BETA: {'articles': {0: -1.3543637183161032, 1: 0.004750407833782899, 2: 0.33609076875409016, 3: 0.008019542083982407, 4: -0.022085074999891305, 5: -0.0005277302408686481, 6: -0.007598125944418946, 7: 0.0016995017192897133}, 'pronoun': {0: -0.212364507344157, 1: 0.02386880764988432, 2: 0.07358648364185835, 3: 0.005639591680844178, 4: -0.022954473376841908, 5: -0.000892784671501977, 6: -0.003105018390318773, 7: 0.0013432300543303576}, 'prepositions': {0: -1.256295002919038, 1: 0.040415276452315935, 2: 0.22137702986448338, 3: 0.006178984053126302, 4: -0.0389081344244522, 5: -0.0013965298148565755, 6: -0.003625844151513593, 7: 0.0013990864518435592}, 'negations': {0: -2.477359287585063, 1: 0.2337928726122622, 2: 0.22188970804660024, 3: -0.0006011405670807613, 4: -0.5820078581046215, 5: -0.008950255218910562, 6: -0.003218712162222208, 7: 0.013669908631843777}, 'tentative': {0: -1.913403301836822, 1: 0.080878352599475, 2: 0.17735329513473186, 3: 0.0036627470221482815, 4: -0.142805304708309, 5: 0.00017017508501389645, 6: -0.002467525632226823, 7: 0.0024115012001903833}, 'certainty': {0: -2.218982512976252, 1: -0.05843295007735436, 2: -0.06342671777233577, 3: -0.0034438926975986486, 4: -0.028119375524365414, 5: 0.0049826266193651785, 6: 0.007070949517301473, 7: -0.006403816374909712}, 'discrepancy': {0: -2.2162078338262132, 1: 0.00027429532425848256, 2: -0.026743714481490155, 3: 0.0030366209665210094, 4: 0.007297823031650899, 5: 0.0008140379581798599, 6: 0.005120469522492978, 7: -7.026375442636631e-05}, 'exclusive': {0: -0.8103645942580885, 1: -0.03418907228492404, 2: 0.12673801421720354, 3: 0.008476332494143974, 4: -0.06976641469018897, 5: -1.3775887605452916e-08, 6: -0.006985646065978153, 7: 0.002793522888005784}, 'inclusive': {0: -1.5863168910929246, 1: 0.12730204841795487, 2: 0.2731112988040749, 3: 0.007730866256767123, 4: -0.20601130046937477, 5: -0.004621578748873597, 6: -0.009358280255163139, 7: 0.00805418920154687}}
 CATEGORIES:	Z-SCORES	P-VALUES
 ----------------------------------
-articles:	1.922	0.055
->> pronoun:	6.313	0.000
->> prepositions:	2.933	0.003
->> negations:	-1.978	0.048
-tentative:	-0.657	0.511
-certainty:	-0.199	0.842
-discrepancy:	0.246	0.806
->> exclusive:	5.130	0.000
->> inclusive:	2.935	0.003
+articles:	1.955	0.051
+>> pronoun:	2.231	0.026
+prepositions:	1.543	0.123
+negations:	1.704	0.088
+tentative:	1.344	0.179
+certainty:	-0.998	0.318
+discrepancy:	-0.025	0.980
+>> exclusive:	2.704	0.007
+>> inclusive:	5.634	0.000

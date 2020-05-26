@@ -34,16 +34,16 @@ def __clean_split_list(split_list, prime_gender):
 def prep_in_between_split_list(dataset):
     print("Please wait while I prepare expanded split list...")
     if dataset == "ICSI":
-        with open(f"../Corpora/{dataset}/f_f.pkl", "rb") as f:
+        with open(f"../Corpora/{dataset}/f_f_short.pkl", "rb") as f:
             ff = pkl.load(f)
 
-        with open(f"../Corpora/{dataset}/f_m.pkl", "rb") as f:
+        with open(f"../Corpora/{dataset}/f_m_short.pkl", "rb") as f:
             mf = pkl.load(f)
 
-        with open(f"../Corpora/{dataset}/m_m.pkl", "rb") as f:
+        with open(f"../Corpora/{dataset}/m_m_short.pkl", "rb") as f:
             mm = pkl.load(f)
 
-        with open(f"../Corpora/{dataset}/m_f.pkl", "rb") as f:
+        with open(f"../Corpora/{dataset}/m_f_short.pkl", "rb") as f:
             fm = pkl.load(f)
 
     else:
@@ -62,16 +62,16 @@ def prep_in_between_split_list(dataset):
 def prep_clean_split_list(dataset):
     print("Please wait while I prepare clean split list...")
     if dataset == "ICSI":
-        with open(f"../Corpora/{dataset}/f_f.pkl", "rb") as f:
+        with open(f"../Corpora/{dataset}/f_f_short.pkl", "rb") as f:
             ff = pkl.load(f)
 
-        with open(f"../Corpora/{dataset}/f_m.pkl", "rb") as f:
+        with open(f"../Corpora/{dataset}/f_m_short.pkl", "rb") as f:
             mf = pkl.load(f)
 
-        with open(f"../Corpora/{dataset}/m_m.pkl", "rb") as f:
+        with open(f"../Corpora/{dataset}/m_m_short.pkl", "rb") as f:
             mm = pkl.load(f)
 
-        with open(f"../Corpora/{dataset}/m_f.pkl", "rb") as f:
+        with open(f"../Corpora/{dataset}/m_f_short.pkl", "rb") as f:
             fm = pkl.load(f)
 
     else:

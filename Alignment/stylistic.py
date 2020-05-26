@@ -242,15 +242,15 @@ def calculate_alignment(apl, eq, target_gender, prime="f"):
         f.write("==================================\n")
         betas = [0, 1, 2, 3] if eq == 1 else [0, 1] if eq == 2 else [0, 1, 2, 3, 4, 5, 6, 7]
 
-        for b in betas:
+        for bb in betas:
             f.write(f"\nBETA: {b}\n")
 
             f.write("CATEGORIES:\tZ-SCORES\tP-VALUES\n")
             f.write("----------------------------------\n")
 
             for w in z:
-                if p[w][b] < 0.05: f.write(">> ")
-                f.write(f"{w}:\t{z[w][b]:.3f}\t{p[w][b]:.3f}\n")\
+                if p[w][bb] < 0.05: f.write(">> ")
+                f.write(f"{w}:\t{z[w][bb]:.3f}\t{p[w][bb]:.3f}\n")
 
     betas_filename = f"./stylistic_{ARGS.dataset}/betas_between.txt" if ARGS.between else f"./stylistic_{ARGS.dataset}/betas_orig.txt"
 
