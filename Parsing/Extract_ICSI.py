@@ -165,10 +165,10 @@ class DialogueAct():
 
 def unpickle_or_generate(gen_fun, pickle_path, *args, two_files=False):
     if two_files:
-        pickle_path1 = pickle_path + 'f_m.pkl'
-        pickle_path2 = pickle_path + 'm_m.pkl'
-        pickle_path3 = pickle_path + 'm_f.pkl'
-        pickle_path4 = pickle_path + 'f_f.pkl'
+        pickle_path1 = pickle_path + 'f_m_short.pkl'
+        pickle_path2 = pickle_path + 'm_m_short.pkl'
+        pickle_path3 = pickle_path + 'm_f_short.pkl'
+        pickle_path4 = pickle_path + 'f_f_short.pkl'
         obj = gen_fun(*args)
         print("Generated pairs.")
         if len(obj)>1:
@@ -420,7 +420,7 @@ def process_adjacency_pairs(adjacency_dict):
     return adjacency_pairs
 
 def process_inbetween(adjacency_dict, dialogue_acts_time, dialogue_acts_text):
-
+    print("Processing in between")
     # adjacency_pairs = []
     f_m = []
     m_m = []
@@ -471,21 +471,26 @@ def process_inbetween(adjacency_dict, dialogue_acts_time, dialogue_acts_text):
                 female_between_counter = Counter()
                 male_between_list = []
                 female_between_list = []
+                in_between_list = []
                 for (time, text) in time_text_dict.items():
                     if time > float(a_starttime) and time < float(b_starttime):
-                        
-                        if text[1] == 'f':
-                            this_counter = Counter(text[0])
-                            female_between_counter +=  this_counter
-                            number_of_female_between += 1
-                            female_between_list.append(this_counter)
-                        elif text[1] == 'm':
-                            this_counter = Counter(text[0])
-                            male_between_counter += this_counter
-                            number_of_male_between += 1
-                            male_between_list.append(this_counter)
-                        else:
-                            print("Gender not defined correctly.")
+                        max_number_in_between = 10
+                        in_between_list.append((text[0], text[1]))
+                        if len(in_between_list)>max_number_in_between:
+                            _ = in_between_list.pop(0)
+                for text in in_between_list:
+                    if text[1] == 'f':
+                        this_counter = Counter(text[0])
+                        female_between_counter +=  this_counter
+                        number_of_female_between += 1
+                        female_between_list.append(this_counter)
+                    elif text[1] == 'm':
+                        this_counter = Counter(text[0])
+                        male_between_counter += this_counter
+                        number_of_male_between += 1
+                        male_between_list.append(this_counter)
+                    else:
+                        print("Gender not defined correctly.")
 
 
 
@@ -598,6 +603,12 @@ def main():
 
     speakers = unpickle_or_generate(extract_speakers, parsed_speakers_path, speakerspath)
     print(len(speakers))
+
+    ## some statistics
+    female_dict = {}
+    for speaker in speakers:
+        
+
 
     adjacency_dict, dialogue_acts_time, dialogue_acts_text = unpickle_or_generate(extract_adjacency_pairs, parsed_adjacency_path, acts_directory, words)
 
