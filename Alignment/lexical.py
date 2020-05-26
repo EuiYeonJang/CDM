@@ -171,7 +171,6 @@ def calculate_alignment(apl, vocab, eq, target_gender, prime="f"):
     
     beta_track = {b: {"triple_count": 0, "triple_list": set(), "double_count": 0, "double_list": set(), "single_count": 0, "single_list": set()} for b in betas}
 
-
     if eq == 1:
         z, p = calculate_beta_one(apl, vocab)
     elif eq == 2:

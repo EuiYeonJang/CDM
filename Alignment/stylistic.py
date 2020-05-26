@@ -29,7 +29,6 @@ def create_liwc(vocab):
             if "*" in w:
                 asterisk.add(w)
                 extension.extend([vw for vw in vocab if (w == vw or vw.startswith(w[:-1]))])
-
         liwc[cat] |= (set(extension))
         liwc[cat] -= asterisk     
 
@@ -64,7 +63,6 @@ def prep_apl(target_gender):
 
     with open(f"{SAVEDIR}/t_{target_gender}_prepped_apl.pkl", "wb") as f:
         pkl.dump(liwc_apl, f)
-
 
     return liwc_apl
 
@@ -121,6 +119,8 @@ def calculate_beta_one(apl):
 
     pvalue_dict = {w: {i: "undefined" for i in range(4)} for w in CATEGORIES}
     zscores_dict = {w: {i: "undefined" for i in range(4)} for w in CATEGORIES}
+    betas_dict = {w: {i: "undefined" for i in range(8)} for w in CATEGORIES}
+
 
     for w in CATEGORIES:
         c_w = c_count[w]
@@ -144,7 +144,11 @@ def calculate_beta_one(apl):
             for i, z in enumerate(z_scores):
                 zscores_dict[w][i] = z
 
-    return zscores_dict, pvalue_dict
+            betas = res.params
+            for i, b in enumerate(betas):
+                betas_dict[w][i] = b
+
+    return zscores_dict, pvalue_dict, betas_dict
        
 
 def calculate_beta_two(apl):
@@ -152,6 +156,8 @@ def calculate_beta_two(apl):
     
     pvalue_dict = {w: {i: "undefined" for i in range(2)} for w in CATEGORIES}
     zscores_dict = {w: {i: "undefined" for i in range(2)} for w in CATEGORIES}
+    betas_dict = {w: {i: "undefined" for i in range(8)} for w in CATEGORIES}
+
 
     for w in CATEGORIES:
         c_w = c_count[w]
@@ -172,8 +178,12 @@ def calculate_beta_two(apl):
             z_scores = res.tvalues
             for i, z in enumerate(z_scores):
                 zscores_dict[w][i] = z
+
+            betas = res.params
+            for i, b in enumerate(betas):
+                betas_dict[w][i] = b
     
-    return zscores_dict, pvalue_dict
+    return zscores_dict, pvalue_dict, betas_dict
 
 
 def calculate_beta_three(apl):
@@ -181,6 +191,8 @@ def calculate_beta_three(apl):
 
     pvalue_dict = {w: {i: "undefined" for i in range(8)} for w in CATEGORIES}
     zscores_dict = {w: {i: "undefined" for i in range(8)} for w in CATEGORIES}
+    betas_dict = {w: {i: "undefined" for i in range(8)} for w in CATEGORIES}
+
 
     for w in CATEGORIES:
         c_w = c_count[w]
@@ -204,17 +216,20 @@ def calculate_beta_three(apl):
             for i, z in enumerate(z_scores):
                 zscores_dict[w][i] = z
 
-    return zscores_dict, pvalue_dict
+            betas = res.params
+            for i, b in enumerate(betas):
+                betas_dict[w][i] = b
+    return zscores_dict, pvalue_dict, betas_dict
 
 
 def calculate_alignment(apl, eq, target_gender, prime="f"):
     print(f"Calculating alignment for eq {eq}, p_{prime}_t_{target_gender}")
     if eq == 1:
-        z, p = calculate_beta_one(apl)
+        z, p, b = calculate_beta_one(apl)
     elif eq == 2:
-        z, p = calculate_beta_two(apl)
+        z, p, b = calculate_beta_two(apl)
     else:
-        z, p = calculate_beta_three(apl)
+        z, p, b = calculate_beta_three(apl)
 
     results_filename = f"./stylistic_{ARGS.dataset}/results_between.txt" if ARGS.between else f"./stylistic_{ARGS.dataset}/results_orig.txt"
 
@@ -235,7 +250,30 @@ def calculate_alignment(apl, eq, target_gender, prime="f"):
 
             for w in z:
                 if p[w][b] < 0.05: f.write(">> ")
-                f.write(f"{w}:\t{z[w][b]:.3f}\t{p[w][b]:.3f}\n")
+                f.write(f"{w}:\t{z[w][b]:.3f}\t{p[w][b]:.3f}\n")\
+
+    betas_filename = f"./stylistic_{ARGS.dataset}/betas_between.txt" if ARGS.between else f"./stylistic_{ARGS.dataset}/betas_orig.txt"
+
+    with open(betas_filename, "a") as f:
+        f.write("\n==================================\n")
+        f.write(f"EQUATION: {ARGS.analysis}\nTARGET GENDER: {target_gender}\n")
+
+        if eq == 2: f.write(f"PRIME GENDER: {prime}\n")
+
+        f.write("==================================\n")
+        betas = [0, 1, 2, 3] if eq == 1 else [0, 1] if eq == 2 else [0, 1, 2, 3, 4, 5, 6, 7]
+
+        f.write("CATEGORIES:")
+        for bb in betas:
+            f.write(f"\tBETA_{bb}")
+
+        f.write("\n----------------------------------\n")
+
+        for w in z:
+            f.write(f"{w}")
+            for bb in betas:
+                f.write(f"\t{b[w][bb]:.3f}")
+            f.write(f"\n")
 
 
 
