@@ -243,7 +243,7 @@ def calculate_alignment(apl, eq, target_gender, prime="f"):
         betas = [0, 1, 2, 3] if eq == 1 else [0, 1] if eq == 2 else [0, 1, 2, 3, 4, 5, 6, 7]
 
         for bb in betas:
-            f.write(f"\nBETA: {b}\n")
+            f.write(f"\nBETA: {bb}\n")
 
             f.write("CATEGORIES:\tZ-SCORES\tP-VALUES\n")
             f.write("----------------------------------\n")

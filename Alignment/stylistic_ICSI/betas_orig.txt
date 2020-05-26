@@ -5,13 +5,6 @@ TARGET GENDER: m
 ==================================
 CATEGORIES:	BETA_0	BETA_1	BETA_2	BETA_3
 ----------------------------------
-articles
-==================================
-EQUATION: 1
-TARGET GENDER: m
-==================================
-CATEGORIES:	BETA_0	BETA_1	BETA_2	BETA_3
-----------------------------------
 articles	-0.983	0.053	0.064	-0.002
 pronoun	-0.187	0.044	-0.008	-0.009
 prepositions	-0.991	0.052	0.071	-0.013
