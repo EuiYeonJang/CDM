@@ -188,7 +188,7 @@ def calculate_beta_two(apl):
         for i, b in enumerate(betas):
             betas_dict[i] = b
 
-    return zscores_dict, pvalue_dict, betas_dict
+     return zscores_dict, pvalue_dict, betas_dict
 
 
 def calculate_beta_three(apl):
@@ -323,10 +323,12 @@ if __name__ == "__main__":
 
     SAVEDIR = f"./stylistic_{ARGS.dataset}/between" if ARGS.between else f"./stylistic_{ARGS.dataset}/orig"
 
-    # prep_apl("m")
-    # prep_apl("f")
+    au.prep(ARGS.dataset)
 
-    # prep_apl_two("m")
-    # prep_apl_two("f")
+    prep_apl("m")
+    prep_apl("f")
+
+    prep_apl_two("m")
+    prep_apl_two("f")
 
     main()
