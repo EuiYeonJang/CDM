@@ -1,4 +1,5 @@
 *.pkl
+OLD RESULTS/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

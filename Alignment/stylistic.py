@@ -32,19 +32,24 @@ def create_liwc(vocab):
         liwc[cat] |= (set(extension))
         liwc[cat] -= asterisk     
 
-    return liwc
+    return liwc, ['articles', 'pronoun', 'prepositions', 'negations', 'tentative', 'certainty', 'discrepancy', 'exclusive', 'inclusive']
 
 
-def create_apl(liwc, orig_apl):
+def create_apl(liwc, cat_set, orig_apl):
     print("Creating LIWC adjacency pairs...")
     # inv_ind = {w: cat for w in liwc[cat] for cat in liwc}
     inv_ind = {w: cat for cat in liwc for w in liwc[cat]}
 
     liwc_apl = list()
-
     for g, p, t, plen in orig_apl:
         new_p = Counter([inv_ind[w] for w in p.elements() if w in inv_ind])
+        for m in cat_set ^ set(new_p.elements()):
+            new_p[m] = 0
+
         new_t = Counter([inv_ind[w] for w in t.elements() if w in inv_ind])
+        for m in cat_set ^ set(new_t.elements()):
+            new_t[m] = 0
+
         liwc_apl.append((g, new_p, new_t, plen))
 
     return liwc_apl
@@ -57,9 +62,9 @@ def prep_apl(target_gender):
     
     vocab = au.create_vocab(apl)
 
-    liwc = create_liwc(vocab)
+    liwc, cat = create_liwc(vocab)
 
-    liwc_apl = create_apl(liwc, apl)
+    liwc_apl = create_apl(liwc, set(cat), apl)
 
     with open(f"{SAVEDIR}/t_{target_gender}_prepped_apl.pkl", "wb") as f:
         pkl.dump(liwc_apl, f)
@@ -73,13 +78,11 @@ def prep_apl_two(target_gender):
     female_prime_vocab = au.create_vocab(pf_apl)
     male_prime_vocab = au.create_vocab(pm_apl)
 
-    female_prime_liwc = create_liwc(female_prime_vocab)
-    male_prime_liwc = create_liwc(male_prime_vocab)
+    female_prime_liwc, cat = create_liwc(female_prime_vocab)
+    male_prime_liwc, cat = create_liwc(male_prime_vocab)
 
-
-    female_prime_stylistic_apl = create_apl(female_prime_liwc, pf_apl)
-    male_prime_stylistic_apl = create_apl(male_prime_liwc, pm_apl)
-
+    female_prime_stylistic_apl = create_apl(female_prime_liwc, set(cat), pf_apl)
+    male_prime_stylistic_apl = create_apl(male_prime_liwc, set(cat), pm_apl)
 
     with open(f"{SAVEDIR}/p_f_t_{target_gender}_prepped_apl.pkl", "wb") as f:
         pkl.dump(female_prime_stylistic_apl, f)
@@ -113,43 +116,6 @@ def create_predictors(apl, eq):
 
         return c_count, c_gender, c_plen, y
 
-
-def calculate_beta_one(apl):
-    c_count, c_gender, y = create_predictors(apl, 1)
-
-    pvalue_dict = {w: {i: "undefined" for i in range(4)} for w in CATEGORIES}
-    zscores_dict = {w: {i: "undefined" for i in range(4)} for w in CATEGORIES}
-    betas_dict = {w: {i: "undefined" for i in range(8)} for w in CATEGORIES}
-
-
-    for w in CATEGORIES:
-        c_w = c_count[w]
-        g_w = c_gender[w]
-        y_w = y[w]
-
-        if sum(y_w) > 0:
-            c_w = np.array(c_w)
-            g_w = np.array(g_w)
-            X = np.array([np.ones(len(c_w)), c_w, g_w, c_w*g_w]).T
-
-            y_w = np.array(y_w)
-
-            res = sm.GLM(y_w, X, family=sm.families.Binomial()).fit()
-            
-            p_values = res.pvalues
-            for i, p in enumerate(p_values):
-                pvalue_dict[w][i] = p
-
-            z_scores = res.tvalues
-            for i, z in enumerate(z_scores):
-                zscores_dict[w][i] = z
-
-            betas = res.params
-            for i, b in enumerate(betas):
-                betas_dict[w][i] = b
-
-    return zscores_dict, pvalue_dict, betas_dict
-       
 
 def calculate_beta_two(apl):
     c_count, y = create_predictors(apl, 2)
@@ -224,9 +190,10 @@ def calculate_beta_three(apl):
 
 def calculate_alignment(apl, eq, target_gender, prime="f"):
     print(f"Calculating alignment for eq {eq}, p_{prime}_t_{target_gender}")
-    if eq == 1:
-        z, p, b = calculate_beta_one(apl)
-    elif eq == 2:
+    betas = [0, 1] if eq == 2 else [0, 1, 2, 3, 4, 5, 6, 7]
+
+
+    if eq == 2:
         z, p, b = calculate_beta_two(apl)
     else:
         z, p, b = calculate_beta_three(apl)
@@ -240,7 +207,6 @@ def calculate_alignment(apl, eq, target_gender, prime="f"):
         if eq == 2: f.write(f"PRIME GENDER: {prime}\n")
 
         f.write("==================================\n")
-        betas = [0, 1, 2, 3] if eq == 1 else [0, 1] if eq == 2 else [0, 1, 2, 3, 4, 5, 6, 7]
 
         for bb in betas:
             f.write(f"\nBETA: {bb}\n")
@@ -261,7 +227,6 @@ def calculate_alignment(apl, eq, target_gender, prime="f"):
         if eq == 2: f.write(f"PRIME GENDER: {prime}\n")
 
         f.write("==================================\n")
-        betas = [0, 1, 2, 3] if eq == 1 else [0, 1] if eq == 2 else [0, 1, 2, 3, 4, 5, 6, 7]
 
         f.write("CATEGORIES:")
         for bb in betas:
@@ -314,7 +279,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Arguments for stylistic alignment.')
     parser.add_argument('--dataset', type=str, default="AMI",
                         help="\"AMI\" or \"ICSI\", name of the dataset being analysed")
-    parser.add_argument('--analysis', type=int, default=1,
+    parser.add_argument('--analysis', type=int, default=3,
 						help="1, 2 or 3, the type of analysis to perform (equation number)")
     parser.add_argument('--between', type=bool, default=False,
                         help="bool to include the intermiediate utterances or not, default True")
