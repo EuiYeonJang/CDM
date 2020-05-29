@@ -43,11 +43,11 @@ def create_apl(liwc, cat_set, orig_apl):
     liwc_apl = list()
     for g, p, t, plen in orig_apl:
         new_p = Counter([inv_ind[w] for w in p.elements() if w in inv_ind])
-        for m in cat_set ^ set(new_p.elements()):
+        for m in cat_set ^ set(new_p.keys()):
             new_p[m] = 0
 
         new_t = Counter([inv_ind[w] for w in t.elements() if w in inv_ind])
-        for m in cat_set ^ set(new_t.elements()):
+        for m in cat_set ^ set(new_t.keys()):
             new_t[m] = 0
 
         liwc_apl.append((g, new_p, new_t, plen))

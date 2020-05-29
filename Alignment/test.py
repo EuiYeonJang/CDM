@@ -49,39 +49,6 @@ def create_predictors(apl, eq):
         return c_count, c_gender, c_plen, y
 
 
-def calculate_beta_one(apl):
-    c_count, c_gender, y = create_predictors(apl, 1)
-
-    print("Calculating betas...")
-    pvalue_dict = {i: "undefined" for i in range(4)}
-    zscores_dict = {i: "undefined" for i in range(4)}
-    betas_dict = {i: "undefined" for i in range(4)}
-
-    if sum(y) > 0:
-        c_w = np.array(c_count)
-        g_w = np.array(c_gender)
-        X = np.array([np.ones(len(c_w)), c_w, g_w, c_w*g_w]).T
-
-        y_w = np.array(y)
-
-
-        res = sm.GLM(y_w, X, family=sm.families.Binomial()).fit()
-        
-        p_values = res.pvalues
-        for i, p in enumerate(p_values):
-            pvalue_dict[i] = p
-
-        z_scores = res.tvalues
-        for i, z in enumerate(z_scores):
-            zscores_dict[i] = z
-
-        betas = res.params
-        for i, b in enumerate(betas):
-            betas_dict[i] = b
-    
-    return zscores_dict, pvalue_dict, betas_dict
-
-
 def calculate_beta_two(apl):
     c_count, y = create_predictors(apl, 2)
     
@@ -108,6 +75,9 @@ def calculate_beta_two(apl):
         betas = res.params
         for i, b in enumerate(betas):
             betas_dict[i] = b
+
+        print(res.bse[1])
+        
 
     return zscores_dict, pvalue_dict, betas_dict
 
@@ -146,11 +116,9 @@ def calculate_beta_three(apl):
 
 def calculate_alignment(apl, eq, target_gender, prime="f"):
     print(f"Calculating alignment for eq {eq}, p_{prime}_t_{target_gender}")
-    betas = [0, 1, 2, 3] if eq == 1 else [0, 1] if eq == 2 else [0, 1, 2, 3, 4, 5, 6, 7]
+    betas = [0, 1] if eq == 2 else [0, 1, 2, 3, 4, 5, 6, 7]
 
-    if eq == 1:
-        z, p, b = calculate_beta_one(apl)
-    elif eq == 2:
+    if eq == 2:
         z, p, b = calculate_beta_two(apl)
     else:
         z, p, b = calculate_beta_three(apl)
@@ -182,7 +150,6 @@ def calculate_alignment(apl, eq, target_gender, prime="f"):
         if eq == 2: f.write(f"PRIME GENDER: {prime}\n")
 
         f.write("==================================\n")
-        betas = [0, 1, 2, 3] if eq == 1 else [0, 1] if eq == 2 else [0, 1, 2, 3, 4, 5, 6, 7]
 
         for bb in betas:
             f.write(f"\tBETA_{bb}")
@@ -225,7 +192,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Arguments for lexical alignment.')
     parser.add_argument('--dataset', type=str, default="AMI",
 						help="\"AMI\" or \"ICSI\", name of the dataset being analysed.")
-    parser.add_argument('--analysis', type=int, default=1,
+    parser.add_argument('--analysis', type=int, default=3,
 						help="1, 2 or 3, the type of analysis to perform (equation number)")
     parser.add_argument('--between', type=bool, default=False,
                         help="bool to include the intermiediate utterances or not, default True")

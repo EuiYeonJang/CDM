@@ -161,7 +161,7 @@ def calculate_beta_two(apl):
         for i, b in enumerate(betas):
             betas_dict[i] = b
 
-        # print(res.bse[1])
+        print(res.bse[1])
 
     return zscores_dict, pvalue_dict, betas_dict
 

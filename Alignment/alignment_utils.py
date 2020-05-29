@@ -13,7 +13,8 @@ def __expand_split_list(split_list, prime_gender, lexical=False):
         if sum(adj_pair["b"].values()) > 0:
             if sum(adj_pair["a"].values()) > 0:
                 if lexical:
-                    for k in adj_pair['a'].keys():
+                    keyz = list(adj_pair['a'].keys()) + list(adj_pair['b'].keys())
+                    for k in keyz:
                         expanded_split.append((prime_gender, adj_pair['a'][k], adj_pair['b'][k], sum(adj_pair["a"].values())))
                 else:
                     expanded_split.append((prime_gender, adj_pair["a"], adj_pair["b"], sum(adj_pair["a"].values())))
@@ -21,7 +22,8 @@ def __expand_split_list(split_list, prime_gender, lexical=False):
             for ab in adj_pair[b_str]:
                 if sum(ab.values()) > 0:
                     if lexical:
-                        for k in ab.keys():
+                        keyz = list(ab.keys()) + list(adj_pair['b'].keys())
+                        for k in keyz:
                             expanded_split.append((prime_gender, ab[k], adj_pair['b'][k], sum(adj_pair["a"].values())))
                     else:
                         expanded_split.append((prime_gender, ab, adj_pair["b"], sum(ab.values())))
@@ -35,7 +37,8 @@ def __clean_split_list(split_list, prime_gender, lexical=False):
     for adj_pair in split_list:
         if sum(adj_pair["b"].values()) > 0 and sum(adj_pair["a"].values()) > 0:
             if lexical:
-                for k in adj_pair['a'].keys():
+                keyz = list(adj_pair['a'].keys()) + list(adj_pair['b'].keys())
+                for k in keyz:
                     clean_split.append((prime_gender, adj_pair['a'][k], adj_pair['b'][k], sum(adj_pair["a"].values())))
             else:
                 clean_split.append((prime_gender, adj_pair["a"], adj_pair["b"], sum(adj_pair["a"].values())))
