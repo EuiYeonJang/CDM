@@ -287,7 +287,7 @@ def print_betas_per_cat(b, filename, analysis, target_gender, prime_gender):
 
         f.write("\n----------------------------------\n")
 
-        for w in z:
+        for w in b:
             f.write(f"{w}")
             for bb in betas:
                 f.write(f"\t{b[w][bb]:.3f}")
