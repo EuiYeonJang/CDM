@@ -3,6 +3,7 @@ import numpy as np
 import pickle as pkl
 import os
 
+CATEGORIES = ['articles', 'pronoun', 'prepositions', 'negations', 'tentative', 'certainty', 'discrepancy', 'exclusive', 'inclusive']
 
 ######################################################
 ########## PREPROCESSING STEP FOR Xu et al. ##########
@@ -105,7 +106,7 @@ def create_predictors(apl, analysis):
         c_gender = [ 1 if prime_gender == "m" else 0 for prime_gender, _, _, _ in apl]
         c_plen = [plen for _, _, _, plen in apl]
 
-        return c_count, c_gender, y
+        return c_count, c_gender, c_plen, y
     
     else:
         c_count = [prime for _, prime, _, _ in apl]
@@ -116,10 +117,10 @@ def create_predictors(apl, analysis):
 def calculate_beta(apl, analysis):
     if analysis == 1:
         n = 8
-        c_count, c_gender, c_plen, y = create_predictors(apl)
+        c_count, c_gender, c_plen, y = create_predictors(apl, analysis)
     else:
         n = 2
-        c_count, y = create_predictors(apl)
+        c_count, y = create_predictors(apl, analysis)
     
     pvalue_dict = {i: "undefined" for i in range(n)}
     zscores_dict = {i: "undefined" for i in range(n)}
@@ -152,17 +153,80 @@ def calculate_beta(apl, analysis):
             betas_dict[i] = b
 
     return zscores_dict, pvalue_dict, betas_dict
-#############################################################################
 
 
-def print_results(z, p, b, dir_name, between, analysis, target_gender, prime_gender):
+def create_predictors_per_cat(apl):
+    print("Creating predictors...")
+    y = {w: [ 1 if target[w] > 0 else 0 for _, _, target, _ in apl] for w in CATEGORIES}
+
+    c_count = {w: [prime[w] for _, prime, _, _ in apl] for w in CATEGORIES}
+    c_gender = {w: [ 1 if prime_gender == "m" else 0 for prime_gender, _, _, _ in apl] for w in CATEGORIES}
+    c_plen = [plen for _, _, _, plen in apl]
+
+    return c_count, c_gender, c_plen, y
+
+
+def calculate_beta_per_cat(apl):
+    c_count, c_gender, c_plen, y = create_predictors_per_cat(apl)
+
+    pvalue_dict = {w: {i: "undefined" for i in range(8)} for w in CATEGORIES}
+    zscores_dict = {w: {i: "undefined" for i in range(8)} for w in CATEGORIES}
+    betas_dict = {w: {i: "undefined" for i in range(8)} for w in CATEGORIES}
+
+    print("Calculating betas...")
+    for w in CATEGORIES:
+        c_w = c_count[w]
+        g_w = c_gender[w]
+        y_w = y[w]
+
+        if sum(y_w) > 0:
+            c_w = np.array(c_w)
+            g_w = np.array(g_w)
+            X = np.array([np.ones(len(c_w)), c_w, g_w, c_plen, c_w*g_w, c_w*c_plen, g_w*c_plen, c_w*g_w*c_plen]).T
+    
+            y_w = np.array(y_w)
+
+            res = sm.GLM(y_w, X, family=sm.families.Binomial()).fit()
+            
+            p_values = res.pvalues
+            for i, p in enumerate(p_values):
+                pvalue_dict[w][i] = p
+
+            z_scores = res.tvalues
+            for i, z in enumerate(z_scores):
+                zscores_dict[w][i] = z
+
+            betas = res.params
+            for i, b in enumerate(betas):
+                betas_dict[w][i] = b
+    return zscores_dict, pvalue_dict, betas_dict
+
+
+def print_betas(b, filename, analysis, target_gender, prime_gender):
     betas = [0, 1] if analysis == 2 else list(range(8))
 
-    adj_pair_type = "between" if between else "plain"
+    with open(filename, "a") as f:
+        f.write("\n==================================\n")
+        f.write(f"EXPERIMENT: {analysis}\nTARGET GENDER: {target_gender}\n")
 
-    results_filename = f"{dir_name}/results_{adj_pair_type}.txt"
+        if analysis == 2: f.write(f"PRIME GENDER: {prime_gender}\n")
 
-    with open(results_filename, "a") as f:
+        f.write("==================================\n")
+
+        for bb in betas:
+            f.write(f"\tBETA_{bb}")
+
+        f.write("\n----------------------------------\n")
+
+        for bb in betas:
+            f.write(f"\t{b[bb]:.3f}")
+        f.write(f"\n")
+
+
+def print_zscores(z, p, filename, analysis, target_gender, prime_gender):
+    betas = [0, 1] if analysis == 2 else list(range(8))
+
+    with open(filename, "a") as f:
         f.write("\n==================================\n")
         f.write(f"EXPERIMENT: {analysis}\nTARGET GENDER: {target_gender}\n")
 
@@ -184,9 +248,10 @@ def print_results(z, p, b, dir_name, between, analysis, target_gender, prime_gen
             f.write(f"{bb}\t{z[bb]:.3f}\t{p[bb]:.3f}\n")
 
 
-    betas_filename = f"{dir_name}/betas_{adj_pair_type}.txt"
+def print_zscores_per_cat(z, p, b, filename, analysis, target_gender, prime_gender):
+    betas = [0, 1] if analysis == 2 else list(range(8))
 
-    with open(betas_filename, "a") as f:
+    with open(filename, "a") as f:
         f.write("\n==================================\n")
         f.write(f"EXPERIMENT: {analysis}\nTARGET GENDER: {target_gender}\n")
 
@@ -195,13 +260,38 @@ def print_results(z, p, b, dir_name, between, analysis, target_gender, prime_gen
         f.write("==================================\n")
 
         for bb in betas:
+            f.write(f"\nBETA: {bb}\n")
+
+            f.write("CATEGORIES:\tZ-SCORES\tP-VALUES\n")
+            f.write("----------------------------------\n")
+
+            for w in z:
+                if p[w][bb] < 0.05: f.write(">> ")
+                f.write(f"{w}:\t{z[w][bb]:.3f}\t{p[w][bb]:.3f}\n")
+
+
+def print_betas_per_cat(z, p, b, filename, analysis, target_gender, prime_gender):
+    betas = [0, 1] if analysis == 2 else list(range(8))
+
+    with open(filename, "a") as f:
+        f.write("\n==================================\n")
+        f.write(f"EXPERIMENT: {analysis}\nTARGET GENDER: {target_gender}\n")
+
+        if analysis == 2: f.write(f"PRIME GENDER: {prime_gender}\n")
+
+        f.write("==================================\n")
+
+        f.write("CATEGORIES:")
+        for bb in betas:
             f.write(f"\tBETA_{bb}")
 
         f.write("\n----------------------------------\n")
 
-        for bb in betas:
-            f.write(f"\t{b[bb]:.3f}")
-        f.write(f"\n")
+        for w in z:
+            f.write(f"{w}")
+            for bb in betas:
+                f.write(f"\t{b[w][bb]:.3f}")
+            f.write(f"\n")
 
 
 def create_vocab(adj_pair_list):

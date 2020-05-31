@@ -1,13 +1,11 @@
 import os
 import argparse
 import pickle as pkl
-import numpy as np
-import statsmodels.api as sm
 from collections import Counter
 import alignment_utils as au
+import statsmodels.api as sm
+import numpy as np
 
-
-CATEGORIES = ['articles', 'pronoun', 'prepositions', 'negations', 'tentative', 'certainty', 'discrepancy', 'exclusive', 'inclusive']
 
 
 def create_liwc(vocab):
@@ -37,17 +35,17 @@ def create_liwc(vocab):
 
 def create_apl(liwc, cat_set, orig_apl):
     print("Creating LIWC adjacency pairs...")
-    # inv_ind = {w: cat for w in liwc[cat] for cat in liwc}
+    
     inv_ind = {w: cat for cat in liwc for w in liwc[cat]}
 
     liwc_apl = list()
     for g, p, t, plen in orig_apl:
         new_p = Counter([inv_ind[w] for w in p.elements() if w in inv_ind])
-        for m in cat_set ^ set(new_p.keys()):
+        for m in cat_set ^ set(new_p.elements()):
             new_p[m] = 0
 
         new_t = Counter([inv_ind[w] for w in t.elements() if w in inv_ind])
-        for m in cat_set ^ set(new_t.keys()):
+        for m in cat_set ^ set(new_t.elements()):
             new_t[m] = 0
 
         liwc_apl.append((g, new_p, new_t, plen))
@@ -66,10 +64,12 @@ def prep_apl(target_gender):
 
     liwc_apl = create_apl(liwc, set(cat), apl)
 
-    with open(f"{SAVEDIR}/t_{target_gender}_prepped_apl.pkl", "wb") as f:
-        pkl.dump(liwc_apl, f)
+    combined_apl = list()
+    for g, p, t, l in liwc_apl:
+        for k in cat:
+            combined_apl.append((g, p[k], t[k], l))
 
-    return liwc_apl
+    return combined_apl
 
 
 def prep_apl_two(target_gender):
@@ -81,214 +81,105 @@ def prep_apl_two(target_gender):
     female_prime_liwc, cat = create_liwc(female_prime_vocab)
     male_prime_liwc, cat = create_liwc(male_prime_vocab)
 
+
     female_prime_stylistic_apl = create_apl(female_prime_liwc, set(cat), pf_apl)
     male_prime_stylistic_apl = create_apl(male_prime_liwc, set(cat), pm_apl)
 
-    with open(f"{SAVEDIR}/p_f_t_{target_gender}_prepped_apl.pkl", "wb") as f:
-        pkl.dump(female_prime_stylistic_apl, f)
+    combined_apl_f = list()
+    for g, p, t, l in female_prime_stylistic_apl:
+        for k in cat:
+            combined_apl_f.append((g, p[k], t[k], l))
 
-    with open(f"{SAVEDIR}/p_m_t_{target_gender}_prepped_apl.pkl", "wb") as f:
-        pkl.dump(male_prime_stylistic_apl, f)
+    combined_apl_m = list()
+    for g, p, t, l in male_prime_stylistic_apl:
+        for k in cat:
+            combined_apl_m.append((g, p[k], t[k], l))
 
 
-    return female_prime_stylistic_apl, male_prime_stylistic_apl
+    return combined_apl_f, combined_apl_m
 
 
-def create_predictors(apl, eq):
-    print("Creating predictors...")
-    y = {w: [ 1 if target[w] > 0 else 0 for _, _, target, _ in apl] for w in CATEGORIES}
-
-    if eq == 1:
-        c_count = {w: [prime[w] for _, prime, _, _ in apl] for w in CATEGORIES}
-        c_gender = {w: [ 1 if prime_gender == "m" else 0 for prime_gender, _, _, _ in apl] for w in CATEGORIES}
-
-        return c_count, c_gender, y
+def prep_apl_per_cat(target_gender):
+    pf_apl, pm_apl = au.prime_lists(target_gender, ARGS.dataset, ARGS.between)
     
-    elif eq == 2:
-        c_count = {w: [prime[w] for _, prime, _, _ in apl] for w in CATEGORIES}
-
-        return c_count, y
-
-    elif eq == 3: 
-        c_count = {w: [prime[w] for _, prime, _, _ in apl] for w in CATEGORIES}
-        c_gender = {w: [ 1 if prime_gender == "m" else 0 for prime_gender, _, _, _ in apl] for w in CATEGORIES}
-        c_plen = [plen for _, _, _, plen in apl]
-
-        return c_count, c_gender, c_plen, y
-
-
-def calculate_beta_two(apl):
-    c_count, y = create_predictors(apl, 2)
+    apl = pf_apl + pm_apl
     
-    pvalue_dict = {w: {i: "undefined" for i in range(2)} for w in CATEGORIES}
-    zscores_dict = {w: {i: "undefined" for i in range(2)} for w in CATEGORIES}
-    betas_dict = {w: {i: "undefined" for i in range(8)} for w in CATEGORIES}
+    vocab = au.create_vocab(apl)
+
+    liwc, cat = create_liwc(vocab)
+
+    liwc_apl = create_apl(liwc, set(cat), apl)
+
+    return liwc_apl
 
 
-    for w in CATEGORIES:
-        c_w = c_count[w]
-        y_w = y[w]
-
-        if sum(y_w) > 0:
-            c_w = np.array(c_w)
-            X = np.array([np.ones(len(c_w)), c_w]).T
-
-            y_w = np.array(y_w)
-
-            res = sm.GLM(y_w, X, family=sm.families.Binomial()).fit()
-            
-            p_values = res.pvalues
-            for i, p in enumerate(p_values):
-                pvalue_dict[w][i] = p
-
-            z_scores = res.tvalues
-            for i, z in enumerate(z_scores):
-                zscores_dict[w][i] = z
-
-            betas = res.params
-            for i, b in enumerate(betas):
-                betas_dict[w][i] = b
+def calculate_alignment(apl, target_gender, prime_gender="f"):
+    print(f"Calculating alignment for experiment {ARGS.analysis} ",  
+        f"t_{target_gender}" if ARGS.analysis == 1 else f"p_{prime_gender}_t_{target_gender}")
     
-    return zscores_dict, pvalue_dict, betas_dict
+    z, p, b = au.calculate_beta(apl, ARGS.analysis)
+
+    adj_pair_type = "between" if ARGS.between else "plain"
+    results_filename = f"{SAVEDIR}/results_{adj_pair_type}.txt"
+    betas_filename = f"{SAVEDIR}/betas_{adj_pair_type}.txt"
+
+    au.print_zscores(z, p, results_filename, ARGS.analysis, target_gender, prime_gender)
+    au.print_betas(b, betas_filename, ARGS.analysis, target_gender, prime_gender)
 
 
-def calculate_beta_three(apl):
-    c_count, c_gender, c_plen, y = create_predictors(apl, 3)
+def calculate_alignment_per_cat(apl, target_gender, prime_gender="f"):
+    print(f"Calculating alignment per category for experiment {ARGS.analysis} t_{target_gender}")
 
-    pvalue_dict = {w: {i: "undefined" for i in range(8)} for w in CATEGORIES}
-    zscores_dict = {w: {i: "undefined" for i in range(8)} for w in CATEGORIES}
-    betas_dict = {w: {i: "undefined" for i in range(8)} for w in CATEGORIES}
+    z, p, b = au.calculate_beta_per_cat(apl)
 
-
-    for w in CATEGORIES:
-        c_w = c_count[w]
-        g_w = c_gender[w]
-        y_w = y[w]
-
-        if sum(y_w) > 0:
-            c_w = np.array(c_w)
-            g_w = np.array(g_w)
-            X = np.array([np.ones(len(c_w)), c_w, g_w, c_plen, c_w*g_w, c_w*c_plen, g_w*c_plen, c_w*g_w*c_plen]).T
+    adj_pair_type = "between" if ARGS.between else "plain"
+    results_filename = f"{SAVEDIR}/cat_results_{adj_pair_type}.txt"
+    betas_filename = f"{SAVEDIR}/cat_betas_{adj_pair_type}.txt"
     
-            y_w = np.array(y_w)
-
-            res = sm.GLM(y_w, X, family=sm.families.Binomial()).fit()
-            
-            p_values = res.pvalues
-            for i, p in enumerate(p_values):
-                pvalue_dict[w][i] = p
-
-            z_scores = res.tvalues
-            for i, z in enumerate(z_scores):
-                zscores_dict[w][i] = z
-
-            betas = res.params
-            for i, b in enumerate(betas):
-                betas_dict[w][i] = b
-    return zscores_dict, pvalue_dict, betas_dict
-
-
-def calculate_alignment(apl, eq, target_gender, prime="f"):
-    print(f"Calculating alignment for eq {eq}, p_{prime}_t_{target_gender}")
-    betas = [0, 1] if eq == 2 else [0, 1, 2, 3, 4, 5, 6, 7]
-
-
-    if eq == 2:
-        z, p, b = calculate_beta_two(apl)
-    else:
-        z, p, b = calculate_beta_three(apl)
-
-    results_filename = f"./stylistic_{ARGS.dataset}/results_between.txt" if ARGS.between else f"./stylistic_{ARGS.dataset}/results_orig.txt"
-
-    with open(results_filename, "a") as f:
-        f.write("\n==================================\n")
-        f.write(f"EQUATION: {ARGS.analysis}\nTARGET GENDER: {target_gender}\n")
-
-        if eq == 2: f.write(f"PRIME GENDER: {prime}\n")
-
-        f.write("==================================\n")
-
-        for bb in betas:
-            f.write(f"\nBETA: {bb}\n")
-
-            f.write("CATEGORIES:\tZ-SCORES\tP-VALUES\n")
-            f.write("----------------------------------\n")
-
-            for w in z:
-                if p[w][bb] < 0.05: f.write(">> ")
-                f.write(f"{w}:\t{z[w][bb]:.3f}\t{p[w][bb]:.3f}\n")
-
-    betas_filename = f"./stylistic_{ARGS.dataset}/betas_between.txt" if ARGS.between else f"./stylistic_{ARGS.dataset}/betas_orig.txt"
-
-    with open(betas_filename, "a") as f:
-        f.write("\n==================================\n")
-        f.write(f"EQUATION: {ARGS.analysis}\nTARGET GENDER: {target_gender}\n")
-
-        if eq == 2: f.write(f"PRIME GENDER: {prime}\n")
-
-        f.write("==================================\n")
-
-        f.write("CATEGORIES:")
-        for bb in betas:
-            f.write(f"\tBETA_{bb}")
-
-        f.write("\n----------------------------------\n")
-
-        for w in z:
-            f.write(f"{w}")
-            for bb in betas:
-                f.write(f"\t{b[w][bb]:.3f}")
-            f.write(f"\n")
-
+    au.print_zscores_per_cat(z, p, b, results_filename, ARGS.analysis, target_gender, prime_gender)
+    au.print_betas_per_cat(z, p, b, betas_filename, ARGS.analysis, target_gender, prime_gender)
 
 
 def main():
-    au.prep(ARGS.dataset)
+    au.prep_dataset(ARGS.dataset, between=ARGS.between)
 
     os.makedirs(SAVEDIR, exist_ok=True)
-    for target_gender in ["m", "f"]:
-        if ARGS.analysis == 1 or ARGS.analysis == 3:
-            filename = f"{SAVEDIR}/t_{target_gender}_prepped_apl.pkl"
 
-            if os.path.exists(filename):
-                with open(filename, "rb") as f:
-                    adj_pair_list = pkl.load(f)
+    for target_gender in ["m", "f"]:
+        if ARGS.analysis == 1:
+            if ARGS.cat:
+                adj_pair_list = prep_apl_per_cat(target_gender)
+
+                calculate_alignment_per_cat(adj_pair_list, target_gender)
             else:
                 adj_pair_list = prep_apl(target_gender)
 
-            calculate_alignment(adj_pair_list, ARGS.analysis, target_gender)
+                calculate_alignment(adj_pair_list, target_gender)
+        else:
+            female_prime_apl, male_prime_apl = prep_apl_two(target_gender)
 
-        elif ARGS.analysis == 2:
-            filename = f"{SAVEDIR}/p_f_t_{target_gender}_prepped_apl.pkl"
-            
-            if os.path.exists(filename):
-                with open(filename, "rb") as f:
-                    female_prime_apl = pkl.load(f)
+            calculate_alignment(female_prime_apl, target_gender)
+            calculate_alignment(male_prime_apl, target_gender, prime_gender="m")
 
-                with open(f"{SAVEDIR}/p_m_t_{target_gender}_prepped_apl.pkl", "rb") as f:
-                    male_prime_apl = pkl.load(f)
-                
-            else:
-                female_prime_apl, male_prime_apl = prep_apl_two(target_gender)
-
-            calculate_alignment(female_prime_apl, ARGS.analysis, target_gender)
-            calculate_alignment(male_prime_apl, ARGS.analysis, target_gender, prime="m")
-
+    print("Done! Enjoy the results!")
+    
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Arguments for stylistic alignment.')
-    parser.add_argument('--dataset', type=str, default="AMI",
+    parser.add_argument('dataset', type=str, choices=["AMI", "ICSI"],
                         help="\"AMI\" or \"ICSI\", name of the dataset being analysed")
-    parser.add_argument('--analysis', type=int, default=3,
-						help="1, 2 or 3, the type of analysis to perform (equation number)")
+    parser.add_argument('analysis', type=int, default=1, choices=[1, 2],
+						help="1 or 2, experimet to perform")
     parser.add_argument('--between', type=bool, default=False,
-                        help="bool to include the intermiediate utterances or not, default True")
+                        help="bool to include the intermiediate utterances or not, default False")
+    parser.add_argument('--cat', type=bool, default=False,
+                        help='bool to compute beta values per LIWC category, default False -- only for experiment 1')
 
     ARGS = parser.parse_args()
     
     print("Attention: Make sure you're in the 'Alignment' directory before running code!")
     print(ARGS)
 
-    SAVEDIR = f"./stylistic_{ARGS.dataset}/between" if ARGS.between else f"./stylistic_{ARGS.dataset}/orig"
+    SAVEDIR = f"./stylistic_{ARGS.dataset}"
 
     main()
