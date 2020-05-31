@@ -248,7 +248,7 @@ def print_zscores(z, p, filename, analysis, target_gender, prime_gender):
             f.write(f"{bb}\t{z[bb]:.3f}\t{p[bb]:.3f}\n")
 
 
-def print_zscores_per_cat(z, p, b, filename, analysis, target_gender, prime_gender):
+def print_zscores_per_cat(z, p, filename, analysis, target_gender, prime_gender):
     betas = [0, 1] if analysis == 2 else list(range(8))
 
     with open(filename, "a") as f:
@@ -270,7 +270,7 @@ def print_zscores_per_cat(z, p, b, filename, analysis, target_gender, prime_gend
                 f.write(f"{w}:\t{z[w][bb]:.3f}\t{p[w][bb]:.3f}\n")
 
 
-def print_betas_per_cat(z, p, b, filename, analysis, target_gender, prime_gender):
+def print_betas_per_cat(b, filename, analysis, target_gender, prime_gender):
     betas = [0, 1] if analysis == 2 else list(range(8))
 
     with open(filename, "a") as f:

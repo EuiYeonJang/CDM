@@ -136,8 +136,8 @@ def calculate_alignment_per_cat(apl, target_gender, prime_gender="f"):
     results_filename = f"{SAVEDIR}/cat_results_{adj_pair_type}.txt"
     betas_filename = f"{SAVEDIR}/cat_betas_{adj_pair_type}.txt"
     
-    au.print_zscores_per_cat(z, p, b, results_filename, ARGS.analysis, target_gender, prime_gender)
-    au.print_betas_per_cat(z, p, b, betas_filename, ARGS.analysis, target_gender, prime_gender)
+    au.print_zscores_per_cat(z, p,results_filename, ARGS.analysis, target_gender, prime_gender)
+    au.print_betas_per_cat(b, betas_filename, ARGS.analysis, target_gender, prime_gender)
 
 
 def main():

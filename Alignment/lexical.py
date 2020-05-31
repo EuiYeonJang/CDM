@@ -26,7 +26,12 @@ def calculate_alignment(apl, target_gender, prime_gender="f"):
 
     z, p, b = au.calculate_beta(apl, ARGS.analysis)
 
-    au.print_results(z, p, b, SAVEDIR, ARGS.between, ARGS.analysis, target_gender, prime_gender)
+    adj_pair_type = "between" if ARGS.between else "plain"
+    results_filename = f"{SAVEDIR}/results_{adj_pair_type}.txt"
+    betas_filename = f"{SAVEDIR}/betas_{adj_pair_type}.txt"
+
+    au.print_results(z, p, results_filename, ARGS.analysis, target_gender, prime_gender)
+    au.print_betas(b, betas_filename, ARGS.analysis, target_gender, prime_gender)
 
 
 def main():
