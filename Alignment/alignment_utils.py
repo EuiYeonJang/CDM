@@ -5,7 +5,7 @@ import os
 ######################################################
 ########## PREPROCESSING STEP FOR Xu et al. ##########
 ######################################################
-def __expand_split_list(split_list, prime_gender, lexical=False):
+def __between_split_list(split_list, prime_gender, lexical=False):
     expanded_split = list()
     b_str = f"list_{prime_gender}b"
 
@@ -31,7 +31,7 @@ def __expand_split_list(split_list, prime_gender, lexical=False):
     return expanded_split
 
 
-def __clean_split_list(split_list, prime_gender, lexical=False):
+def __plain_split_list(split_list, prime_gender, lexical=False):
     clean_split = list()
 
     for adj_pair in split_list:
@@ -46,78 +46,102 @@ def __clean_split_list(split_list, prime_gender, lexical=False):
     return clean_split
 
 
-def prep_in_between_split_list(dataset, lexical=False):
+def __prep_between_split_list(dataset, lexical=False):
     alignment_type = "lexical" if lexical else "stylistic"
 
-    print("Please wait while I prepare expanded split list...")
-    if dataset == "ICSI":
-        with open(f"../Corpora/{dataset}/f_f_short.pkl", "rb") as f:
-            ff = pkl.load(f)
+    print("Please wait while I first prepare between split list...")
+    with open(f"../Corpora/{dataset}/final_split.pkl", "rb") as f:
+        mf, mm, fm, ff = pkl.load(f)
 
-        with open(f"../Corpora/{dataset}/f_m_short.pkl", "rb") as f:
-            mf = pkl.load(f)
-
-        with open(f"../Corpora/{dataset}/m_m_short.pkl", "rb") as f:
-            mm = pkl.load(f)
-
-        with open(f"../Corpora/{dataset}/m_f_short.pkl", "rb") as f:
-            fm = pkl.load(f)
-
-    else:
-        with open(f"../Corpora/{dataset}/final_split.pkl", "rb") as f:
-            mf, mm, fm, ff = pkl.load(f)
-
-    e_mf = __expand_split_list(mf, "m", lexical)
-    e_mm = __expand_split_list(mm, "m", lexical)
-    e_fm = __expand_split_list(fm, "f", lexical)
-    e_ff = __expand_split_list(ff, "f", lexical)
+    e_mf = __between_split_list(mf, "m", lexical)
+    e_mm = __between_split_list(mm, "m", lexical)
+    e_fm = __between_split_list(fm, "f", lexical)
+    e_ff = __between_split_list(ff, "f", lexical)
     
-    with open(f"../Corpora/{dataset}/{alignment_type}_processed_in_between_split.pkl", "wb") as f:
+    with open(f"../Corpora/{dataset}/{alignment_type}_processed_between_split.pkl", "wb") as f:
         pkl.dump((e_mf, e_mm, e_fm, e_ff), f)
 
 
-def prep_clean_split_list(dataset, lexical=False):
+def __prep_plain_split_list(dataset, lexical=False):
     alignment_type = "lexical" if lexical else "stylistic"
 
-    print("Please wait while I prepare clean split list...")
-    if dataset == "ICSI":
-        with open(f"../Corpora/{dataset}/f_f_short.pkl", "rb") as f:
-            ff = pkl.load(f)
+    print("Please wait while I first prepare plain split list...")
+    with open(f"../Corpora/{dataset}/final_split.pkl", "rb") as f:
+        mf, mm, fm, ff = pkl.load(f)
 
-        with open(f"../Corpora/{dataset}/f_m_short.pkl", "rb") as f:
-            mf = pkl.load(f)
-
-        with open(f"../Corpora/{dataset}/m_m_short.pkl", "rb") as f:
-            mm = pkl.load(f)
-
-        with open(f"../Corpora/{dataset}/m_f_short.pkl", "rb") as f:
-            fm = pkl.load(f)
-
-    else:
-        with open(f"../Corpora/{dataset}/final_split.pkl", "rb") as f:
-            mf, mm, fm, ff = pkl.load(f)
-
-    c_mf = __clean_split_list(mf, "m", lexical)
-    c_mm = __clean_split_list(mm, "m", lexical)
-    c_fm = __clean_split_list(fm, "f", lexical)
-    c_ff = __clean_split_list(ff, "f", lexical)
+    c_mf = __plain_split_list(mf, "m", lexical)
+    c_mm = __plain_split_list(mm, "m", lexical)
+    c_fm = __plain_split_list(fm, "f", lexical)
+    c_ff = __plain_split_list(ff, "f", lexical)
     
-    with open(f"../Corpora/{dataset}/{alignment_type}_processed_clean_split.pkl", "wb") as f:
+    with open(f"../Corpora/{dataset}/{alignment_type}_processed_plain_split.pkl", "wb") as f:
         pkl.dump((c_mf, c_mm, c_fm, c_ff), f)
 
 
-def prep(dataset, lexical=False):
-    print(f"Prepping the dataset for lexical alignment,... at least I'm supposed to be? Is that True? {lexical}")
+def prep_dataset(dataset, between, lexical=False):
     alignment_type = "lexical" if lexical else "stylistic"
+    adj_pair_type = "between" if between else "plain"
 
-    c_filename = f"../Corpora/{dataset}/{alignment_type}_processed_clean_split.pkl"
-    e_filename = f"../Corpora/{dataset}/{alignment_type}_processed_in_between_split.pkl"
-    
-    if not os.path.exists(c_filename):
-        prep_clean_split_list(dataset, lexical)
+    c_filename = f"../Corpora/{dataset}/{alignment_type}_processed_plain_split.pkl"
+    e_filename = f"../Corpora/{dataset}/{alignment_type}_processed_between_split.pkl"
 
-    if not os.path.exists(e_filename):
-        prep_in_between_split_list(dataset, lexical)
+    if between and not os.path.exists(e_filename):
+        __prep_between_split_list(dataset, lexical)
+        
+    elif not os.path.exists(c_filename):
+        __prep_plain_split_list(dataset, lexical)
+
+
+#############################################################################
+
+def print_results(z, p, b, dir_name, between, analysis, target_gender, prime_gender):
+    betas = [0, 1] if analysis == 2 else list(range(8))
+
+    adj_pair_type = "between" if between else "plain"
+
+    results_filename = f"{dir_name}/results_{adj_pair_type}.txt"
+
+    with open(results_filename, "a") as f:
+        f.write("\n==================================\n")
+        f.write(f"EXPERIMENT: {analysis}\nTARGET GENDER: {target_gender}\n")
+
+        if analysis == 2: f.write(f"PRIME GENDER: {prime_gender}\n")
+
+        f.write("==================================\n")
+
+        f.write("BETA:\tZ-SCORES\tP-VALUES\n")
+        f.write("----------------------------------\n")
+
+        for bb in betas:
+            if p[bb] < 0.001: 
+                f.write(">>> ")
+            elif p[bb] < 0.01:
+                f.write(">> ")
+            elif p[bb] < 0.05:
+                f.write("> ")
+
+            f.write(f"{bb}\t{z[bb]:.3f}\t{p[bb]:.3f}\n")
+
+
+    betas_filename = f"{dir_name}/betas_{adj_pair_type}.txt"
+
+    with open(betas_filename, "a") as f:
+        f.write("\n==================================\n")
+        f.write(f"EXPERIMENT: {analysis}\nTARGET GENDER: {target_gender}\n")
+
+        if analysis == 2: f.write(f"PRIME GENDER: {prime_gender}\n")
+
+        f.write("==================================\n")
+
+        for bb in betas:
+            f.write(f"\tBETA_{bb}")
+
+        f.write("\n----------------------------------\n")
+
+        for bb in betas:
+            f.write(f"\t{b[bb]:.3f}")
+        f.write(f"\n")
+
 
 def create_vocab(adj_pair_list):
     print("Creating vocab...")
@@ -131,10 +155,10 @@ def create_vocab(adj_pair_list):
 
 
 def prime_lists(target_gender, dataset, between, lexical=False):
-    split_type = "in_between" if between else "clean"
     alignment_type = "lexical" if lexical else "stylistic"
+    adj_pair_type = "between" if between else "plain"
 
-    with open(f"../Corpora/{dataset}/{alignment_type}_processed_{split_type}_split.pkl", "rb") as f:
+    with open(f"../Corpora/{dataset}/{alignment_type}_processed_{adj_pair_type}_split.pkl", "rb") as f:
         mf, mm, fm, ff = pkl.load(f)
 
     if target_gender == "m":
