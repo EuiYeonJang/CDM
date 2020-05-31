@@ -1,3 +1,5 @@
+import statsmodels.api as sm
+import numpy as np
 import pickle as pkl
 import os
 
@@ -93,6 +95,65 @@ def prep_dataset(dataset, between, lexical=False):
 
 
 #############################################################################
+def create_predictors(apl, analysis):
+    print("Creating predictors...")
+
+    y = [ 1 if target > 0 else 0 for _, _, target, _ in apl]
+
+    if analysis == 1:
+        c_count = [prime for _, prime, _, _ in apl]
+        c_gender = [ 1 if prime_gender == "m" else 0 for prime_gender, _, _, _ in apl]
+        c_plen = [plen for _, _, _, plen in apl]
+
+        return c_count, c_gender, y
+    
+    else:
+        c_count = [prime for _, prime, _, _ in apl]
+
+        return c_count, y
+
+
+def calculate_beta(apl, analysis):
+    if analysis == 1:
+        n = 8
+        c_count, c_gender, c_plen, y = create_predictors(apl)
+    else:
+        n = 2
+        c_count, y = create_predictors(apl)
+    
+    pvalue_dict = {i: "undefined" for i in range(n)}
+    zscores_dict = {i: "undefined" for i in range(n)}
+    betas_dict = {i: "undefined" for i in range(n)}
+
+    print("Calculating betas...")
+    if sum(y) > 0:
+        c_w = np.array(c_count)
+
+        if analysis == 1:
+            g_w = np.array(c_gender)
+            X = np.array([np.ones(len(c_w)), c_w, g_w, c_plen, c_w*g_w, c_w*c_plen, g_w*c_plen, c_w*g_w*c_plen]).T
+        else:
+            X = np.array([np.ones(len(c_w)), c_w]).T
+
+        y_w = np.array(y)
+
+        res = sm.GLM(y_w, X, family=sm.families.Binomial()).fit()
+        
+        p_values = res.pvalues
+        for i, p in enumerate(p_values):
+            pvalue_dict[i] = p
+
+        z_scores = res.tvalues
+        for i, z in enumerate(z_scores):
+            zscores_dict[i] = z
+
+        betas = res.params
+        for i, b in enumerate(betas):
+            betas_dict[i] = b
+
+    return zscores_dict, pvalue_dict, betas_dict
+#############################################################################
+
 
 def print_results(z, p, b, dir_name, between, analysis, target_gender, prime_gender):
     betas = [0, 1] if analysis == 2 else list(range(8))
